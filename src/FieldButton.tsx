@@ -9,7 +9,7 @@ import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { tv } from "tailwind-variants"
 
 let button = tv({
-  base: "pressed:bg-foreground/10 flex cursor-default items-center justify-center rounded-sm border-0 bg-transparent p-1 text-muted-foreground transition-colors outline-none [-webkit-tap-highlight-color:transparent] hover:bg-foreground/5 disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-ring/30"
+  base: "pressed:bg-foreground/10 flex cursor-default items-center justify-center rounded-full border-0 bg-transparent p-1.5 text-muted-foreground transition-colors outline-none [-webkit-tap-highlight-color:transparent] hover:bg-foreground/5 disabled:bg-transparent focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:border-ring"
 })
 
 export function FieldButton(props: RACButtonProps) {

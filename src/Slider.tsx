@@ -40,7 +40,7 @@ export function Slider<T extends number | number[]>({ label, thumbLabels, ...pro
           <>
             <div
               className={[
-                "h-1.5 rounded-full bg-muted",
+                "h-1.5 rounded-full bg-input/90",
                 renderProps.orientation === "horizontal" ? "w-full" : "h-full w-1.5 translate-x-0",
                 renderProps.isDisabled ? "opacity-50 forced-colors:bg-[ButtonBorder]" : "forced-colors:bg-[ButtonBorder]"
               ].join(" ")}
@@ -73,7 +73,7 @@ export function Slider<T extends number | number[]>({ label, thumbLabels, ...pro
                 index={i}
                 aria-label={thumbLabels?.[i]}
                 data-slot="slider-thumb"
-                className="group-orientation-horizontal:mt-5 group-orientation-vertical:ml-2.5 size-4 rounded-full border-2 border-input bg-background shadow-sm transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50"
+                className="group-orientation-horizontal:mt-5 group-orientation-vertical:ml-2.5 h-4 w-6 rounded-full bg-white shadow-md ring-1 ring-black/10 transition-[color,box-shadow,background-color] outline-none not-dark:bg-clip-padding hover:ring-4 hover:ring-ring/30 focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[orientation=vertical]:h-6 data-[orientation=vertical]:w-4"
               />
             ))}
           </>

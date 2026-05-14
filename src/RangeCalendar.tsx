@@ -57,7 +57,7 @@ export function RangeCalendar<T extends DateValue>({ errorMessage, ...props }: R
       data-slot="range-calendar"
       className={composeTailwindRenderProps(
         props.className,
-        "group/range-calendar [--cell-radius:var(--radius-4xl)] [--cell-size:2rem] @container"
+        "group/range-calendar [--cell-radius:var(--radius-4xl)] [--cell-size:2rem] w-[calc(9*var(--spacing)*7)] @container"
       )}
     >
       <CalendarHeader />

@@ -21,22 +21,44 @@ const overlayStyles = tv({
 })
 
 const modalStyles = tv({
-  base: "max-h-[calc(var(--visual-viewport-height)*.9)] w-full max-w-[min(90vw,450px)] rounded-4xl bg-popover p-6 text-left align-middle text-popover-foreground shadow-xl ring-1 ring-foreground/5 dark:ring-foreground/10 forced-colors:bg-[Canvas]",
+  base: "max-h-[calc(var(--visual-viewport-height)*.9)] w-full max-w-[min(90vw,450px)] rounded-4xl bg-popover text-left align-middle text-popover-foreground shadow-xl ring-1 ring-foreground/5 dark:ring-foreground/10 forced-colors:bg-[Canvas]",
   variants: {
     isEntering: {
       true: "animate-in zoom-in-95 fade-in-0 duration-100 ease-out"
     },
     isExiting: {
       true: "animate-out zoom-out-95 fade-out-0 duration-100 ease-in"
+    },
+    position: {
+      center: "p-6",
+      top: ""
     }
+  },
+  defaultVariants: {
+    position: "center" as const
   }
 })
 
-export function Modal(props: ModalOverlayProps) {
+export interface ModalProps extends ModalOverlayProps {
+  position?: "center" | "top"
+}
+
+export function Modal({ position = "center", ...props }: ModalProps) {
   return (
     <ModalOverlay {...props} className={overlayStyles}>
-      <div className="fixed top-0 left-0 flex h-(--visual-viewport-height) w-screen items-center justify-center text-center">
-        <RACModal {...props} data-slot="modal" className={modalStyles} />
+      <div
+        className={[
+          "fixed top-0 left-0 flex h-(--visual-viewport-height) w-screen text-center",
+          position === "top"
+            ? "items-start justify-center pt-[33vh]"
+            : "items-center justify-center"
+        ].join(" ")}
+      >
+        <RACModal
+          {...props}
+          data-slot="modal"
+          className={(renderProps) => modalStyles({ ...renderProps, position })}
+        />
       </div>
     </ModalOverlay>
   )

@@ -60,7 +60,7 @@ export function Calendar<T extends DateValue>({ errorMessage, ...props }: Calend
       data-slot="calendar"
       className={composeTailwindRenderProps(
         props.className,
-        "group/calendar flex flex-col [--cell-radius:var(--radius-4xl)] [--cell-size:2rem] @container"
+        "group/calendar flex flex-col [--cell-radius:var(--radius-4xl)] [--cell-size:2rem] w-[calc(9*var(--spacing)*7)] @container"
       )}
     >
       <CalendarHeader />

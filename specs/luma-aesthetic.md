@@ -208,6 +208,7 @@ These shaped the spec; kept here for the "why".
     track, `size-4` thumb, `translate-x-4` when on. Slider `h-1.5
     rounded-full bg-muted` track, `bg-primary` range fill, `size-4
     border-2 border-input bg-background shadow-sm rounded-full` thumb.
+    > **Superseded by [`specs/luma-touchups.md`](./luma-touchups.md) §4 (Switch) and §5 (Slider).**
 
 20. **`bg-clip-padding` on all filled controls.** Buttons (filled
     variants), Switch track, filled Badge, Toast surface. Prevents bg

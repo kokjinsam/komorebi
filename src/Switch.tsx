@@ -25,22 +25,22 @@ export function Switch({ children, ...props }: SwitchProps) {
         <>
           <span
             className={[
-              "peer flex h-5 w-9 shrink-0 cursor-default items-center rounded-full border border-transparent bg-clip-padding px-px transition-colors",
+              "peer flex h-5 w-11 shrink-0 cursor-default items-center rounded-full border-2 bg-clip-padding transition-colors",
               renderProps.isSelected
-                ? "bg-primary forced-colors:bg-[Highlight]!"
-                : "bg-input forced-colors:bg-[ButtonBorder]",
+                ? "border-primary bg-primary forced-colors:bg-[Highlight]!"
+                : "border-input/90 bg-input/90 forced-colors:bg-[ButtonBorder]",
               renderProps.isFocusVisible
                 ? "border-ring ring-3 ring-ring/30"
-                : "",
-              "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20"
+                : ""
             ].join(" ")}
           >
             <span
               className={[
-                "pointer-events-none block size-4 rounded-full shadow-sm transition-transform",
+                "pointer-events-none block h-4 w-6 rounded-full shadow-sm transition-transform not-dark:bg-clip-padding",
+                "bg-background dark:bg-primary-foreground",
                 renderProps.isSelected
-                  ? "translate-x-4 bg-primary-foreground forced-colors:bg-[HighlightText]"
-                  : "translate-x-0 bg-foreground forced-colors:bg-[ButtonText]"
+                  ? "translate-x-[calc(100%-8px)] forced-colors:bg-[HighlightText]"
+                  : "translate-x-0 forced-colors:bg-[ButtonText]"
               ].join(" ")}
             />
           </span>

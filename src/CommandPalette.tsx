@@ -41,18 +41,27 @@ export function CommandPalette<T extends object>(
   }, [onOpenChange])
 
   return (
-    <Modal isDismissable isOpen={isOpen} onOpenChange={onOpenChange}>
-      <Dialog data-slot="command-palette" className="flex max-h-[inherit] flex-col">
+    <Modal
+      isDismissable
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      position="top"
+    >
+      <Dialog
+        data-slot="command-palette"
+        className="flex max-h-[inherit] flex-col p-1"
+      >
         <AriaAutocomplete filter={contains} {...props}>
-          <SearchField
-            autoFocus
-            aria-label="Search commands"
-            placeholder="Search commands"
-            className="m-2"
-          />
+          <div className="px-1 pt-1">
+            <SearchField
+              autoFocus
+              aria-label="Search commands"
+              placeholder="Search commands"
+            />
+          </div>
           <Menu
             {...props}
-            className="min-h-0 flex-1"
+            className="max-h-72 min-h-0 flex-1"
             renderEmptyState={() => "No results found."}
           />
         </AriaAutocomplete>
