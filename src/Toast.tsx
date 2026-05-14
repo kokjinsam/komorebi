@@ -1,6 +1,6 @@
 "use client"
 
-import { XIcon } from "lucide-react"
+import { XIcon } from "@phosphor-icons/react"
 import React, { type CSSProperties } from "react"
 import {
   UNSTABLE_ToastRegion as ToastRegion,

@@ -1,6 +1,6 @@
 "use client"
 
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   DateRangePicker as AriaDateRangePicker,

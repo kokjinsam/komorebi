@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown } from "lucide-react"
+import { CaretDownIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   ComboBox as AriaComboBox,
@@ -54,7 +54,7 @@ export function ComboBox<
       <FieldGroup>
         <Input className="ps-3 pe-1" />
         <FieldButton className="mr-1 w-6 outline-offset-0">
-          <ChevronDown aria-hidden className="h-4 w-4" />
+          <CaretDownIcon aria-hidden className="h-4 w-4" />
         </FieldButton>
       </FieldGroup>
       {props.selectionMode === "multiple" && (

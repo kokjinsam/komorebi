@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight } from "lucide-react"
+import { CaretRightIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   Breadcrumb as AriaBreadcrumb,
@@ -37,7 +37,7 @@ export function Breadcrumb(
         <>
           <Link variant="secondary" {...props} />
           {!isCurrent && (
-            <ChevronRight className="h-3 w-3 text-neutral-600 dark:text-neutral-400" />
+            <CaretRightIcon className="h-3 w-3 text-neutral-600 dark:text-neutral-400" />
           )}
         </>
       )}

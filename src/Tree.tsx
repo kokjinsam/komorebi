@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight } from "lucide-react"
+import { CaretRightIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   Tree as AriaTree,
@@ -87,7 +87,7 @@ export function TreeItem(props: TreeItemProps) {
             <div className="w-[calc(calc(var(--tree-item-level)-1)*(--spacing(3)))] shrink-0" />
             {hasChildItems ? (
               <Button slot="chevron" className={expandButton({ isDisabled })}>
-                <ChevronRight
+                <CaretRightIcon
                   aria-hidden
                   className={chevron({ isExpanded, isDisabled })}
                 />

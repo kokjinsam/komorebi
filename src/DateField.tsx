@@ -45,7 +45,7 @@ export function DateField<T extends DateValue>({
 }
 
 const segmentStyles = tv({
-  base: "type-literal:p-0 inline rounded-xs p-0.5 whitespace-nowrap text-neutral-800 caret-transparent outline outline-0 forced-color-adjust-none [-webkit-tap-highlight-color:transparent] dark:text-neutral-200 forced-colors:text-[ButtonText]",
+  base: "type-literal:p-0 inline rounded-xs p-0.5 whitespace-nowrap text-neutral-800 caret-transparent outline-0 forced-color-adjust-none [-webkit-tap-highlight-color:transparent] dark:text-neutral-200 forced-colors:text-[ButtonText]",
   variants: {
     isPlaceholder: {
       true: "text-neutral-600 dark:text-neutral-400"

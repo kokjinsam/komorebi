@@ -1,5 +1,5 @@
 import { type Meta } from "@storybook/react"
-import { HelpCircle } from "lucide-react"
+import { QuestionIcon } from "@phosphor-icons/react"
 import React from "react"
 import { DialogTrigger } from "react-aria-components/Dialog"
 import { Heading } from "react-aria-components/Heading"
@@ -23,7 +23,7 @@ export default meta
 export const Example = (args: any) => (
   <DialogTrigger>
     <Button variant="secondary" aria-label="Help">
-      <HelpCircle className="h-4 w-4" />
+      <QuestionIcon className="h-4 w-4" />
     </Button>
     <Popover {...args} className="max-w-[250px]">
       <Dialog>

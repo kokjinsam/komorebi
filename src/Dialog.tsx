@@ -13,7 +13,7 @@ export function Dialog(props: DialogProps) {
     <RACDialog
       {...props}
       className={twMerge(
-        "outline box-border p-6 [[data-placement]>&]:p-4 max-h-[inherit] overflow-auto relative",
+        "outline-0 box-border p-6 [[data-placement]>&]:p-4 max-h-[inherit] overflow-auto relative",
         props.className
       )}
     />

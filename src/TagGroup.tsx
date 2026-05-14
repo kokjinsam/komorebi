@@ -1,6 +1,6 @@
 "use client"
 
-import { XIcon } from "lucide-react"
+import { XIcon } from "@phosphor-icons/react"
 import React, { createContext, useContext } from "react"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import {

@@ -1,5 +1,5 @@
 import { type Meta } from "@storybook/react"
-import { Bold, Italic, Underline } from "lucide-react"
+import { TextBIcon as BoldIcon, TextItalicIcon as ItalicIcon, TextUnderlineIcon as UnderlineIcon } from "@phosphor-icons/react"
 import React from "react"
 import { ToggleButton } from "../src/ToggleButton"
 import { ToggleButtonGroup } from "../src/ToggleButtonGroup"
@@ -17,13 +17,13 @@ export default meta
 export const Example = (args: any) => (
   <ToggleButtonGroup {...args}>
     <ToggleButton id="bold" aria-label="Bold">
-      <Bold className="h-4 w-4" />
+      <BoldIcon className="h-4 w-4" />
     </ToggleButton>
     <ToggleButton id="italic" aria-label="Italic">
-      <Italic className="h-4 w-4" />
+      <ItalicIcon className="h-4 w-4" />
     </ToggleButton>
     <ToggleButton id="underline" aria-label="Underline">
-      <Underline className="h-4 w-4" />
+      <UnderlineIcon className="h-4 w-4" />
     </ToggleButton>
   </ToggleButtonGroup>
 )

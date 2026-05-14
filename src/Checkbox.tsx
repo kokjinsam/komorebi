@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Minus } from "lucide-react"
+import { CheckIcon, MinusIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   Checkbox as AriaCheckbox,
@@ -60,9 +60,9 @@ export function Checkbox(props: CheckboxProps) {
               })}
             >
               {isIndeterminate ? (
-                <Minus aria-hidden className={iconStyles} />
+                <MinusIcon aria-hidden className={iconStyles} />
               ) : isSelected ? (
-                <Check aria-hidden className={iconStyles} />
+                <CheckIcon aria-hidden className={iconStyles} />
               ) : null}
             </div>
             {children}

@@ -1,6 +1,6 @@
 "use client"
 
-import { AlertCircleIcon, InfoIcon } from "lucide-react"
+import { InfoIcon, WarningCircleIcon } from "@phosphor-icons/react"
 import React, { type ReactNode } from "react"
 import { type DialogProps } from "react-aria-components/Dialog"
 import { Heading } from "react-aria-components/Heading"
@@ -37,10 +37,10 @@ export function AlertDialog({
             {title}
           </Heading>
           <div
-            className={`absolute top-6 right-6 h-6 w-6 stroke-2 ${variant === "destructive" ? "text-red-500" : "text-blue-500"}`}
+            className={`absolute top-6 right-6 h-6 w-6 ${variant === "destructive" ? "text-red-500" : "text-blue-500"}`}
           >
             {variant === "destructive" ? (
-              <AlertCircleIcon aria-hidden />
+              <WarningCircleIcon weight="fill" aria-hidden />
             ) : (
               <InfoIcon aria-hidden />
             )}

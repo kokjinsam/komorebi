@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, ChevronRight } from "lucide-react"
+import { CaretRightIcon, CheckIcon } from "@phosphor-icons/react"
 import React from "react"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import {
@@ -47,14 +47,14 @@ export function MenuItem(props: MenuItemProps) {
           <>
             {selectionMode !== "none" && (
               <span className="flex w-4 items-center">
-                {isSelected && <Check aria-hidden className="h-4 w-4" />}
+                {isSelected && <CheckIcon weight="fill" aria-hidden className="h-4 w-4" />}
               </span>
             )}
             <span className="group-selected:font-semibold flex flex-1 items-center gap-2 truncate font-normal">
               {children}
             </span>
             {hasSubmenu && (
-              <ChevronRight aria-hidden className="absolute right-2 h-4 w-4" />
+              <CaretRightIcon aria-hidden className="absolute right-2 h-4 w-4" />
             )}
           </>
         )

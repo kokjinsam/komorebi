@@ -1,6 +1,6 @@
 "use client"
 
-import { Check } from "lucide-react"
+import { CheckIcon } from "@phosphor-icons/react"
 import React from "react"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import {
@@ -30,7 +30,7 @@ export function ListBox<T extends object>({
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "outline-0 p-1 w-[200px] bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans"
+        "outline-0 p-1 w-50 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans"
       )}
     >
       {children}
@@ -70,7 +70,7 @@ export function ListBoxItem(props: ListBoxItemProps) {
 }
 
 export const dropdownItemStyles = tv({
-  base: "group selected:pr-1 flex cursor-default items-center gap-4 rounded-lg py-2 pr-3 pl-3 text-sm no-underline outline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&[href]]:cursor-pointer",
+  base: "group selected:pr-1 flex cursor-default items-center gap-4 rounded-lg py-2 pr-3 pl-3 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&[href]]:cursor-pointer",
   variants: {
     isDisabled: {
       false: "text-neutral-900 dark:text-neutral-100",
@@ -108,7 +108,7 @@ export function DropdownItem(props: ListBoxItemProps) {
             {children}
           </span>
           <span className="flex w-5 items-center">
-            {isSelected && <Check className="h-4 w-4" />}
+            {isSelected && <CheckIcon className="h-4 w-4" />}
           </span>
         </>
       ))}
@@ -125,8 +125,8 @@ export function DropdownSection<T extends object>(
   props: DropdownSectionProps<T>
 ) {
   return (
-    <ListBoxSection className="after:block after:h-[5px] after:content-[''] first:-mt-[5px] last:after:hidden">
-      <Header className="sticky -top-[5px] z-10 -mx-1 -mt-px truncate border-y border-y-neutral-200 bg-neutral-100/60 px-4 py-1 text-sm font-semibold text-neutral-500 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 dark:border-y-neutral-700 dark:bg-neutral-700/60 dark:text-neutral-300 [&+*]:mt-1">
+    <ListBoxSection className="first:-mt-1.25last:after:hidden after:block after:h-1.25 after:content-['']">
+      <Header className="sticky -top-1.25 z-10 -mx-1 -mt-px truncate border-y border-y-neutral-200 bg-neutral-100/60 px-4 py-1 text-sm font-semibold text-neutral-500 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 dark:border-y-neutral-700 dark:bg-neutral-700/60 dark:text-neutral-300 [&+*]:mt-1">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>

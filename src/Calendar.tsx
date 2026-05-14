@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   Calendar as AriaCalendar,
@@ -76,17 +76,17 @@ export function CalendarHeader() {
     <header className="border-box flex items-center gap-1 px-1 pb-4">
       <Button variant="quiet" slot="previous">
         {direction === "rtl" ? (
-          <ChevronRight aria-hidden size={18} />
+          <CaretRightIcon aria-hidden className="h-4 w-4" />
         ) : (
-          <ChevronLeft aria-hidden size={18} />
+          <CaretLeftIcon aria-hidden className="h-4 w-4" />
         )}
       </Button>
       <Heading className="mx-2 my-0 flex-1 text-center font-sans text-base font-semibold text-neutral-900 [font-variation-settings:normal] dark:text-neutral-200" />
       <Button variant="quiet" slot="next">
         {direction === "rtl" ? (
-          <ChevronLeft aria-hidden size={18} />
+          <CaretLeftIcon aria-hidden className="h-4 w-4" />
         ) : (
-          <ChevronRight aria-hidden size={18} />
+          <CaretRightIcon aria-hidden className="h-4 w-4" />
         )}
       </Button>
     </header>

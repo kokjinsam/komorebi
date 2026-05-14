@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight } from "lucide-react"
+import { CaretRightIcon } from "@phosphor-icons/react"
 import React, { useContext } from "react"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import {
@@ -63,7 +63,7 @@ export function DisclosureHeader({ children }: DisclosureHeaderProps) {
       >
         {({ isDisabled }) => (
           <>
-            <ChevronRight
+            <CaretRightIcon
               aria-hidden
               className={chevron({ isExpanded, isDisabled })}
             />

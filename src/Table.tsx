@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUp, ChevronRight } from "lucide-react"
+import { ArrowUpIcon, CaretRightIcon } from "@phosphor-icons/react"
 import React from "react"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { Group } from "react-aria-components/Group"
@@ -81,7 +81,7 @@ export function Column(props: ColumnProps) {
                   }`}
                 >
                   {sortDirection && (
-                    <ArrowUp
+                    <ArrowUpIcon
                       aria-hidden
                       className="h-4 w-4 text-neutral-500 dark:text-neutral-400 forced-colors:text-[ButtonText]"
                     />
@@ -207,7 +207,7 @@ export function Cell(props: CellProps) {
           <>
             {hasChildItems && isTreeColumn && (
               <Button slot="chevron" className={expandButton({ isDisabled })}>
-                <ChevronRight
+                <CaretRightIcon
                   aria-hidden
                   className={chevron({ isExpanded, isDisabled })}
                 />

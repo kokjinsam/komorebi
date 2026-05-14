@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown } from "lucide-react"
+import { CaretDownIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   Select as AriaSelect,
@@ -70,7 +70,7 @@ export function Select<
             selectedText || defaultChildren
           }
         </SelectValue>
-        <ChevronDown
+        <CaretDownIcon
           aria-hidden
           className="h-4 w-4 text-neutral-600 group-disabled:text-neutral-200 dark:text-neutral-400 dark:group-disabled:text-neutral-600 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
         />

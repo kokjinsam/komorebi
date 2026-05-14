@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   NumberField as AriaNumberField,
@@ -53,7 +53,7 @@ export function NumberField({
               })}
             >
               <StepperButton slot="increment">
-                <ChevronUp aria-hidden className="h-4 w-4" />
+                <CaretUpIcon aria-hidden className="h-4 w-4" />
               </StepperButton>
               <div
                 className={fieldBorderStyles({
@@ -62,7 +62,7 @@ export function NumberField({
                 })}
               />
               <StepperButton slot="decrement">
-                <ChevronDown aria-hidden className="h-4 w-4" />
+                <CaretDownIcon aria-hidden className="h-4 w-4" />
               </StepperButton>
             </div>
           </>

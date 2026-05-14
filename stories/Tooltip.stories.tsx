@@ -1,5 +1,5 @@
 import { type Meta } from "@storybook/react"
-import { PrinterIcon, SaveIcon } from "lucide-react"
+import { DownloadSimpleIcon, PrinterIcon } from "@phosphor-icons/react"
 import React from "react"
 import { TooltipTrigger } from "react-aria-components/Tooltip"
 import { Button } from "../src/Button"
@@ -19,7 +19,7 @@ export const Example = (args: any) => (
   <div className="flex gap-2">
     <TooltipTrigger>
       <Button variant="secondary" className="px-2">
-        <SaveIcon className="h-5 w-5" />
+        <DownloadSimpleIcon className="h-5 w-5" />
       </Button>
       <Tooltip {...args}>Save</Tooltip>
     </TooltipTrigger>

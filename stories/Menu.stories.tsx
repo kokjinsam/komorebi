@@ -1,5 +1,5 @@
 import { type Meta } from "@storybook/react"
-import { MoreHorizontal } from "lucide-react"
+import { DotsThreeIcon } from "@phosphor-icons/react"
 import React from "react"
 import { Button } from "../src/Button"
 import {
@@ -24,7 +24,7 @@ export default meta
 export const Example = (args: any) => (
   <MenuTrigger>
     <Button variant="secondary" className="px-2">
-      <MoreHorizontal className="h-5 w-5" />
+      <DotsThreeIcon className="h-5 w-5" />
     </Button>
     <Menu {...args}>
       <MenuItem id="new">New…</MenuItem>
@@ -46,7 +46,7 @@ DisabledItems.args = {
 export const Sections = (args: any) => (
   <MenuTrigger>
     <Button variant="secondary" className="px-2">
-      <MoreHorizontal className="h-5 w-5" />
+      <DotsThreeIcon className="h-5 w-5" />
     </Button>
     <Menu {...args}>
       <MenuSection title="Your Content">
@@ -68,7 +68,7 @@ export const Sections = (args: any) => (
 export const Submenu = (args: any) => (
   <MenuTrigger>
     <Button variant="secondary" className="px-2">
-      <MoreHorizontal className="h-5 w-5" />
+      <DotsThreeIcon className="h-5 w-5" />
     </Button>
     <Menu {...args}>
       <MenuItem id="new">New…</MenuItem>
