@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "quoteProps": "consistent",
+  "semi": false,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "printWidth": 80,
+  "ignorePatterns": [],
+  "experimentalTailwindcss": {
+    "functions": ["clsx", "cn", "tv"]
+  },
+  "experimentalSortImports": {
+    "newlinesBetween": false
+  },
+  "experimentalSortPackageJson": {
+    "sortScripts": true
+  }
+}
