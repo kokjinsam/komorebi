@@ -6,7 +6,13 @@
   "tabWidth": 2,
   "trailingComma": "none",
   "printWidth": 80,
-  "ignorePatterns": [],
+  "ignorePatterns": [
+    "dist/**",
+    "node_modules/**",
+    ".claude/**",
+    ".agents/**",
+    "specs/**"
+  ],
   "experimentalTailwindcss": {
     "functions": ["clsx", "cn", "tv"]
   },
