@@ -29,8 +29,8 @@ export function GridList<T extends object>({
       className={composeTailwindRenderProps(
         props.className,
         isHorizontal
-          ? "flex flex-row flex-nowrap overflow-x-auto relative w-full max-w-125 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm"
-          : "overflow-auto w-50 relative bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm"
+          ? "flex flex-row flex-nowrap overflow-x-auto relative w-full max-w-125 bg-background border border-border rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm"
+          : "overflow-auto w-50 relative bg-background border border-border rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm"
       )}
     >
       {children}
@@ -41,22 +41,22 @@ export function GridList<T extends object>({
 const itemStyles = tv({
   extend: focusRing,
   base: [
-    "relative flex gap-3 cursor-default select-none py-2 px-3 text-sm text-neutral-900 dark:text-neutral-200 border-transparent -outline-offset-2",
-    "[[data-orientation=vertical]_&]:border-t [[data-orientation=vertical]_&]:dark:border-t-neutral-700 [[data-orientation=vertical]_&]:first:border-t-0 [[data-orientation=vertical]_&]:first:rounded-t-lg [[data-orientation=vertical]_&]:last:rounded-b-lg",
-    "[[data-orientation=horizontal]_&]:border-l [[data-orientation=horizontal]_&]:dark:border-l-neutral-700 [[data-orientation=horizontal]_&]:first:border-l-0 [[data-orientation=horizontal]_&]:first:rounded-s-lg [[data-orientation=horizontal]_&]:last:rounded-e-lg [[data-orientation=horizontal]_&]:flex-shrink-0"
+    "relative flex gap-3 cursor-default select-none py-2 px-3 text-sm text-foreground border-transparent -outline-offset-2",
+    "[[data-orientation=vertical]_&]:border-t [[data-orientation=vertical]_&]:border-t-border [[data-orientation=vertical]_&]:first:border-t-0 [[data-orientation=vertical]_&]:first:rounded-t-lg [[data-orientation=vertical]_&]:last:rounded-b-lg",
+    "[[data-orientation=horizontal]_&]:border-l [[data-orientation=horizontal]_&]:border-l-border [[data-orientation=horizontal]_&]:first:border-l-0 [[data-orientation=horizontal]_&]:first:rounded-s-lg [[data-orientation=horizontal]_&]:last:rounded-e-lg [[data-orientation=horizontal]_&]:flex-shrink-0"
   ].join(" "),
   variants: {
     isSelected: {
       false:
-        "pressed:bg-neutral-100 dark:pressed:bg-neutral-700/60 hover:bg-neutral-100 dark:hover:bg-neutral-700/60",
+        "pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)] hover:bg-muted",
       true: [
-        "bg-blue-100 dark:bg-blue-700/30 hover:bg-blue-200 pressed:bg-blue-200 dark:hover:bg-blue-700/40 dark:pressed:bg-blue-700/40 z-20",
-        "[[data-orientation=vertical]_&]:border-y-blue-200 [[data-orientation=vertical]_&]:dark:border-y-blue-900",
-        "[[data-orientation=horizontal]_&]:border-x-blue-200 [[data-orientation=horizontal]_&]:dark:border-x-blue-900 "
+        "bg-accent hover:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_8%)] pressed:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_16%)] z-20",
+        "[[data-orientation=vertical]_&]:border-y-[color-mix(in_oklch,var(--accent),transparent_50%)]",
+        "[[data-orientation=horizontal]_&]:border-x-[color-mix(in_oklch,var(--accent),transparent_50%)]"
       ].join(" ")
     },
     isDisabled: {
-      true: "z-10 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "z-10 text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -90,7 +90,7 @@ export function GridListHeader({
     <AriaGridListHeader
       {...props}
       className={twMerge(
-        "text-sm font-semibold text-neutral-500 dark:text-neutral-300 px-4 py-1 -mt-px z-10 bg-neutral-100/60 dark:bg-neutral-700/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 border-y border-y-neutral-200 dark:border-y-neutral-700",
+        "text-sm font-semibold text-muted-foreground px-4 py-1 -mt-px z-10 bg-muted/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-muted border-y border-y-border",
         props.className
       )}
     >

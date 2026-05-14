@@ -41,16 +41,16 @@ export function MyToastRegion() {
     // The ToastRegion should be rendered at the root of your app.
     <ToastRegion
       queue={queue}
-      className="fixed right-4 bottom-4 flex flex-col-reverse gap-2 rounded-lg outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 focus-visible:outline-solid"
+      className="fixed right-4 bottom-4 flex flex-col-reverse gap-2 rounded-lg outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:outline-solid"
     >
       {({ toast }) => (
         <MyToast toast={toast}>
           <ToastContent className="flex min-w-0 flex-1 flex-col">
-            <Text slot="title" className="text-sm font-semibold text-white">
+            <Text slot="title" className="text-sm font-semibold text-primary-foreground">
               {toast.content.title}
             </Text>
             {toast.content.description && (
-              <Text slot="description" className="text-xs text-white">
+              <Text slot="description" className="text-xs text-primary-foreground">
                 {toast.content.description}
               </Text>
             )}
@@ -58,7 +58,7 @@ export function MyToastRegion() {
           <Button
             slot="close"
             aria-label="Close"
-            className="pressed:bg-white/15 flex h-8 w-8 flex-none appearance-none items-center justify-center rounded-sm border-none bg-transparent p-0 text-white outline-none [-webkit-tap-highlight-color:transparent] hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white focus-visible:outline-solid"
+            className="pressed:bg-primary-foreground/15 flex h-8 w-8 flex-none appearance-none items-center justify-center rounded-sm border-none bg-transparent p-0 text-primary-foreground outline-none [-webkit-tap-highlight-color:transparent] hover:bg-primary-foreground/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground focus-visible:outline-solid"
           >
             <XIcon className="h-4 w-4" />
           </Button>
@@ -75,7 +75,7 @@ export function MyToast(props: ToastProps<MyToastContent>) {
       style={{ viewTransitionName: props.toast.key } as CSSProperties}
       className={composeTailwindRenderProps(
         props.className,
-        "flex items-center gap-4 bg-blue-600 px-4 py-3 rounded-lg outline-none forced-colors:outline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 [view-transition-class:toast] font-sans w-57.5"
+        "flex items-center gap-4 bg-primary px-4 py-3 rounded-lg outline-none forced-colors:outline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 [view-transition-class:toast] font-sans w-57.5"
       )}
     />
   )

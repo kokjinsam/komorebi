@@ -23,12 +23,12 @@ import { composeTailwindRenderProps, focusRing } from "./utils"
 
 const styles = tv({
   extend: focusRing,
-  base: "flex h-9 w-full min-w-[180px] cursor-default items-center gap-4 rounded-lg border border-black/10 bg-neutral-50 pr-2 pl-3 text-start font-sans transition [-webkit-tap-highlight-color:transparent] dark:border-white/10 dark:bg-neutral-700",
+  base: "flex h-9 w-full min-w-[180px] cursor-default items-center gap-4 rounded-lg border border-input bg-secondary pr-2 pl-3 text-start font-sans transition [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
       false:
-        "pressed:bg-neutral-200 dark:pressed:bg-neutral-500 text-neutral-800 group-invalid:outline group-invalid:outline-red-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-600 forced-colors:group-invalid:outline-[Mark]",
-      true: "border-transparent bg-neutral-100 text-neutral-200 dark:border-transparent dark:bg-neutral-800 dark:text-neutral-600 forced-colors:text-[GrayText]"
+        "pressed:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_16%)] text-secondary-foreground group-invalid:outline group-invalid:outline-destructive hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_8%)] forced-colors:group-invalid:outline-[Mark]",
+      true: "border-transparent bg-muted text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -72,7 +72,7 @@ export function Select<
         </SelectValue>
         <CaretDownIcon
           aria-hidden
-          className="h-4 w-4 text-neutral-600 group-disabled:text-neutral-200 dark:text-neutral-400 dark:group-disabled:text-neutral-600 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+          className="h-4 w-4 text-muted-foreground group-disabled:text-muted-foreground forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
         />
       </Button>
       {description && <Description>{description}</Description>}

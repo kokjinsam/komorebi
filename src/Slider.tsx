@@ -21,8 +21,8 @@ const trackStyles = tv({
     },
     isDisabled: {
       false:
-        "bg-neutral-300 dark:bg-neutral-700 forced-colors:bg-[ButtonBorder]",
-      true: "bg-neutral-200 dark:bg-neutral-800 forced-colors:bg-[ButtonBorder]"
+        "bg-muted forced-colors:bg-[ButtonBorder]",
+      true: "bg-muted opacity-50 forced-colors:bg-[ButtonBorder]"
     }
   }
 })
@@ -36,21 +36,21 @@ const fillStyles = tv({
         "bottom-(--start,0) ml-[50%] h-(--size) w-[6px] -translate-x-[50%]"
     },
     isDisabled: {
-      false: "bg-blue-500 forced-colors:bg-[Highlight]",
-      true: "bg-neutral-300 dark:bg-neutral-600 forced-colors:bg-[GrayText]"
+      false: "bg-primary forced-colors:bg-[Highlight]",
+      true: "bg-muted-foreground/40 forced-colors:bg-[GrayText]"
     }
   }
 })
 
 const thumbStyles = tv({
   extend: focusRing,
-  base: "group-orientation-horizontal:mt-5 group-orientation-vertical:ml-2.5 h-4.5 w-4.5 rounded-full border border-neutral-700 bg-neutral-50 dark:border-neutral-300 dark:bg-neutral-900",
+  base: "group-orientation-horizontal:mt-5 group-orientation-vertical:ml-2.5 h-4.5 w-4.5 rounded-full border border-primary bg-background",
   variants: {
     isDragging: {
-      true: "bg-neutral-700 dark:bg-neutral-300 forced-colors:bg-[ButtonBorder]"
+      true: "bg-primary forced-colors:bg-[ButtonBorder]"
     },
     isDisabled: {
-      true: "border-neutral-300 dark:border-neutral-700 forced-colors:border-[GrayText]"
+      true: "border-input forced-colors:border-[GrayText]"
     }
   }
 })
@@ -74,7 +74,7 @@ export function Slider<T extends number | number[]>({
       )}
     >
       <Label>{label}</Label>
-      <SliderOutput className="orientation-vertical:hidden text-sm text-neutral-500 dark:text-neutral-400">
+      <SliderOutput className="orientation-vertical:hidden text-sm text-muted-foreground">
         {({ state }) =>
           state.values.map((_, i) => state.getThumbValueLabel(i)).join(" – ")
         }

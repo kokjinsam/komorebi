@@ -16,17 +16,17 @@ import { Button } from "./Button"
 import { composeTailwindRenderProps } from "./utils"
 
 const disclosure = tv({
-  base: "group min-w-50 rounded-lg font-sans text-neutral-900 dark:text-neutral-200"
+  base: "group min-w-50 rounded-lg font-sans text-foreground"
 })
 
 const chevron = tv({
-  base: "h-4 w-4 text-neutral-500 transition-transform duration-200 ease-in-out dark:text-neutral-400",
+  base: "h-4 w-4 text-muted-foreground transition-transform duration-200 ease-in-out",
   variants: {
     isExpanded: {
       true: "rotate-90 transform"
     },
     isDisabled: {
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })

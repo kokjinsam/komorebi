@@ -19,35 +19,40 @@ import { Description, Label } from "./Field"
 import { focusRing } from "./utils"
 
 const colors = {
-  gray: "bg-white text-neutral-600 border-neutral-200 hover:border-neutral-300 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-600 dark:hover:border-neutral-500",
-  green:
-    "bg-green-100 text-green-700 border-green-200 hover:border-green-300 dark:bg-green-300/20 dark:text-green-400 dark:border-green-300/10 dark:hover:border-green-300/20",
-  yellow:
-    "bg-yellow-100 text-yellow-700 border-yellow-200 hover:border-yellow-300 dark:bg-yellow-300/20 dark:text-yellow-400 dark:border-yellow-300/10 dark:hover:border-yellow-300/20",
-  blue: "bg-blue-100 text-blue-700 border-blue-200 hover:border-blue-300 dark:bg-blue-400/20 dark:text-blue-300 dark:border-blue-400/10 dark:hover:border-blue-400/20"
+  neutral:
+    "bg-background text-muted-foreground border-border hover:border-[color-mix(in_oklch,var(--border),var(--foreground)_20%)]",
+  danger:
+    "bg-[color-mix(in_oklch,var(--destructive),transparent_85%)] text-destructive border-[color-mix(in_oklch,var(--destructive),transparent_75%)] hover:border-[color-mix(in_oklch,var(--destructive),transparent_60%)]",
+  chart1:
+    "bg-[color-mix(in_oklch,var(--chart-1),transparent_85%)] text-[color-mix(in_oklch,var(--chart-1),var(--foreground)_50%)] border-[color-mix(in_oklch,var(--chart-1),transparent_75%)] hover:border-[color-mix(in_oklch,var(--chart-1),transparent_60%)]",
+  chart3:
+    "bg-[color-mix(in_oklch,var(--chart-3),transparent_85%)] text-[color-mix(in_oklch,var(--chart-3),var(--foreground)_50%)] border-[color-mix(in_oklch,var(--chart-3),transparent_75%)] hover:border-[color-mix(in_oklch,var(--chart-3),transparent_60%)]",
+  chart5:
+    "bg-[color-mix(in_oklch,var(--chart-5),transparent_85%)] text-[color-mix(in_oklch,var(--chart-5),var(--foreground)_50%)] border-[color-mix(in_oklch,var(--chart-5),transparent_75%)] hover:border-[color-mix(in_oklch,var(--chart-5),transparent_60%)]"
 }
 
 type Color = keyof typeof colors
-const ColorContext = createContext<Color>("gray")
+const ColorContext = createContext<Color>("neutral")
 
 const tagStyles = tv({
   extend: focusRing,
   base: "flex max-w-fit cursor-default items-center gap-1 rounded-full border px-3 py-0.5 font-sans text-xs transition [-webkit-tap-highlight-color:transparent]",
   variants: {
     color: {
-      gray: "",
-      green: "",
-      yellow: "",
-      blue: ""
+      neutral: "",
+      danger: "",
+      chart1: "",
+      chart3: "",
+      chart5: ""
     },
     allowsRemoving: {
       true: "pr-1"
     },
     isSelected: {
-      true: "border-transparent bg-blue-600 text-white forced-color-adjust-none forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
+      true: "border-transparent bg-primary text-primary-foreground forced-color-adjust-none forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     },
     isDisabled: {
-      true: "bg-neutral-100 text-neutral-300 dark:border-white/20 dark:bg-transparent dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "bg-muted text-muted-foreground border-foreground/20 forced-colors:text-[GrayText]"
     }
   },
   compoundVariants: (Object.keys(colors) as Color[]).map((color) => ({
@@ -87,7 +92,7 @@ export function TagGroup<T extends object>({
       className={twMerge("flex flex-col gap-2 font-sans", props.className)}
     >
       <Label>{label}</Label>
-      <ColorContext.Provider value={props.color || "gray"}>
+      <ColorContext.Provider value={props.color || "neutral"}>
         <TagList
           items={items}
           renderEmptyState={renderEmptyState}
@@ -98,7 +103,7 @@ export function TagGroup<T extends object>({
       </ColorContext.Provider>
       {description && <Description>{description}</Description>}
       {errorMessage && (
-        <Text slot="errorMessage" className="text-sm text-red-600">
+        <Text slot="errorMessage" className="text-sm text-destructive">
           {errorMessage}
         </Text>
       )}
@@ -108,7 +113,7 @@ export function TagGroup<T extends object>({
 
 const removeButtonStyles = tv({
   extend: focusRing,
-  base: "pressed:bg-black/20 dark:pressed:bg-white/20 flex cursor-default items-center justify-center rounded-full border-0 bg-transparent p-0.5 text-[inherit] transition-[background-color] hover:bg-black/10 dark:hover:bg-white/10"
+  base: "pressed:bg-foreground/20 flex cursor-default items-center justify-center rounded-full border-0 bg-transparent p-0.5 text-[inherit] transition-[background-color] hover:bg-foreground/10"
 })
 
 export function Tag({ children, color, ...props }: TagProps) {

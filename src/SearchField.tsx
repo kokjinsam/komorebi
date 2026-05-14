@@ -37,7 +37,7 @@ export function SearchField({
       <FieldGroup>
         <MagnifyingGlassIcon
           aria-hidden
-          className="ml-2 h-4 w-4 text-neutral-500 group-disabled:text-neutral-200 dark:text-neutral-400 dark:group-disabled:text-neutral-600 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+          className="ml-2 h-4 w-4 text-muted-foreground group-disabled:text-muted-foreground forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
         />
         <Input
           placeholder={placeholder}

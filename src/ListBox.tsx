@@ -30,7 +30,7 @@ export function ListBox<T extends object>({
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "outline-0 p-1 w-50 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans"
+        "outline-0 p-1 w-50 bg-popover border border-border rounded-lg font-sans"
       )}
     >
       {children}
@@ -44,11 +44,11 @@ export const itemStyles = tv({
   variants: {
     isSelected: {
       false:
-        "pressed:bg-neutral-100 dark:pressed:bg-neutral-800 text-neutral-700 -outline-offset-2 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800",
-      true: "bg-blue-600 text-white -outline-offset-4 outline-white dark:outline-white forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:outline-[HighlightText] [&+[data-selected]]:rounded-t-none [&:has(+[data-selected])]:rounded-b-none"
+        "pressed:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_8%)] text-popover-foreground -outline-offset-2 hover:bg-accent hover:text-accent-foreground",
+      true: "bg-primary text-primary-foreground -outline-offset-4 outline-primary-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:outline-[HighlightText] [&+[data-selected]]:rounded-t-none [&:has(+[data-selected])]:rounded-b-none"
     },
     isDisabled: {
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -62,7 +62,7 @@ export function ListBoxItem(props: ListBoxItemProps) {
       {composeRenderProps(props.children, (children) => (
         <>
           {children}
-          <div className="absolute right-4 bottom-0 left-4 hidden h-px bg-white/20 forced-colors:bg-[HighlightText] [.group[data-selected]:has(+[data-selected])_&]:block" />
+          <div className="absolute right-4 bottom-0 left-4 hidden h-px bg-primary-foreground/20 forced-colors:bg-[HighlightText] [.group[data-selected]:has(+[data-selected])_&]:block" />
         </>
       ))}
     </AriaListBoxItem>
@@ -73,21 +73,21 @@ export const dropdownItemStyles = tv({
   base: "group selected:pr-1 flex cursor-default items-center gap-4 rounded-lg py-2 pr-3 pl-3 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&[href]]:cursor-pointer",
   variants: {
     isDisabled: {
-      false: "text-neutral-900 dark:text-neutral-100",
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      false: "text-foreground",
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     },
     isPressed: {
-      true: "bg-neutral-100 dark:bg-neutral-800"
+      true: "bg-muted"
     },
     isFocused: {
-      true: "bg-blue-600 text-white dark:bg-blue-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
+      true: "bg-accent text-accent-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     }
   },
   compoundVariants: [
     {
       isFocused: false,
       isOpen: true,
-      className: "bg-neutral-100 dark:bg-neutral-700/60"
+      className: "bg-muted/60"
     }
   ]
 })
@@ -126,7 +126,7 @@ export function DropdownSection<T extends object>(
 ) {
   return (
     <ListBoxSection className="first:-mt-1.25last:after:hidden after:block after:h-1.25 after:content-['']">
-      <Header className="sticky -top-1.25 z-10 -mx-1 -mt-px truncate border-y border-y-neutral-200 bg-neutral-100/60 px-4 py-1 text-sm font-semibold text-neutral-500 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 dark:border-y-neutral-700 dark:bg-neutral-700/60 dark:text-neutral-300 [&+*]:mt-1">
+      <Header className="sticky -top-1.25 z-10 -mx-1 -mt-px truncate border-y border-y-border bg-muted/60 px-4 py-1 text-sm font-semibold text-muted-foreground backdrop-blur-md supports-[-moz-appearance:none]:bg-muted [&+*]:mt-1">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>

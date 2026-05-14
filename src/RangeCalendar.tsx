@@ -23,20 +23,20 @@ export interface RangeCalendarProps<T extends DateValue> extends Omit<
 
 const cell = tv({
   extend: focusRing,
-  base: "flex h-full w-full items-center justify-center rounded-full text-neutral-900 forced-color-adjust-none dark:text-neutral-200",
+  base: "flex h-full w-full items-center justify-center rounded-full text-foreground forced-color-adjust-none",
   variants: {
     selectionState: {
-      none: "group-pressed:bg-neutral-300 dark:group-pressed:bg-neutral-600 group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700",
+      none: "group-pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)] group-hover:bg-muted",
       middle: [
-        "group-hover:bg-blue-200 dark:group-hover:bg-blue-900 forced-colors:group-hover:bg-[Highlight]",
-        "group-invalid:group-hover:bg-red-200 dark:group-invalid:group-hover:bg-red-900 forced-colors:group-invalid:group-hover:bg-[Mark]",
-        "group-pressed:bg-blue-300 dark:group-pressed:bg-blue-800 forced-colors:group-pressed:bg-[Highlight] forced-colors:text-[HighlightText]",
-        "group-invalid:group-pressed:bg-red-300 dark:group-invalid:group-pressed:bg-red-800 forced-colors:group-invalid:group-pressed:bg-[Mark]"
+        "group-hover:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_8%)] forced-colors:group-hover:bg-[Highlight]",
+        "group-invalid:group-hover:bg-[color-mix(in_oklch,var(--destructive),transparent_80%)] forced-colors:group-invalid:group-hover:bg-[Mark]",
+        "group-pressed:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_16%)] forced-colors:group-pressed:bg-[Highlight] forced-colors:text-[HighlightText]",
+        "group-invalid:group-pressed:bg-[color-mix(in_oklch,var(--destructive),transparent_70%)] forced-colors:group-invalid:group-pressed:bg-[Mark]"
       ],
-      cap: "bg-blue-600 text-white group-invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:group-invalid:bg-[Mark]"
+      cap: "bg-primary text-primary-foreground group-invalid:bg-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:group-invalid:bg-[Mark]"
     },
     isDisabled: {
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -60,7 +60,7 @@ export function RangeCalendar<T extends DateValue>({
           {(date) => (
             <CalendarCell
               date={date}
-              className="group outside-month:text-neutral-300 selected:bg-blue-100 dark:selected:bg-blue-700/30 forced-colors:selected:bg-[Highlight] invalid:selected:bg-red-100 dark:invalid:selected:bg-red-700/30 forced-colors:invalid:selected:bg-[Mark] selection-start:rounded-s-full selection-end:rounded-e-full aspect-square w-[calc(100cqw/7)] cursor-default text-sm outline [-webkit-tap-highlight-color:transparent] [td:first-child_&]:rounded-s-full [td:last-child_&]:rounded-e-full"
+              className="group outside-month:text-muted-foreground selected:bg-accent forced-colors:selected:bg-[Highlight] invalid:selected:bg-[color-mix(in_oklch,var(--destructive),transparent_80%)] forced-colors:invalid:selected:bg-[Mark] selection-start:rounded-s-full selection-end:rounded-e-full aspect-square w-[calc(100cqw/7)] cursor-default text-sm outline [-webkit-tap-highlight-color:transparent] [td:first-child_&]:rounded-s-full [td:last-child_&]:rounded-e-full"
             >
               {({
                 formattedDate,
@@ -90,7 +90,7 @@ export function RangeCalendar<T extends DateValue>({
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot="errorMessage" className="text-sm text-red-600">
+        <Text slot="errorMessage" className="text-sm text-destructive">
           {errorMessage}
         </Text>
       )}

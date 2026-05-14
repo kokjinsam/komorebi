@@ -16,18 +16,20 @@ export interface ButtonProps extends RACButtonProps {
 
 let button = tv({
   extend: focusRing,
-  base: "relative box-border inline-flex h-9 cursor-default items-center justify-center gap-2 rounded-lg border border-transparent px-3.5 py-0 text-center font-sans text-sm transition [-webkit-tap-highlight-color:transparent] dark:border-white/10 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 [&:has(>svg:only-child)]:px-0",
+  base: "relative box-border inline-flex h-9 cursor-default items-center justify-center gap-2 rounded-lg border border-transparent px-3.5 py-0 text-center font-sans text-sm transition [-webkit-tap-highlight-color:transparent] dark:border-foreground/10 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 [&:has(>svg:only-child)]:px-0",
   variants: {
     variant: {
-      primary: "pressed:bg-blue-800 bg-blue-600 text-white hover:bg-blue-700",
+      primary:
+        "bg-primary text-primary-foreground hover:bg-[color-mix(in_oklch,var(--primary),var(--foreground)_8%)] pressed:bg-[color-mix(in_oklch,var(--primary),var(--foreground)_16%)]",
       secondary:
-        "pressed:bg-neutral-200 dark:pressed:bg-neutral-500 border-black/10 bg-neutral-50 text-neutral-800 hover:bg-neutral-100 dark:bg-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-600",
-      destructive: "pressed:bg-red-900 bg-red-700 text-white hover:bg-red-800",
+        "border-input bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_8%)] pressed:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_16%)]",
+      destructive:
+        "bg-destructive text-destructive-foreground hover:bg-[color-mix(in_oklch,var(--destructive),var(--foreground)_8%)] pressed:bg-[color-mix(in_oklch,var(--destructive),var(--foreground)_16%)]",
       quiet:
-        "pressed:bg-neutral-300 dark:pressed:bg-neutral-600 border-0 bg-transparent text-neutral-800 hover:bg-neutral-200 dark:text-neutral-100 dark:hover:bg-neutral-700"
+        "border-0 bg-transparent text-foreground hover:bg-muted pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)]"
     },
     isDisabled: {
-      true: "border-transparent bg-neutral-100 text-neutral-300 dark:border-transparent dark:bg-neutral-800 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "border-transparent bg-muted text-muted-foreground forced-colors:text-[GrayText]"
     },
     isPending: {
       true: "text-transparent"
@@ -40,7 +42,7 @@ let button = tv({
     {
       variant: "quiet",
       isDisabled: true,
-      class: "bg-transparent dark:bg-transparent"
+      class: "bg-transparent"
     }
   ]
 })
@@ -62,12 +64,12 @@ export function Button(props: ButtonProps) {
               className="absolute inset-0 flex items-center justify-center"
             >
               <svg
-                className="h-4 w-4 animate-spin text-white"
+                className="h-4 w-4 animate-spin"
                 viewBox="0 0 24 24"
                 stroke={
                   props.variant === "secondary" || props.variant === "quiet"
-                    ? "light-dark(black, white)"
-                    : "white"
+                    ? "var(--foreground)"
+                    : "var(--primary-foreground)"
                 }
               >
                 <circle

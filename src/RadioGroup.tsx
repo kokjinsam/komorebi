@@ -41,18 +41,18 @@ export function RadioGroup(props: RadioGroupProps) {
 
 const styles = tv({
   extend: focusRing,
-  base: "box-border h-4.5 w-4.5 rounded-full border bg-white transition-all dark:bg-neutral-900",
+  base: "box-border h-4.5 w-4.5 rounded-full border bg-background transition-all",
   variants: {
     isSelected: {
       false:
-        "group-pressed:border-neutral-500 dark:group-pressed:border-neutral-300 border-neutral-400 dark:border-neutral-400",
-      true: "group-pressed:border-neutral-800 dark:group-pressed:border-neutral-200 border-[calc(var(--spacing)*1.5)] border-neutral-700 dark:border-neutral-300 forced-colors:border-[Highlight]!"
+        "group-pressed:border-[color-mix(in_oklch,var(--input),var(--foreground)_10%)] border-input",
+      true: "group-pressed:border-[color-mix(in_oklch,var(--primary),var(--foreground)_10%)] border-[calc(var(--spacing)*1.5)] border-primary forced-colors:border-[Highlight]!"
     },
     isInvalid: {
-      true: "group-pressed:border-red-800 dark:group-pressed:border-red-700 border-red-700 dark:border-red-600 forced-colors:border-[Mark]!"
+      true: "group-pressed:border-[color-mix(in_oklch,var(--destructive),var(--foreground)_10%)] border-destructive forced-colors:border-[Mark]!"
     },
     isDisabled: {
-      true: "border-neutral-200 dark:border-neutral-700 forced-colors:border-[GrayText]!"
+      true: "border-input opacity-50 forced-colors:border-[GrayText]!"
     }
   }
 })
@@ -63,7 +63,7 @@ export function Radio(props: RadioProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "flex relative gap-2 items-center group text-neutral-800 disabled:text-neutral-300 dark:text-neutral-200 dark:disabled:text-neutral-600 forced-colors:disabled:text-[GrayText] text-sm transition [-webkit-tap-highlight-color:transparent]"
+        "flex relative gap-2 items-center group text-foreground disabled:text-muted-foreground forced-colors:disabled:text-[GrayText] text-sm transition [-webkit-tap-highlight-color:transparent]"
       )}
     >
       {composeRenderProps(props.children, (children, renderProps) => (

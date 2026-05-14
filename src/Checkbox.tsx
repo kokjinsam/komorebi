@@ -14,8 +14,8 @@ const checkboxStyles = tv({
   base: "group relative flex items-center gap-2 font-sans text-sm transition [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
-      false: "text-neutral-800 dark:text-neutral-200",
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      false: "text-foreground",
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -26,20 +26,20 @@ const boxStyles = tv({
   variants: {
     isSelected: {
       false:
-        "group-pressed:[--color:var(--color-neutral-500)] dark:group-pressed:[--color:var(--color-neutral-300)] border-(--color) bg-white [--color:var(--color-neutral-400)] dark:bg-neutral-900 dark:[--color:var(--color-neutral-400)]",
-      true: "group-pressed:[--color:var(--color-neutral-800)] dark:group-pressed:[--color:var(--color-neutral-200)] border-(--color) bg-(--color) [--color:var(--color-neutral-700)] dark:[--color:var(--color-neutral-300)] forced-colors:[--color:Highlight]!"
+        "group-pressed:[--color:color-mix(in_oklch,var(--input),var(--foreground)_10%)] border-(--color) bg-background [--color:var(--input)]",
+      true: "group-pressed:[--color:color-mix(in_oklch,var(--primary),var(--foreground)_10%)] border-(--color) bg-(--color) [--color:var(--primary)] forced-colors:[--color:Highlight]!"
     },
     isInvalid: {
-      true: "group-pressed:[--color:var(--color-red-800)] dark:group-pressed:[--color:var(--color-red-700)] [--color:var(--color-red-700)] dark:[--color:var(--color-red-600)] forced-colors:[--color:Mark]!"
+      true: "group-pressed:[--color:color-mix(in_oklch,var(--destructive),var(--foreground)_10%)] [--color:var(--destructive)] forced-colors:[--color:Mark]!"
     },
     isDisabled: {
-      true: "[--color:var(--color-neutral-200)] dark:[--color:var(--color-neutral-700)] forced-colors:[--color:GrayText]!"
+      true: "[--color:color-mix(in_oklch,var(--muted-foreground),transparent_50%)] forced-colors:[--color:GrayText]!"
     }
   }
 })
 
 const iconStyles =
-  "w-3.5 h-3.5 text-white group-disabled:text-neutral-400 dark:text-neutral-900 dark:group-disabled:text-neutral-600 forced-colors:text-[HighlightText] pointer-events-none"
+  "w-3.5 h-3.5 text-primary-foreground group-disabled:text-muted-foreground forced-colors:text-[HighlightText] pointer-events-none"
 
 export function Checkbox(props: CheckboxProps) {
   return (

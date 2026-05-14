@@ -18,11 +18,11 @@ const track = tv({
   variants: {
     isSelected: {
       false:
-        "group-pressed:bg-neutral-200 dark:group-pressed:bg-neutral-700 border-neutral-400 bg-neutral-100 dark:border-neutral-400 dark:bg-neutral-800",
-      true: "group-pressed:bg-neutral-800 dark:group-pressed:bg-neutral-200 bg-neutral-700 dark:bg-neutral-300 forced-colors:bg-[Highlight]!"
+        "group-pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)] border-input bg-muted",
+      true: "group-pressed:bg-[color-mix(in_oklch,var(--primary),var(--foreground)_8%)] bg-primary forced-colors:bg-[Highlight]!"
     },
     isDisabled: {
-      true: "group-selected:bg-neutral-300 dark:group-selected:bg-neutral-800 forced-colors:group-selected:bg-[GrayText]! border-neutral-300 bg-neutral-100 dark:border-neutral-900 dark:bg-neutral-800 forced-colors:border-[GrayText]"
+      true: "group-selected:bg-muted forced-colors:group-selected:bg-[GrayText]! border-input bg-muted opacity-50 forced-colors:border-[GrayText]"
     }
   }
 })
@@ -31,8 +31,8 @@ const handle = tv({
   base: "h-4 w-4 transform rounded-full shadow-xs outline outline-1 -outline-offset-1 outline-transparent transition duration-200 ease-in-out",
   variants: {
     isSelected: {
-      false: "translate-x-0 bg-neutral-900 dark:bg-neutral-300",
-      true: "translate-x-[100%] bg-white dark:bg-neutral-900"
+      false: "translate-x-0 bg-foreground",
+      true: "translate-x-[100%] bg-primary-foreground"
     },
     isDisabled: {
       true: "forced-colors:outline-[GrayText]"
@@ -42,12 +42,12 @@ const handle = tv({
     {
       isSelected: false,
       isDisabled: true,
-      class: "bg-neutral-300 dark:bg-neutral-700"
+      class: "bg-muted-foreground"
     },
     {
       isSelected: true,
       isDisabled: true,
-      class: "bg-neutral-50 dark:bg-neutral-700"
+      class: "bg-muted-foreground"
     }
   ]
 })
@@ -58,7 +58,7 @@ export function Switch({ children, ...props }: SwitchProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "group relative flex gap-2 items-center text-neutral-800 disabled:text-neutral-300 dark:text-neutral-200 dark:disabled:text-neutral-600 forced-colors:disabled:text-[GrayText] text-sm transition [-webkit-tap-highlight-color:transparent]"
+        "group relative flex gap-2 items-center text-foreground disabled:text-muted-foreground forced-colors:disabled:text-[GrayText] text-sm transition [-webkit-tap-highlight-color:transparent]"
       )}
     >
       {(renderProps) => (

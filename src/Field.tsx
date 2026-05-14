@@ -19,7 +19,7 @@ export function Label(props: LabelProps) {
     <RACLabel
       {...props}
       className={twMerge(
-        "font-sans text-sm text-neutral-600 dark:text-neutral-300 font-medium cursor-default w-fit",
+        "font-sans text-sm text-foreground font-medium cursor-default w-fit",
         props.className
       )}
     />
@@ -31,7 +31,7 @@ export function Description(props: TextProps) {
     <Text
       {...props}
       slot="description"
-      className={twMerge("text-sm text-neutral-600", props.className)}
+      className={twMerge("text-sm text-muted-foreground", props.className)}
     />
   )
 }
@@ -42,7 +42,7 @@ export function FieldError(props: FieldErrorProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "text-sm text-red-600 forced-colors:text-[Mark]"
+        "text-sm text-destructive forced-colors:text-[Mark]"
       )}
     />
   )
@@ -53,21 +53,21 @@ export const fieldBorderStyles = tv({
   variants: {
     isFocusWithin: {
       false:
-        "border-neutral-300 hover:border-neutral-400 dark:border-neutral-600 dark:hover:border-neutral-500 forced-colors:border-[ButtonBorder]",
-      true: "border-neutral-600 dark:border-neutral-300 forced-colors:border-[Highlight]"
+        "border-input hover:border-[color-mix(in_oklch,var(--input),var(--foreground)_8%)] forced-colors:border-[ButtonBorder]",
+      true: "border-ring forced-colors:border-[Highlight]"
     },
     isInvalid: {
-      true: "border-red-600 dark:border-red-600 forced-colors:border-[Mark]"
+      true: "border-destructive forced-colors:border-[Mark]"
     },
     isDisabled: {
-      true: "border-neutral-200 dark:border-neutral-700 forced-colors:border-[GrayText]"
+      true: "border-input opacity-50 forced-colors:border-[GrayText]"
     }
   }
 })
 
 export const fieldGroupStyles = tv({
   extend: focusRing,
-  base: "group box-border flex h-9 items-center overflow-hidden rounded-lg border bg-white transition dark:bg-neutral-900 forced-colors:bg-[Field]",
+  base: "group box-border flex h-9 items-center overflow-hidden rounded-lg border bg-background transition forced-colors:bg-[Field]",
   variants: fieldBorderStyles.variants
 })
 
@@ -88,7 +88,7 @@ export function Input(props: InputProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "px-3 py-0 min-h-9 flex-1 min-w-0 border-0 outline-0 bg-white dark:bg-neutral-900 font-sans text-sm text-neutral-800 dark:text-neutral-200 placeholder:text-neutral-600 dark:placeholder:text-neutral-400 disabled:text-neutral-200 dark:disabled:text-neutral-600 disabled:placeholder:text-neutral-200 dark:disabled:placeholder:text-neutral-600 [-webkit-tap-highlight-color:transparent]"
+        "px-3 py-0 min-h-9 flex-1 min-w-0 border-0 outline-0 bg-background font-sans text-sm text-foreground placeholder:text-muted-foreground disabled:text-muted-foreground disabled:placeholder:text-muted-foreground [-webkit-tap-highlight-color:transparent]"
       )}
     />
   )

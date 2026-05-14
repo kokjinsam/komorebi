@@ -8,7 +8,7 @@ import {
 import { tv } from "tailwind-variants"
 
 const styles = tv({
-  base: "border-none bg-neutral-300 dark:bg-neutral-600 forced-colors:bg-[ButtonBorder]",
+  base: "border-none bg-border forced-colors:bg-[ButtonBorder]",
   variants: {
     orientation: {
       horizontal: "h-px w-full",

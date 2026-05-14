@@ -16,15 +16,15 @@ import { composeTailwindRenderProps, focusRing } from "./utils"
 
 const itemStyles = tv({
   extend: focusRing,
-  base: "group relative flex cursor-default gap-3 border-t border-transparent bg-white px-3 py-1 font-sans text-sm text-neutral-900 -outline-offset-2 select-none first:rounded-t-lg first:border-t-0 last:rounded-b-lg dark:border-t-neutral-700 dark:bg-neutral-900 dark:text-neutral-200",
+  base: "group relative flex cursor-default gap-3 border-t border-border bg-background px-3 py-1 font-sans text-sm text-foreground -outline-offset-2 select-none first:rounded-t-lg first:border-t-0 last:rounded-b-lg",
   variants: {
     isSelected: {
       false:
-        "pressed:bg-neutral-100 dark:pressed:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800",
-      true: "pressed:bg-blue-200 dark:pressed:bg-blue-700/40 z-20 border-y-blue-200 bg-blue-100 hover:bg-blue-200 dark:border-y-blue-900 dark:bg-blue-700/30 dark:hover:bg-blue-700/40"
+        "pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)] hover:bg-muted",
+      true: "pressed:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_16%)] z-20 border-y-[color-mix(in_oklch,var(--accent),transparent_50%)] bg-accent hover:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_8%)]"
     },
     isDisabled: {
-      true: "z-10 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "z-10 text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -35,7 +35,7 @@ export function Tree<T extends object>({ children, ...props }: TreeProps<T>) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "w-48 max-w-full overflow-auto relative border border-neutral-200 dark:border-neutral-700 rounded-lg"
+        "w-48 max-w-full overflow-auto relative border border-border rounded-lg"
       )}
     >
       {children}
@@ -48,19 +48,19 @@ const expandButton = tv({
   base: "flex h-8 w-8 shrink-0 cursor-default items-center justify-center rounded-lg border-0 bg-transparent p-0 text-start [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
 
 const chevron = tv({
-  base: "h-4.5 w-4.5 text-neutral-500 transition-transform duration-200 ease-in-out dark:text-neutral-400",
+  base: "h-4.5 w-4.5 text-muted-foreground transition-transform duration-200 ease-in-out",
   variants: {
     isExpanded: {
       true: "rotate-90 transform"
     },
     isDisabled: {
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })

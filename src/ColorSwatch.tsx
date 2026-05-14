@@ -13,7 +13,7 @@ export function ColorSwatch(props: ColorSwatchProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "w-8 h-8 box-border rounded-md border border-black/10"
+        "w-8 h-8 box-border rounded-md border border-foreground/10"
       )}
       style={({ color }) => ({
         background: `linear-gradient(${color}, ${color}),

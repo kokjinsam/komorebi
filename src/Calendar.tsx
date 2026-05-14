@@ -25,11 +25,11 @@ const cellStyles = tv({
   variants: {
     isSelected: {
       false:
-        "pressed:bg-neutral-300 dark:pressed:bg-neutral-600 text-neutral-900 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-700",
-      true: "bg-blue-600 text-white invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]"
+        "pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)] text-foreground hover:bg-muted",
+      true: "bg-primary text-primary-foreground invalid:bg-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]"
     },
     isDisabled: {
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]"
+      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -61,7 +61,7 @@ export function Calendar<T extends DateValue>({
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot="errorMessage" className="text-sm text-red-600">
+        <Text slot="errorMessage" className="text-sm text-destructive">
           {errorMessage}
         </Text>
       )}
@@ -81,7 +81,7 @@ export function CalendarHeader() {
           <CaretLeftIcon aria-hidden className="h-4 w-4" />
         )}
       </Button>
-      <Heading className="mx-2 my-0 flex-1 text-center font-sans text-base font-semibold text-neutral-900 [font-variation-settings:normal] dark:text-neutral-200" />
+      <Heading className="mx-2 my-0 flex-1 text-center font-sans text-base font-semibold text-foreground [font-variation-settings:normal]" />
       <Button variant="quiet" slot="next">
         {direction === "rtl" ? (
           <CaretLeftIcon aria-hidden className="h-4 w-4" />
@@ -97,7 +97,7 @@ export function CalendarGridHeader() {
   return (
     <AriaCalendarGridHeader>
       {(day) => (
-        <CalendarHeaderCell className="text-xs font-semibold text-neutral-500">
+        <CalendarHeaderCell className="text-xs font-semibold text-muted-foreground">
           {day}
         </CalendarHeaderCell>
       )}

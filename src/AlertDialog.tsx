@@ -37,7 +37,7 @@ export function AlertDialog({
             {title}
           </Heading>
           <div
-            className={`absolute top-6 right-6 h-6 w-6 ${variant === "destructive" ? "text-red-500" : "text-blue-500"}`}
+            className={`absolute top-6 right-6 h-6 w-6 ${variant === "destructive" ? "text-destructive" : "text-primary"}`}
           >
             {variant === "destructive" ? (
               <WarningCircleIcon weight="fill" aria-hidden />
@@ -45,7 +45,7 @@ export function AlertDialog({
               <InfoIcon aria-hidden />
             )}
           </div>
-          <p className="mt-3 text-neutral-500 dark:text-neutral-400">
+          <p className="mt-3 text-muted-foreground">
             {children}
           </p>
           <div className="mt-6 flex justify-end gap-2">

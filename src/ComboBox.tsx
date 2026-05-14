@@ -60,7 +60,7 @@ export function ComboBox<
       {props.selectionMode === "multiple" && (
         <ComboBoxValue
           placeholder="No items selected"
-          className="text-xs text-neutral-600 dark:text-neutral-300"
+          className="text-xs text-muted-foreground"
         />
       )}
       {description && <Description>{description}</Description>}

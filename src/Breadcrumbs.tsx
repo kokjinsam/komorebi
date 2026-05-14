@@ -37,7 +37,7 @@ export function Breadcrumb(
         <>
           <Link variant="secondary" {...props} />
           {!isCurrent && (
-            <CaretRightIcon className="h-3 w-3 text-neutral-600 dark:text-neutral-400" />
+            <CaretRightIcon className="h-3 w-3 text-muted-foreground" />
           )}
         </>
       )}
