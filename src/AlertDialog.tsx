@@ -27,17 +27,14 @@ export function AlertDialog({
   ...props
 }: AlertDialogProps) {
   return (
-    <Dialog role="alertdialog" {...props}>
+    <Dialog role="alertdialog" data-slot="alert-dialog" {...props}>
       {({ close }) => (
         <>
-          <Heading
-            slot="title"
-            className="my-0 text-xl leading-6 font-semibold"
-          >
+          <Heading slot="title" className="my-0 text-xl leading-6 font-semibold font-heading">
             {title}
           </Heading>
           <div
-            className={`absolute top-6 right-6 h-6 w-6 ${variant === "destructive" ? "text-destructive" : "text-primary"}`}
+            className={`absolute top-6 right-6 size-6 ${variant === "destructive" ? "text-destructive" : "text-primary"}`}
           >
             {variant === "destructive" ? (
               <WarningCircleIcon weight="fill" aria-hidden />
@@ -45,15 +42,13 @@ export function AlertDialog({
               <InfoIcon aria-hidden />
             )}
           </div>
-          <p className="mt-3 text-muted-foreground">
-            {children}
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{children}</p>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="secondary" onPress={close}>
+            <Button variant="outline" onPress={close}>
               {cancelLabel || "Cancel"}
             </Button>
             <Button
-              variant={variant === "destructive" ? "destructive" : "primary"}
+              variant={variant === "destructive" ? "destructive" : "default"}
               autoFocus
               onPress={chain(onAction, close)}
             >

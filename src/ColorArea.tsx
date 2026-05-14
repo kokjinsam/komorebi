@@ -14,9 +14,10 @@ export function ColorArea(props: ColorAreaProps) {
   return (
     <AriaColorArea
       {...props}
+      data-slot="color-area"
       className={composeTailwindRenderProps(
         props.className,
-        "w-full max-w-56 aspect-square rounded-lg bg-muted forced-colors:bg-[GrayText]"
+        "w-full max-w-56 aspect-square rounded-3xl bg-muted forced-colors:bg-[GrayText] disabled:opacity-50"
       )}
       style={({ defaultStyle, isDisabled }) => ({
         ...defaultStyle,

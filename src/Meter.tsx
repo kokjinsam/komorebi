@@ -17,10 +17,8 @@ export function Meter({ label, ...props }: MeterProps) {
   return (
     <AriaMeter
       {...props}
-      className={composeTailwindRenderProps(
-        props.className,
-        "flex flex-col gap-2 font-sans max-w-full"
-      )}
+      data-slot="meter"
+      className={composeTailwindRenderProps(props.className, "flex flex-col gap-2 max-w-full")}
     >
       {({ percentage, valueText }) => (
         <>
@@ -33,15 +31,15 @@ export function Meter({ label, ...props }: MeterProps) {
                 <WarningIcon
                   weight="fill"
                   aria-label="Alert"
-                  className="inline-block h-4 w-4 align-text-bottom"
+                  className="inline-block size-4 align-text-bottom"
                 />
               )}
               {" " + valueText}
             </span>
           </div>
-          <div className="relative h-2 w-64 max-w-full rounded-full bg-muted outline -outline-offset-1 outline-transparent">
+          <div className="relative h-1.5 w-64 max-w-full overflow-hidden rounded-full bg-muted">
             <div
-              className={`absolute top-0 left-0 h-full rounded-full ${getColor(percentage)} forced-colors:bg-[Highlight]`}
+              className={`absolute top-0 left-0 h-full rounded-full forced-colors:bg-[Highlight] ${getFillClass(percentage)}`}
               style={{ width: percentage + "%" }}
             />
           </div>
@@ -51,14 +49,8 @@ export function Meter({ label, ...props }: MeterProps) {
   )
 }
 
-function getColor(percentage: number) {
-  if (percentage < 40) {
-    return "bg-chart-1"
-  }
-
-  if (percentage < 80) {
-    return "bg-chart-3"
-  }
-
+function getFillClass(percentage: number) {
+  if (percentage < 40) return "bg-muted-foreground/40"
+  if (percentage < 80) return "bg-muted-foreground/70"
   return "bg-destructive"
 }

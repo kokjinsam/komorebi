@@ -1,58 +1,65 @@
 "use client"
 
+import { SpinnerIcon } from "@phosphor-icons/react"
 import React from "react"
 import {
   Button as RACButton,
   type ButtonProps as RACButtonProps
 } from "react-aria-components/Button"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
-import { tv } from "tailwind-variants"
-import { focusRing } from "./utils"
+import { tv, type VariantProps } from "tailwind-variants"
+import { cn } from "./utils"
 
-export interface ButtonProps extends RACButtonProps {
-  /** @default 'primary' */
-  variant?: "primary" | "secondary" | "destructive" | "quiet"
-}
-
-let button = tv({
-  extend: focusRing,
-  base: "relative box-border inline-flex h-9 cursor-default items-center justify-center gap-2 rounded-lg border border-transparent px-3.5 py-0 text-center font-sans text-sm transition [-webkit-tap-highlight-color:transparent] dark:border-foreground/10 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 [&:has(>svg:only-child)]:px-0",
+const button = tv({
+  base: "group/button relative inline-flex shrink-0 cursor-default items-center justify-center gap-1.5 overflow-hidden rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 pressed:translate-y-px disabled:pointer-events-none disabled:opacity-50 forced-colors:outline-[Highlight] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   variants: {
     variant: {
-      primary:
-        "bg-primary text-primary-foreground hover:bg-[color-mix(in_oklch,var(--primary),var(--foreground)_8%)] pressed:bg-[color-mix(in_oklch,var(--primary),var(--foreground)_16%)]",
+      default: "bg-primary text-primary-foreground hover:bg-primary/80 pressed:bg-primary/70",
       secondary:
-        "border-input bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_8%)] pressed:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_16%)]",
+        "bg-secondary text-secondary-foreground hover:bg-secondary/80 pressed:bg-secondary/70",
+      outline:
+        "border-input bg-background hover:bg-muted hover:text-foreground pressed:bg-muted/80 dark:bg-input/30",
+      ghost: "text-foreground hover:bg-muted pressed:bg-muted/80 dark:hover:bg-muted/50",
       destructive:
-        "bg-destructive text-destructive-foreground hover:bg-[color-mix(in_oklch,var(--destructive),var(--foreground)_8%)] pressed:bg-[color-mix(in_oklch,var(--destructive),var(--foreground)_16%)]",
-      quiet:
-        "border-0 bg-transparent text-foreground hover:bg-muted pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)]"
+        "bg-destructive/10 text-destructive hover:bg-destructive/20 pressed:bg-destructive/30 dark:bg-destructive/20 dark:hover:bg-destructive/30",
+      link: "text-primary underline-offset-4 hover:underline pressed:translate-y-0"
     },
-    isDisabled: {
-      true: "border-transparent bg-muted text-muted-foreground forced-colors:text-[GrayText]"
+    size: {
+      default: "h-9 px-3",
+      xs: "h-6 gap-1 px-2.5 text-xs [&_svg:not([class*='size-'])]:size-3",
+      sm: "h-8 gap-1 px-3",
+      lg: "h-10 px-4",
+      icon: "size-9",
+      "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
+      "icon-sm": "size-8",
+      "icon-lg": "size-10"
     },
-    isPending: {
-      true: "text-transparent"
-    }
+    isPending: { true: "text-transparent" }
   },
-  defaultVariants: {
-    variant: "primary"
-  },
-  compoundVariants: [
-    {
-      variant: "quiet",
-      isDisabled: true,
-      class: "bg-transparent"
-    }
-  ]
+  defaultVariants: { variant: "default", size: "default" }
 })
+
+export interface ButtonProps
+  extends RACButtonProps,
+    Omit<VariantProps<typeof button>, "isPending"> {
+  variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "link"
+  size?: "default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"
+}
 
 export function Button(props: ButtonProps) {
   return (
     <RACButton
       {...props}
+      data-slot="button"
+      data-variant={props.variant ?? "default"}
+      data-size={props.size ?? "default"}
       className={composeRenderProps(props.className, (className, renderProps) =>
-        button({ ...renderProps, variant: props.variant, className })
+        button({
+          ...renderProps,
+          variant: props.variant,
+          size: props.size,
+          className
+        })
       )}
     >
       {composeRenderProps(props.children, (children, { isPending }) => (
@@ -61,37 +68,16 @@ export function Button(props: ButtonProps) {
           {isPending && (
             <span
               aria-hidden
-              className="absolute inset-0 flex items-center justify-center"
+              className={cn(
+                "absolute inset-0 flex items-center justify-center",
+                props.variant === "default" || props.variant == null
+                  ? "text-primary-foreground"
+                  : props.variant === "destructive"
+                    ? "text-destructive"
+                    : "text-foreground"
+              )}
             >
-              <svg
-                className="h-4 w-4 animate-spin"
-                viewBox="0 0 24 24"
-                stroke={
-                  props.variant === "secondary" || props.variant === "quiet"
-                    ? "var(--foreground)"
-                    : "var(--primary-foreground)"
-                }
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  strokeWidth="4"
-                  fill="none"
-                  className="opacity-25"
-                />
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  fill="none"
-                  pathLength="100"
-                  strokeDasharray="60 140"
-                  strokeDashoffset="0"
-                />
-              </svg>
+              <SpinnerIcon className="size-4 animate-spin" />
             </span>
           )}
         </>

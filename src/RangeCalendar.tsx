@@ -12,45 +12,52 @@ import {
 } from "react-aria-components/RangeCalendar"
 import { tv } from "tailwind-variants"
 import { CalendarGridHeader, CalendarHeader } from "./Calendar"
-import { composeTailwindRenderProps, focusRing } from "./utils"
+import { composeTailwindRenderProps } from "./utils"
 
-export interface RangeCalendarProps<T extends DateValue> extends Omit<
-  AriaRangeCalendarProps<T>,
-  "visibleDuration"
-> {
+export interface RangeCalendarProps<T extends DateValue>
+  extends Omit<AriaRangeCalendarProps<T>, "visibleDuration"> {
   errorMessage?: string
 }
 
 const cell = tv({
-  extend: focusRing,
-  base: "flex h-full w-full items-center justify-center rounded-full text-foreground forced-color-adjust-none",
+  base: "flex size-full items-center justify-center text-sm text-foreground forced-color-adjust-none outline-none",
   variants: {
     selectionState: {
-      none: "group-pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)] group-hover:bg-muted",
+      none: "rounded-(--cell-radius) hover:bg-muted pressed:bg-muted/80",
       middle: [
-        "group-hover:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_8%)] forced-colors:group-hover:bg-[Highlight]",
-        "group-invalid:group-hover:bg-[color-mix(in_oklch,var(--destructive),transparent_80%)] forced-colors:group-invalid:group-hover:bg-[Mark]",
-        "group-pressed:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_16%)] forced-colors:group-pressed:bg-[Highlight] forced-colors:text-[HighlightText]",
-        "group-invalid:group-pressed:bg-[color-mix(in_oklch,var(--destructive),transparent_70%)] forced-colors:group-invalid:group-pressed:bg-[Mark]"
-      ],
-      cap: "bg-primary text-primary-foreground group-invalid:bg-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:group-invalid:bg-[Mark]"
+        "rounded-none bg-accent text-accent-foreground",
+        "hover:bg-accent/80 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+        "group-invalid:bg-destructive/10 group-invalid:text-destructive"
+      ].join(" "),
+      cap: "rounded-(--cell-radius) bg-primary text-primary-foreground group-invalid:bg-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:group-invalid:bg-[Mark]"
+    },
+    isToday: {
+      true: "ring-1 ring-input"
     },
     isDisabled: {
-      true: "text-muted-foreground forced-colors:text-[GrayText]"
+      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+    },
+    isFocusVisible: {
+      true: "ring-2 ring-ring/30"
     }
-  }
+  },
+  compoundVariants: [
+    {
+      selectionState: "cap",
+      isToday: true,
+      className: "ring-0"
+    }
+  ]
 })
 
-export function RangeCalendar<T extends DateValue>({
-  errorMessage,
-  ...props
-}: RangeCalendarProps<T>) {
+export function RangeCalendar<T extends DateValue>({ errorMessage, ...props }: RangeCalendarProps<T>) {
   return (
     <AriaRangeCalendar
       {...props}
+      data-slot="range-calendar"
       className={composeTailwindRenderProps(
         props.className,
-        "font-sans w-[calc(9*var(--spacing)*7)] max-w-full @container"
+        "group/range-calendar [--cell-radius:var(--radius-4xl)] [--cell-size:2rem] @container"
       )}
     >
       <CalendarHeader />
@@ -60,16 +67,18 @@ export function RangeCalendar<T extends DateValue>({
           {(date) => (
             <CalendarCell
               date={date}
-              className="group outside-month:text-muted-foreground selected:bg-accent forced-colors:selected:bg-[Highlight] invalid:selected:bg-[color-mix(in_oklch,var(--destructive),transparent_80%)] forced-colors:invalid:selected:bg-[Mark] selection-start:rounded-s-full selection-end:rounded-e-full aspect-square w-[calc(100cqw/7)] cursor-default text-sm outline [-webkit-tap-highlight-color:transparent] [td:first-child_&]:rounded-s-full [td:last-child_&]:rounded-e-full"
+              className={[
+                "group/cell size-(--cell-size) cursor-default text-sm outline-none [-webkit-tap-highlight-color:transparent]",
+                "outside-month:text-muted-foreground/60",
+                "selected:bg-accent forced-colors:selected:bg-[Highlight]",
+                "invalid:selected:bg-destructive/10 forced-colors:invalid:selected:bg-[Mark]",
+                "selection-start:rounded-l-(--cell-radius) selection-start:rounded-r-none",
+                "selection-end:rounded-r-(--cell-radius) selection-end:rounded-l-none",
+                "[td:first-child_&]:rounded-l-(--cell-radius)",
+                "[td:last-child_&]:rounded-r-(--cell-radius)"
+              ].join(" ")}
             >
-              {({
-                formattedDate,
-                isSelected,
-                isSelectionStart,
-                isSelectionEnd,
-                isFocusVisible,
-                isDisabled
-              }) => (
+              {({ formattedDate, isSelected, isSelectionStart, isSelectionEnd, isFocusVisible, isDisabled, isToday }) => (
                 <span
                   className={cell({
                     selectionState:
@@ -79,7 +88,8 @@ export function RangeCalendar<T extends DateValue>({
                           ? "middle"
                           : "none",
                     isDisabled,
-                    isFocusVisible
+                    isFocusVisible,
+                    isToday
                   })}
                 >
                   {formattedDate}

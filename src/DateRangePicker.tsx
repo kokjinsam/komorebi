@@ -15,42 +15,33 @@ import { Popover } from "./Popover"
 import { RangeCalendar } from "./RangeCalendar"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface DateRangePickerProps<
-  T extends DateValue
-> extends AriaDateRangePickerProps<T> {
+export interface DateRangePickerProps<T extends DateValue> extends AriaDateRangePickerProps<T> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-export function DateRangePicker<T extends DateValue>({
-  label,
-  description,
-  errorMessage,
-  ...props
-}: DateRangePickerProps<T>) {
+export function DateRangePicker<T extends DateValue>({ label, description, errorMessage, ...props }: DateRangePickerProps<T>) {
   return (
     <AriaDateRangePicker
       {...props}
-      className={composeTailwindRenderProps(
-        props.className,
-        "group flex flex-col gap-1 font-sans max-w-full"
-      )}
+      data-slot="field"
+      className={composeTailwindRenderProps(props.className, "group/field flex flex-col gap-1.5 max-w-full")}
     >
       {label && <Label>{label}</Label>}
-      <FieldGroup className="w-auto min-w-52 cursor-text disabled:cursor-default">
-        <div className="flex w-fit flex-1 scrollbar-none items-center overflow-x-auto overflow-y-clip">
-          <DateInput slot="start" className="ps-3 pe-2 text-sm" />
+      <FieldGroup className="w-auto min-w-52" data-slot="date-range-picker">
+        <div className="flex w-fit flex-1 items-center overflow-x-auto overflow-y-clip [scrollbar-width:none]">
+          <DateInput slot="start" inline />
           <span
             aria-hidden="true"
-            className="text-foreground group-disabled:text-muted-foreground forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+            className="shrink-0 text-foreground group-disabled/field-group:text-muted-foreground forced-colors:text-[ButtonText]"
           >
             –
           </span>
-          <DateInput slot="end" className="flex-1 ps-2 pe-3 text-sm" />
+          <DateInput slot="end" inline />
         </div>
-        <FieldButton className="mr-1 w-6 outline-offset-0">
-          <CalendarIcon aria-hidden className="h-4 w-4" />
+        <FieldButton className="mr-1">
+          <CalendarIcon aria-hidden className="size-4" />
         </FieldButton>
       </FieldGroup>
       {description && <Description>{description}</Description>}

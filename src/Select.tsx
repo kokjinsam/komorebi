@@ -11,7 +11,6 @@ import {
   SelectValue,
   type ValidationResult
 } from "react-aria-components/Select"
-import { tv } from "tailwind-variants"
 import { Description, FieldError, Label } from "./Field"
 import {
   DropdownItem,
@@ -19,24 +18,10 @@ import {
   type DropdownSectionProps
 } from "./ListBox"
 import { Popover } from "./Popover"
-import { composeTailwindRenderProps, focusRing } from "./utils"
+import { composeTailwindRenderProps } from "./utils"
 
-const styles = tv({
-  extend: focusRing,
-  base: "flex h-9 w-full min-w-[180px] cursor-default items-center gap-4 rounded-lg border border-input bg-secondary pr-2 pl-3 text-start font-sans transition [-webkit-tap-highlight-color:transparent]",
-  variants: {
-    isDisabled: {
-      false:
-        "pressed:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_16%)] text-secondary-foreground group-invalid:outline group-invalid:outline-destructive hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_8%)] forced-colors:group-invalid:outline-[Mark]",
-      true: "border-transparent bg-muted text-muted-foreground forced-colors:text-[GrayText]"
-    }
-  }
-})
-
-export interface SelectProps<
-  T extends object,
-  M extends "single" | "multiple"
-> extends Omit<AriaSelectProps<T, M>, "children"> {
+export interface SelectProps<T extends object, M extends "single" | "multiple">
+  extends Omit<AriaSelectProps<T, M>, "children"> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -44,10 +29,7 @@ export interface SelectProps<
   children: React.ReactNode | ((item: T) => React.ReactNode)
 }
 
-export function Select<
-  T extends object,
-  M extends "single" | "multiple" = "single"
->({
+export function Select<T extends object, M extends "single" | "multiple" = "single">({
   label,
   description,
   errorMessage,
@@ -58,21 +40,23 @@ export function Select<
   return (
     <AriaSelect
       {...props}
+      data-slot="field"
       className={composeTailwindRenderProps(
         props.className,
-        "group flex flex-col gap-1 relative font-sans"
+        "group/field flex flex-col gap-1.5 relative"
       )}
     >
       {label && <Label>{label}</Label>}
-      <Button className={styles}>
-        <SelectValue className="flex-1 text-sm">
-          {({ selectedText, defaultChildren }) =>
-            selectedText || defaultChildren
-          }
+      <Button
+        data-slot="select-trigger"
+        className="flex h-9 w-full min-w-[180px] cursor-default items-center gap-2 rounded-3xl border border-transparent bg-input/50 px-3 text-sm text-start transition-[color,box-shadow,background-color] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 group-invalid/field:border-destructive group-invalid/field:ring-3 group-invalid/field:ring-destructive/20 dark:group-invalid/field:ring-destructive/40 [-webkit-tap-highlight-color:transparent]"
+      >
+        <SelectValue className="flex-1 text-sm text-foreground placeholder-shown:text-muted-foreground">
+          {({ selectedText, defaultChildren }) => selectedText || defaultChildren}
         </SelectValue>
         <CaretDownIcon
           aria-hidden
-          className="h-4 w-4 text-muted-foreground group-disabled:text-muted-foreground forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+          className="size-4 shrink-0 text-muted-foreground"
         />
       </Button>
       {description && <Description>{description}</Description>}
@@ -80,7 +64,7 @@ export function Select<
       <Popover className="min-w-(--trigger-width)">
         <ListBox
           items={items}
-          className="box-border max-h-[inherit] overflow-auto p-1 outline-hidden [clip-path:inset(0_0_0_0_round_.75rem)]"
+          className="box-border max-h-[inherit] overflow-auto p-1 outline-hidden"
         >
           {children}
         </ListBox>
@@ -93,8 +77,6 @@ export function SelectItem(props: ListBoxItemProps) {
   return <DropdownItem {...props} />
 }
 
-export function SelectSection<T extends object>(
-  props: DropdownSectionProps<T>
-) {
+export function SelectSection<T extends object>(props: DropdownSectionProps<T>) {
   return <DropdownSection {...props} />
 }

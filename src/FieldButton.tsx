@@ -7,27 +7,16 @@ import {
 } from "react-aria-components/Button"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { tv } from "tailwind-variants"
-import { focusRing } from "./utils"
-
-export interface ButtonProps extends RACButtonProps {
-  /** @default 'primary' */
-  variant?: "primary" | "secondary" | "destructive" | "icon"
-}
 
 let button = tv({
-  extend: focusRing,
-  base: "pressed:bg-foreground/10 relative flex inline-flex cursor-default items-center justify-center rounded-md border-0 bg-transparent p-1 text-center font-sans text-sm text-muted-foreground transition [-webkit-tap-highlight-color:transparent] hover:bg-foreground/5 disabled:bg-transparent",
-  variants: {
-    isDisabled: {
-      true: "bg-muted text-muted-foreground forced-colors:text-[GrayText]"
-    }
-  }
+  base: "pressed:bg-foreground/10 flex cursor-default items-center justify-center rounded-sm border-0 bg-transparent p-1 text-muted-foreground transition-colors outline-none [-webkit-tap-highlight-color:transparent] hover:bg-foreground/5 disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-ring/30"
 })
 
-export function FieldButton(props: ButtonProps) {
+export function FieldButton(props: RACButtonProps) {
   return (
     <RACButton
       {...props}
+      data-slot="field-button"
       className={composeRenderProps(props.className, (className, renderProps) =>
         button({ ...renderProps, className })
       )}

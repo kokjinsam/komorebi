@@ -16,17 +16,14 @@ import { Button } from "./Button"
 import { composeTailwindRenderProps } from "./utils"
 
 const disclosure = tv({
-  base: "group min-w-50 rounded-lg font-sans text-foreground"
+  base: "group/disclosure min-w-50 rounded-2xl text-foreground"
 })
 
 const chevron = tv({
-  base: "h-4 w-4 text-muted-foreground transition-transform duration-200 ease-in-out",
+  base: "size-4 text-muted-foreground transition-transform duration-200 ease-in-out shrink-0",
   variants: {
     isExpanded: {
       true: "rotate-90 transform"
-    },
-    isDisabled: {
-      true: "text-muted-foreground forced-colors:text-[GrayText]"
     }
   }
 })
@@ -39,6 +36,7 @@ export function Disclosure({ children, ...props }: DisclosureProps) {
   return (
     <AriaDisclosure
       {...props}
+      data-slot="disclosure"
       className={composeRenderProps(props.className, (className, renderProps) =>
         disclosure({ ...renderProps, className })
       )}
@@ -55,19 +53,16 @@ export interface DisclosureHeaderProps {
 export function DisclosureHeader({ children }: DisclosureHeaderProps) {
   let { isExpanded } = useContext(DisclosureStateContext)!
   return (
-    <Heading className="m-0 text-lg font-semibold">
+    <Heading className="m-0 text-base">
       <Button
         slot="trigger"
-        variant="quiet"
-        className="w-full justify-start font-medium"
+        variant="ghost"
+        className="w-full justify-between rounded-2xl px-3 py-2 font-medium h-auto"
       >
         {({ isDisabled }) => (
           <>
-            <CaretRightIcon
-              aria-hidden
-              className={chevron({ isExpanded, isDisabled })}
-            />
             <span>{children}</span>
+            <CaretRightIcon aria-hidden className={chevron({ isExpanded, isDisabled } as any)} />
           </>
         )}
       </Button>
@@ -83,12 +78,13 @@ export function DisclosurePanel({ children, ...props }: DisclosurePanelProps) {
   return (
     <AriaDisclosurePanel
       {...props}
+      data-slot="disclosure-panel"
       className={composeTailwindRenderProps(
         props.className,
         "h-(--disclosure-panel-height) motion-safe:transition-[height] overflow-clip"
       )}
     >
-      <div className="px-4 py-2">{children}</div>
+      <div className="px-3 py-2 text-sm text-foreground">{children}</div>
     </AriaDisclosurePanel>
   )
 }

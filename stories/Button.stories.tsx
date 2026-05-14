@@ -10,7 +10,11 @@ export default {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "destructive"]
+      options: ["default", "secondary", "outline", "ghost", "destructive", "link"]
+    },
+    size: {
+      control: "select",
+      options: ["default", "xs", "sm", "lg", "icon", "icon-xs", "icon-sm", "icon-lg"]
     }
   },
   args: {
@@ -19,20 +23,30 @@ export default {
   }
 }
 
-export const Primary = {
-  args: {
-    variant: "primary"
-  }
+export const Default = {
+  args: { variant: "default" }
 }
 
 export const Secondary = {
-  args: {
-    variant: "secondary"
-  }
+  args: { variant: "secondary" }
+}
+
+export const Outline = {
+  args: { variant: "outline" }
+}
+
+export const Ghost = {
+  args: { variant: "ghost" }
 }
 
 export const Destructive = {
-  args: {
-    variant: "destructive"
-  }
+  args: { variant: "destructive" }
+}
+
+export const Pending = {
+  args: { variant: "default", isPending: true, children: "Saving…" }
+}
+
+export const Disabled = {
+  args: { variant: "default", isDisabled: true }
 }

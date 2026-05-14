@@ -7,19 +7,14 @@ import {
   type ToggleButtonProps
 } from "react-aria-components/ToggleButton"
 import { tv } from "tailwind-variants"
-import { focusRing } from "./utils"
 
-let styles = tv({
-  extend: focusRing,
-  base: "relative box-border inline-flex h-9 cursor-default items-center justify-center gap-2 rounded-lg border border-input px-3.5 text-center font-sans text-sm transition forced-color-adjust-none [-webkit-tap-highlight-color:transparent] [&:has(>svg:only-child)]:aspect-square [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:px-0",
+const styles = tv({
+  base: "group/toggle-button relative inline-flex cursor-default items-center justify-center gap-1.5 rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 pressed:translate-y-px forced-color-adjust-none [-webkit-tap-highlight-color:transparent] [&_svg:not([class*='size-'])]:size-4 h-9 px-3",
   variants: {
     isSelected: {
       false:
-        "pressed:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_16%)] bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_8%)] forced-colors:bg-[ButtonFace]! forced-colors:text-[ButtonText]!",
-      true: "pressed:bg-[color-mix(in_oklch,var(--primary),var(--foreground)_16%)] bg-primary text-primary-foreground hover:bg-[color-mix(in_oklch,var(--primary),var(--foreground)_8%)] forced-colors:bg-[Highlight]! forced-colors:text-[HighlightText]!"
-    },
-    isDisabled: {
-      true: "border-transparent bg-muted text-muted-foreground forced-colors:bg-[ButtonFace]! forced-colors:text-[GrayText]!"
+        "bg-secondary text-secondary-foreground hover:bg-secondary/80 pressed:bg-secondary/70 forced-colors:bg-[ButtonFace]! forced-colors:text-[ButtonText]!",
+      true: "bg-primary text-primary-foreground hover:bg-primary/80 pressed:bg-primary/70 forced-colors:bg-[Highlight]! forced-colors:text-[HighlightText]!"
     }
   }
 })
@@ -28,6 +23,7 @@ export function ToggleButton(props: ToggleButtonProps) {
   return (
     <RACToggleButton
       {...props}
+      data-slot="toggle-button"
       className={composeRenderProps(props.className, (className, renderProps) =>
         styles({ ...renderProps, className })
       )}

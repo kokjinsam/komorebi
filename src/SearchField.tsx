@@ -18,33 +18,25 @@ export interface SearchFieldProps extends AriaSearchFieldProps {
   placeholder?: string
 }
 
-export function SearchField({
-  label,
-  description,
-  errorMessage,
-  placeholder,
-  ...props
-}: SearchFieldProps) {
+export function SearchField({ label, description, errorMessage, placeholder, ...props }: SearchFieldProps) {
   return (
     <AriaSearchField
       {...props}
+      data-slot="field"
       className={composeTailwindRenderProps(
         props.className,
-        "group flex flex-col gap-1 min-w-10 font-sans max-w-full"
+        "group/field flex flex-col gap-1.5 min-w-10 max-w-full"
       )}
     >
       {label && <Label>{label}</Label>}
-      <FieldGroup>
+      <FieldGroup data-slot="search-field">
         <MagnifyingGlassIcon
           aria-hidden
-          className="ml-2 h-4 w-4 text-muted-foreground group-disabled:text-muted-foreground forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+          className="ml-3 size-4 shrink-0 text-muted-foreground"
         />
-        <Input
-          placeholder={placeholder}
-          className="pl-2 [&::-webkit-search-cancel-button]:hidden"
-        />
-        <FieldButton className="mr-1 w-6 group-empty:invisible">
-          <XIcon aria-hidden className="h-4 w-4" />
+        <Input placeholder={placeholder} className="[&::-webkit-search-cancel-button]:hidden" />
+        <FieldButton className="mr-1 group-empty:invisible">
+          <XIcon aria-hidden className="size-4" />
         </FieldButton>
       </FieldGroup>
       {description && <Description>{description}</Description>}

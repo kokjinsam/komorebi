@@ -11,9 +11,10 @@ export function ColorSwatch(props: ColorSwatchProps) {
   return (
     <AriaColorSwatch
       {...props}
+      data-slot="color-swatch"
       className={composeTailwindRenderProps(
         props.className,
-        "w-8 h-8 box-border rounded-md border border-foreground/10"
+        "size-8 box-border rounded-3xl border border-foreground/10"
       )}
       style={({ color }) => ({
         background: `linear-gradient(${color}, ${color}),

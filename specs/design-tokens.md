@@ -1,5 +1,13 @@
 # Design Tokens for Komorebi
 
+> **Partially superseded by [`specs/luma-aesthetic.md`](./luma-aesthetic.md).**
+> Where the two specs conflict, `luma-aesthetic.md` takes precedence.
+> Specifically superseded: the Radius scale, State composition (hover/pressed
+> via `color-mix`), Focus ring utility, Modal/Popover translucency, Chart token
+> defaults, TagGroup variant names, and disabled styling patterns.
+> The semantic token list, naming conventions, CSS export shape, `.dark` mode,
+> and `forced-colors:` decisions remain valid.
+
 Introduce a shadcn-aligned, CSS-variable–based design token system to
 `@kokjinsam/komorebi` and migrate every component off hardcoded Tailwind
 palette classes so consumers can re-theme the library by overriding tokens.
@@ -93,9 +101,17 @@ These shaped the spec — kept here for future readers asking "why".
    `calc(var(--radius) - 4px)` / `calc(var(--radius) - 2px)` /
    `var(--radius)` / `calc(var(--radius) + 4px)`. Components keep writing
    `rounded-lg` etc. and inherit the scale.
+   > ⚠️ **Superseded by `specs/luma-aesthetic.md`:** The radius scale now uses
+   > multipliers (`sm 0.6× / md 0.8× / lg 1× / xl 1.4× / 2xl 1.8× / 3xl 2.2× /
+   > 4xl 2.6×`) and extends to `rounded-4xl`. Components use `rounded-4xl` for
+   > buttons/cards/modals and `rounded-3xl` for inputs/popovers.
 7. **Focus ring uses neutral `--ring`.** Komorebi's current blue focus ring
    becomes consumer-themable; default is shadcn's mid-neutral. `focusRing`
    in `src/utils.ts` is rewritten to reference `--ring`.
+   > ⚠️ **Superseded by `specs/luma-aesthetic.md`:** The focus ring is now an
+   > inset ring (`focus-visible:border-ring focus-visible:ring-3
+   > focus-visible:ring-ring/30`) rather than an `outline outline-offset-2`.
+   > The `focusRing` tv() helper in `src/utils.ts` emits these classes.
 8. **Distribution: ship `tokens.css`.** Library exports a CSS file
    containing `:root` + `.dark` variable declarations. Consumer imports
    once. Documented override surface: every public token is stable, every
@@ -295,6 +311,10 @@ shadcn-using consumers get implicit theme inheritance: their existing
 ---
 
 ## State composition (the `color-mix` patterns)
+
+> ⚠️ **Superseded by `specs/luma-aesthetic.md`:** Component hover/pressed states
+> now use opacity-fade (`hover:bg-{token}/80 pressed:bg-{token}/70`) instead of
+> `color-mix(...)`. The `interactive()` helper below was never implemented.
 
 To stay on one token per role while expressing hover / pressed / disabled /
 invalid, components compose states inline. The canonical recipes:

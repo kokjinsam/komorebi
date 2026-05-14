@@ -17,40 +17,50 @@ import {
 import { useLocale } from "react-aria-components/I18nProvider"
 import { tv } from "tailwind-variants"
 import { Button } from "./Button"
-import { composeTailwindRenderProps, focusRing } from "./utils"
+import { composeTailwindRenderProps } from "./utils"
 
 const cellStyles = tv({
-  extend: focusRing,
-  base: "flex aspect-square w-[calc(100cqw/7)] cursor-default items-center justify-center rounded-full text-sm forced-color-adjust-none [-webkit-tap-highlight-color:transparent]",
+  base: "flex size-(--cell-size) cursor-default items-center justify-center rounded-(--cell-radius) text-sm text-foreground transition-colors forced-color-adjust-none outline-none [-webkit-tap-highlight-color:transparent]",
   variants: {
     isSelected: {
-      false:
-        "pressed:bg-[color-mix(in_oklch,var(--muted),var(--foreground)_8%)] text-foreground hover:bg-muted",
-      true: "bg-primary text-primary-foreground invalid:bg-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]"
+      false: "hover:bg-muted pressed:bg-muted/80",
+      true: "bg-primary text-primary-foreground invalid:bg-destructive/10 invalid:text-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]"
+    },
+    isToday: {
+      true: "ring-1 ring-input"
+    },
+    isOutsideMonth: {
+      true: "text-muted-foreground/60"
     },
     isDisabled: {
-      true: "text-muted-foreground forced-colors:text-[GrayText]"
+      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+    },
+    isFocusVisible: {
+      true: "ring-2 ring-ring/30"
     }
-  }
+  },
+  compoundVariants: [
+    {
+      isSelected: true,
+      isToday: true,
+      className: "ring-0"
+    }
+  ]
 })
 
-export interface CalendarProps<T extends DateValue> extends Omit<
-  AriaCalendarProps<T>,
-  "visibleDuration"
-> {
+export interface CalendarProps<T extends DateValue>
+  extends Omit<AriaCalendarProps<T>, "visibleDuration"> {
   errorMessage?: string
 }
 
-export function Calendar<T extends DateValue>({
-  errorMessage,
-  ...props
-}: CalendarProps<T>) {
+export function Calendar<T extends DateValue>({ errorMessage, ...props }: CalendarProps<T>) {
   return (
     <AriaCalendar
       {...props}
+      data-slot="calendar"
       className={composeTailwindRenderProps(
         props.className,
-        "flex flex-col font-sans w-[calc(9*var(--spacing)*7)] max-w-full @container"
+        "group/calendar flex flex-col [--cell-radius:var(--radius-4xl)] [--cell-size:2rem] @container"
       )}
     >
       <CalendarHeader />
@@ -73,20 +83,20 @@ export function CalendarHeader() {
   let { direction } = useLocale()
 
   return (
-    <header className="border-box flex items-center gap-1 px-1 pb-4">
-      <Button variant="quiet" slot="previous">
+    <header className="flex items-center gap-1 px-1 pb-4">
+      <Button variant="ghost" size="icon-sm" slot="previous">
         {direction === "rtl" ? (
-          <CaretRightIcon aria-hidden className="h-4 w-4" />
+          <CaretRightIcon aria-hidden className="size-4" />
         ) : (
-          <CaretLeftIcon aria-hidden className="h-4 w-4" />
+          <CaretLeftIcon aria-hidden className="size-4" />
         )}
       </Button>
-      <Heading className="mx-2 my-0 flex-1 text-center font-sans text-base font-semibold text-foreground [font-variation-settings:normal]" />
-      <Button variant="quiet" slot="next">
+      <Heading className="mx-2 flex-1 text-center font-heading text-base font-semibold text-foreground" />
+      <Button variant="ghost" size="icon-sm" slot="next">
         {direction === "rtl" ? (
-          <CaretLeftIcon aria-hidden className="h-4 w-4" />
+          <CaretLeftIcon aria-hidden className="size-4" />
         ) : (
-          <CaretRightIcon aria-hidden className="h-4 w-4" />
+          <CaretRightIcon aria-hidden className="size-4" />
         )}
       </Button>
     </header>
@@ -97,7 +107,7 @@ export function CalendarGridHeader() {
   return (
     <AriaCalendarGridHeader>
       {(day) => (
-        <CalendarHeaderCell className="text-xs font-semibold text-muted-foreground">
+        <CalendarHeaderCell className="text-xs font-medium text-muted-foreground">
           {day}
         </CalendarHeaderCell>
       )}

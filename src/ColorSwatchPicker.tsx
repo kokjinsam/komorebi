@@ -10,7 +10,6 @@ import {
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { tv } from "tailwind-variants"
 import { ColorSwatch } from "./ColorSwatch"
-import { focusRing } from "./utils"
 
 const pickerStyles = tv({
   base: "flex gap-1",
@@ -29,6 +28,7 @@ export function ColorSwatchPicker({
   return (
     <AriaColorSwatchPicker
       {...props}
+      data-slot="color-swatch-picker"
       className={composeRenderProps(props.className, (className, renderProps) =>
         pickerStyles({ ...renderProps, className })
       )}
@@ -39,18 +39,17 @@ export function ColorSwatchPicker({
 }
 
 const itemStyles = tv({
-  extend: focusRing,
-  base: "relative rounded-xs [-webkit-tap-highlight-color:transparent]"
+  base: "relative rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/30 [-webkit-tap-highlight-color:transparent]"
 })
 
 export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
   return (
-    <AriaColorSwatchPickerItem {...props} className={itemStyles}>
+    <AriaColorSwatchPickerItem {...props} data-slot="color-swatch-picker-item" className={itemStyles}>
       {({ isSelected }) => (
         <>
           <ColorSwatch />
           {isSelected && (
-            <div className="absolute top-0 left-0 box-border h-full w-full rounded-md border border-foreground outline-0 -outline-offset-4 outline-background forced-color-adjust-none" />
+            <div className="absolute top-0 left-0 box-border size-full rounded-sm border border-foreground outline-2 outline-background forced-color-adjust-none" />
           )}
         </>
       )}

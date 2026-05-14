@@ -15,28 +15,24 @@ export interface PopoverProps extends Omit<AriaPopoverProps, "children"> {
 }
 
 const styles = tv({
-  base: "rounded-xl border border-foreground/10 bg-popover bg-clip-padding font-sans text-popover-foreground shadow-2xl outline-0 dark:bg-popover/70 dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas]",
+  base: "group/popover rounded-3xl bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/5 dark:ring-foreground/10 outline-0 forced-colors:bg-[Canvas]",
   variants: {
     isEntering: {
-      true: "animate-in fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 duration-200 ease-out"
+      true: "animate-in fade-in-0 zoom-in-95 placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 duration-100 ease-out"
     },
     isExiting: {
-      true: "animate-out fade-out placement-bottom:slide-out-to-top-1 placement-top:slide-out-to-bottom-1 placement-left:slide-out-to-right-1 placement-right:slide-out-to-left-1 duration-150 ease-in"
+      true: "animate-out fade-out-0 zoom-out-95 placement-bottom:slide-out-to-top-1 placement-top:slide-out-to-bottom-1 placement-left:slide-out-to-right-1 placement-right:slide-out-to-left-1 duration-75 ease-in"
     }
   }
 })
 
-export function Popover({
-  children,
-  showArrow,
-  className,
-  ...props
-}: PopoverProps) {
+export function Popover({ children, showArrow, className, ...props }: PopoverProps) {
   let offset = showArrow ? 12 : 8
   return (
     <AriaPopover
       offset={offset}
       {...props}
+      data-slot="popover"
       className={composeRenderProps(className, (className, renderProps) =>
         styles({ ...renderProps, className })
       )}
@@ -47,7 +43,7 @@ export function Popover({
             width={12}
             height={12}
             viewBox="0 0 12 12"
-            className="group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90 block fill-popover stroke-border stroke-1 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
+            className="group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90 block fill-popover stroke-foreground/5 stroke-1 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
           >
             <path d="M0 0 L6 6 L12 0" />
           </svg>

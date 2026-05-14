@@ -10,7 +10,7 @@ import {
 import { tv } from "tailwind-variants"
 
 const styles = tv({
-  base: "flex flex-wrap gap-2",
+  base: "group/toolbar flex flex-wrap gap-2",
   variants: {
     orientation: {
       horizontal: "flex-row items-center",
@@ -21,14 +21,12 @@ const styles = tv({
 
 export function Toolbar(props: ToolbarProps) {
   return (
-    <ToggleButtonGroupContext.Provider
-      value={{ orientation: props.orientation }}
-    >
+    <ToggleButtonGroupContext.Provider value={{ orientation: props.orientation }}>
       <RACToolbar
         {...props}
-        className={composeRenderProps(
-          props.className,
-          (className, renderProps) => styles({ ...renderProps, className })
+        data-slot="toolbar"
+        className={composeRenderProps(props.className, (className, renderProps) =>
+          styles({ ...renderProps, className })
         )}
       />
     </ToggleButtonGroupContext.Provider>

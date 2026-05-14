@@ -22,12 +22,13 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
         <section className="flex flex-col gap-2">
           <h3 className="text-sm font-medium text-muted-foreground font-sans">Buttons</h3>
           <div className="flex flex-wrap gap-2">
-            <Button variant="primary">Primary</Button>
+            <Button variant="default">Default</Button>
             <Button variant="secondary">Secondary</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="ghost">Ghost</Button>
             <Button variant="destructive">Destructive</Button>
-            <Button variant="quiet">Quiet</Button>
-            <Button variant="primary" isDisabled>Disabled</Button>
-            <Button variant="primary" isPending>Pending</Button>
+            <Button variant="default" isDisabled>Disabled</Button>
+            <Button variant="default" isPending>Pending</Button>
           </div>
         </section>
 
@@ -55,24 +56,23 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
         <section className="flex flex-col gap-2">
           <h3 className="text-sm font-medium text-muted-foreground font-sans">Tags</h3>
           <div className="flex flex-col gap-2">
-            <TagGroup label="Neutral" color="neutral">
+            <TagGroup label="Default" variant="default">
               <Tag>Alpha</Tag>
               <Tag>Beta</Tag>
+            </TagGroup>
+            <TagGroup label="Secondary" variant="secondary">
               <Tag>Gamma</Tag>
+              <Tag>Delta</Tag>
             </TagGroup>
-            <TagGroup label="Danger" color="danger">
-              <Tag>Error</Tag>
-              <Tag>Critical</Tag>
-            </TagGroup>
-            <TagGroup label="Chart 1 — good" color="chart1">
+            <TagGroup label="Outline" variant="outline">
               <Tag>Passing</Tag>
               <Tag>Healthy</Tag>
             </TagGroup>
-            <TagGroup label="Chart 3 — caution" color="chart3">
-              <Tag>Warning</Tag>
-              <Tag>At risk</Tag>
+            <TagGroup label="Destructive" variant="destructive">
+              <Tag>Error</Tag>
+              <Tag>Critical</Tag>
             </TagGroup>
-            <TagGroup label="Chart 5" color="chart5">
+            <TagGroup label="Ghost" variant="ghost">
               <Tag>Info</Tag>
               <Tag>Pending</Tag>
             </TagGroup>

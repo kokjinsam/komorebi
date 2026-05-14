@@ -24,6 +24,7 @@ export function Separator(props: SeparatorProps) {
   return (
     <RACSeparator
       {...props}
+      data-slot="separator"
       className={styles({
         orientation: props.orientation,
         className: props.className

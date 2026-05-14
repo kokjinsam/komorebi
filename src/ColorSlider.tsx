@@ -13,14 +13,14 @@ import { Label } from "./Field"
 import { composeTailwindRenderProps } from "./utils"
 
 const trackStyles = tv({
-  base: "group col-span-2 rounded-md",
+  base: "group/color-slider-track col-span-2 rounded-3xl",
   variants: {
     orientation: {
       horizontal: "h-6 w-full",
       vertical: "h-50 w-6"
     },
     isDisabled: {
-      true: "bg-muted forced-colors:bg-[GrayText]"
+      true: "bg-muted opacity-50 forced-colors:bg-[GrayText]"
     }
   }
 })
@@ -33,9 +33,10 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
   return (
     <AriaColorSlider
       {...props}
+      data-slot="color-slider"
       className={composeTailwindRenderProps(
         props.className,
-        "font-sans orientation-horizontal:grid orientation-vertical:flex grid-cols-[1fr_auto] flex-col items-center gap-2 orientation-horizontal:w-56"
+        "orientation-horizontal:grid orientation-vertical:flex grid-cols-[1fr_auto] flex-col items-center gap-2 orientation-horizontal:w-56"
       )}
     >
       <Label>{label}</Label>

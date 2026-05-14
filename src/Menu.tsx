@@ -26,7 +26,8 @@ export function Menu<T extends object>(props: MenuProps<T>) {
   return (
     <AriaMenu
       {...props}
-      className="max-h-[inherit] overflow-auto p-1 font-sans outline [clip-path:inset(0_0_0_0_round_.75rem)] empty:pb-2 empty:text-center"
+      data-slot="menu"
+      className="max-h-[inherit] overflow-auto p-1 outline-none"
     />
   )
 }
@@ -39,6 +40,7 @@ export function MenuItem(props: MenuItemProps) {
     <AriaMenuItem
       textValue={textValue}
       {...props}
+      data-slot="menu-item"
       className={dropdownItemStyles}
     >
       {composeRenderProps(
@@ -47,14 +49,14 @@ export function MenuItem(props: MenuItemProps) {
           <>
             {selectionMode !== "none" && (
               <span className="flex w-4 items-center">
-                {isSelected && <CheckIcon weight="fill" aria-hidden className="h-4 w-4" />}
+                {isSelected && <CheckIcon weight="fill" aria-hidden className="size-4" />}
               </span>
             )}
-            <span className="group-selected:font-semibold flex flex-1 items-center gap-2 truncate font-normal">
+            <span className="group-selected/menu-item:font-semibold flex flex-1 items-center gap-2 truncate font-normal">
               {children}
             </span>
             {hasSubmenu && (
-              <CaretRightIcon aria-hidden className="absolute right-2 h-4 w-4" />
+              <CaretRightIcon aria-hidden className="absolute right-2 size-4 text-muted-foreground" />
             )}
           </>
         )
@@ -64,12 +66,7 @@ export function MenuItem(props: MenuItemProps) {
 }
 
 export function MenuSeparator(props: SeparatorProps) {
-  return (
-    <Separator
-      {...props}
-      className="mx-3 my-1 border-b border-border"
-    />
-  )
+  return <Separator {...props} className="mx-2 my-1 h-px bg-border" />
 }
 
 export interface MenuSectionProps<T> extends AriaMenuSectionProps<T> {
@@ -81,10 +78,10 @@ export function MenuSection<T extends object>(props: MenuSectionProps<T>) {
   return (
     <AriaMenuSection
       {...props}
-      className="after:block after:h-1.25 after:content-[''] first:-mt-1.25"
+      className="after:block after:h-1 after:content-[''] first:-mt-1"
     >
       {props.title && (
-        <Header className="sticky -top-1.25 z-10 -mx-1 -mt-px truncate border-y border-y-border bg-muted/60 px-4 py-1 text-sm font-semibold text-muted-foreground backdrop-blur-md supports-[-moz-appearance:none]:bg-muted [&+*]:mt-1">
+        <Header className="sticky -top-1 z-10 -mx-1 -mt-px truncate border-y border-y-border bg-muted/60 px-4 py-1 text-xs font-medium text-muted-foreground [&+*]:mt-1">
           {props.title}
         </Header>
       )}
@@ -105,7 +102,7 @@ export function MenuTrigger(props: MenuTriggerProps) {
   return (
     <AriaMenuTrigger {...props}>
       {trigger}
-      <Popover placement={props.placement} className="min-w-37.5">
+      <Popover placement={props.placement} className="min-w-37.5 p-1">
         {menu}
       </Popover>
     </AriaMenuTrigger>
@@ -120,7 +117,7 @@ export function SubmenuTrigger(props: SubmenuTriggerProps) {
   return (
     <AriaSubmenuTrigger {...props}>
       {trigger}
-      <Popover offset={-2} crossOffset={-4}>
+      <Popover offset={-2} crossOffset={-4} className="min-w-37.5 p-1">
         {menu}
       </Popover>
     </AriaSubmenuTrigger>

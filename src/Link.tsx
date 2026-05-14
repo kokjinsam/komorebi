@@ -7,21 +7,17 @@ import {
   type LinkProps as AriaLinkProps
 } from "react-aria-components/Link"
 import { tv } from "tailwind-variants"
-import { focusRing } from "./utils"
 
 interface LinkProps extends AriaLinkProps {
   variant?: "primary" | "secondary"
 }
 
 const styles = tv({
-  extend: focusRing,
-  base: "rounded-xs underline transition [-webkit-tap-highlight-color:transparent] disabled:cursor-default disabled:no-underline forced-colors:disabled:text-[GrayText]",
+  base: "group/link rounded-md underline-offset-4 transition outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 forced-colors:outline-[Highlight] disabled:cursor-default disabled:opacity-50",
   variants: {
     variant: {
-      primary:
-        "text-primary underline decoration-primary/60 hover:decoration-primary",
-      secondary:
-        "text-foreground underline decoration-foreground/50 hover:decoration-foreground"
+      primary: "text-primary hover:underline",
+      secondary: "text-foreground hover:underline"
     }
   },
   defaultVariants: {
@@ -33,6 +29,7 @@ export function Link(props: LinkProps) {
   return (
     <AriaLink
       {...props}
+      data-slot="link"
       className={composeRenderProps(props.className, (className, renderProps) =>
         styles({ ...renderProps, className, variant: props.variant })
       )}

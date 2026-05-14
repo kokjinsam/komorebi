@@ -17,17 +17,17 @@ export function Breadcrumbs<T extends object>(props: BreadcrumbsProps<T>) {
   return (
     <AriaBreadcrumbs
       {...props}
-      className={twMerge("flex gap-1", props.className)}
+      data-slot="breadcrumbs"
+      className={twMerge("flex flex-wrap items-center gap-1", props.className)}
     />
   )
 }
 
-export function Breadcrumb(
-  props: BreadcrumbProps & Omit<LinkProps, "className">
-) {
+export function Breadcrumb(props: BreadcrumbProps & Omit<LinkProps, "className">) {
   return (
     <AriaBreadcrumb
       {...props}
+      data-slot="breadcrumb"
       className={composeTailwindRenderProps(
         props.className,
         "flex items-center gap-1"
@@ -35,9 +35,13 @@ export function Breadcrumb(
     >
       {({ isCurrent }) => (
         <>
-          <Link variant="secondary" {...props} />
+          <Link
+            variant={isCurrent ? "secondary" : "secondary"}
+            {...props}
+            className={isCurrent ? "text-foreground no-underline pointer-events-none" : undefined}
+          />
           {!isCurrent && (
-            <CaretRightIcon className="h-3 w-3 text-muted-foreground" />
+            <CaretRightIcon className="size-3 text-muted-foreground" />
           )}
         </>
       )}

@@ -11,30 +11,21 @@ import {
   type ValidationResult
 } from "react-aria-components/DateField"
 import { tv } from "tailwind-variants"
-import { Description, FieldError, Label, fieldGroupStyles } from "./Field"
+import { Description, FieldError, Label } from "./Field"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface DateFieldProps<
-  T extends DateValue
-> extends AriaDateFieldProps<T> {
+export interface DateFieldProps<T extends DateValue> extends AriaDateFieldProps<T> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-export function DateField<T extends DateValue>({
-  label,
-  description,
-  errorMessage,
-  ...props
-}: DateFieldProps<T>) {
+export function DateField<T extends DateValue>({ label, description, errorMessage, ...props }: DateFieldProps<T>) {
   return (
     <AriaDateField
       {...props}
-      className={composeTailwindRenderProps(
-        props.className,
-        "flex flex-col gap-1"
-      )}
+      data-slot="field"
+      className={composeTailwindRenderProps(props.className, "group/field flex flex-col gap-1.5")}
     >
       {label && <Label>{label}</Label>}
       <DateInput />
@@ -45,31 +36,32 @@ export function DateField<T extends DateValue>({
 }
 
 const segmentStyles = tv({
-  base: "type-literal:p-0 inline rounded-xs p-0.5 whitespace-nowrap text-foreground caret-transparent outline-0 forced-color-adjust-none [-webkit-tap-highlight-color:transparent] forced-colors:text-[ButtonText]",
+  base: "type-literal:p-0 inline rounded-sm p-0.5 whitespace-nowrap text-foreground caret-transparent outline-0 forced-color-adjust-none [-webkit-tap-highlight-color:transparent] forced-colors:text-[ButtonText]",
   variants: {
-    isPlaceholder: {
-      true: "text-muted-foreground"
-    },
-    isDisabled: {
-      true: "text-muted-foreground forced-colors:text-[GrayText]"
-    },
-    isFocused: {
-      true: "bg-primary text-primary-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
-    }
+    isPlaceholder: { true: "text-muted-foreground" },
+    isDisabled: { true: "text-muted-foreground forced-colors:text-[GrayText]" },
+    isFocused: { true: "bg-primary text-primary-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]" }
   }
 })
 
-export function DateInput(props: Omit<DateInputProps, "children">) {
+export const dateInputContainerClass =
+  "flex h-9 w-full items-center rounded-3xl border border-transparent bg-input/50 px-3 py-1 text-sm transition-[color,box-shadow,background-color] outline-none focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/30 invalid:border-destructive invalid:ring-3 invalid:ring-destructive/20 dark:invalid:ring-destructive/40 disabled:pointer-events-none disabled:opacity-50 cursor-text whitespace-nowrap overflow-x-auto [scrollbar-width:none] forced-colors:bg-[Field]"
+
+export const dateInputInlineClass =
+  "flex h-full min-w-0 flex-1 items-center bg-transparent px-3 text-sm text-foreground whitespace-nowrap overflow-x-auto [scrollbar-width:none] cursor-text outline-none"
+
+export function DateInput({
+  inline,
+  ...props
+}: Omit<DateInputProps, "children"> & { inline?: boolean }) {
   return (
     <AriaDateInput
-      className={(renderProps) =>
-        fieldGroupStyles({
-          ...renderProps,
-          class:
-            "inline min-w-37.5 px-3 h-9 text-sm leading-8.5 font-sans cursor-text disabled:cursor-default whitespace-nowrap overflow-x-auto scrollbar-none"
-        })
-      }
+      data-slot="date-input"
       {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        inline ? dateInputInlineClass : dateInputContainerClass
+      )}
     >
       {(segment) => <DateSegment segment={segment} className={segmentStyles} />}
     </AriaDateInput>

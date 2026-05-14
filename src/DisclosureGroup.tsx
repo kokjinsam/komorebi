@@ -11,5 +11,9 @@ export interface DisclosureGroupProps extends AriaDisclosureGroupProps {
 }
 
 export function DisclosureGroup({ children, ...props }: DisclosureGroupProps) {
-  return <AriaDisclosureGroup {...props}>{children}</AriaDisclosureGroup>
+  return (
+    <AriaDisclosureGroup {...props} data-slot="disclosure-group">
+      {children}
+    </AriaDisclosureGroup>
+  )
 }

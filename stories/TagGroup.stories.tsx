@@ -26,44 +26,40 @@ Example.args = {
   selectionMode: "single"
 }
 
-export const Neutral = (args: any) => (
-  <TagGroup label="Status" color="neutral" {...args}>
+export const Default = (args: any) => (
+  <TagGroup label="Status" variant="default" {...args}>
     <Tag>Draft</Tag>
     <Tag>Review</Tag>
     <Tag>Published</Tag>
   </TagGroup>
 )
 
-export const Danger = (args: any) => (
-  <TagGroup label="Issues" color="danger" {...args}>
-    <Tag>Error</Tag>
-    <Tag>Critical</Tag>
-    <Tag>Blocked</Tag>
+export const Secondary = (args: any) => (
+  <TagGroup label="Category" variant="secondary" {...args}>
+    <Tag>Design</Tag>
+    <Tag>Engineering</Tag>
+    <Tag>Product</Tag>
   </TagGroup>
 )
 
-export const Chart1 = (args: any) => (
-  <TagGroup label="Health (chart1)" color="chart1" {...args}>
+export const Outline = (args: any) => (
+  <TagGroup label="Health" variant="outline" {...args}>
     <Tag>Passing</Tag>
     <Tag>Healthy</Tag>
     <Tag>Active</Tag>
   </TagGroup>
 )
 
-Chart1.storyName = "Chart1 — good"
-
-export const Chart3 = (args: any) => (
-  <TagGroup label="Caution (chart3)" color="chart3" {...args}>
-    <Tag>Warning</Tag>
-    <Tag>At risk</Tag>
-    <Tag>Degraded</Tag>
+export const Destructive = (args: any) => (
+  <TagGroup label="Issues" variant="destructive" {...args}>
+    <Tag>Error</Tag>
+    <Tag>Critical</Tag>
+    <Tag>Blocked</Tag>
   </TagGroup>
 )
 
-Chart3.storyName = "Chart3 — caution"
-
-export const Chart5 = (args: any) => (
-  <TagGroup label="Info (chart5)" color="chart5" {...args}>
+export const Ghost = (args: any) => (
+  <TagGroup label="Info" variant="ghost" {...args}>
     <Tag>Queued</Tag>
     <Tag>Pending</Tag>
     <Tag>Scheduled</Tag>

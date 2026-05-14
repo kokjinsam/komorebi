@@ -8,10 +8,9 @@ import {
 } from "react-aria-components/Checkbox"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { tv } from "tailwind-variants"
-import { focusRing } from "./utils"
 
 const checkboxStyles = tv({
-  base: "group relative flex items-center gap-2 font-sans text-sm transition [-webkit-tap-highlight-color:transparent]",
+  base: "group/checkbox relative flex items-center gap-2 text-sm transition [-webkit-tap-highlight-color:transparent] disabled:pointer-events-none disabled:opacity-50",
   variants: {
     isDisabled: {
       false: "text-foreground",
@@ -21,43 +20,39 @@ const checkboxStyles = tv({
 })
 
 const boxStyles = tv({
-  extend: focusRing,
-  base: "box-border flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-sm border transition",
+  base: "flex size-4 shrink-0 items-center justify-center rounded-md border transition-[color,box-shadow,background-color] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 group-invalid/checkbox:border-destructive group-invalid/checkbox:ring-3 group-invalid/checkbox:ring-destructive/20",
   variants: {
     isSelected: {
-      false:
-        "group-pressed:[--color:color-mix(in_oklch,var(--input),var(--foreground)_10%)] border-(--color) bg-background [--color:var(--input)]",
-      true: "group-pressed:[--color:color-mix(in_oklch,var(--primary),var(--foreground)_10%)] border-(--color) bg-(--color) [--color:var(--primary)] forced-colors:[--color:Highlight]!"
-    },
-    isInvalid: {
-      true: "group-pressed:[--color:color-mix(in_oklch,var(--destructive),var(--foreground)_10%)] [--color:var(--destructive)] forced-colors:[--color:Mark]!"
+      false: "border-input bg-background",
+      true: "border-transparent bg-primary forced-colors:bg-[Highlight]!"
     },
     isDisabled: {
-      true: "[--color:color-mix(in_oklch,var(--muted-foreground),transparent_50%)] forced-colors:[--color:GrayText]!"
+      true: "forced-colors:border-[GrayText]!"
     }
   }
 })
 
-const iconStyles =
-  "w-3.5 h-3.5 text-primary-foreground group-disabled:text-muted-foreground forced-colors:text-[HighlightText] pointer-events-none"
+const iconStyles = "size-3 text-primary-foreground forced-colors:text-[HighlightText] pointer-events-none"
 
 export function Checkbox(props: CheckboxProps) {
   return (
     <AriaCheckbox
       {...props}
+      data-slot="checkbox"
       className={composeRenderProps(props.className, (className, renderProps) =>
         checkboxStyles({ ...renderProps, className })
       )}
     >
       {composeRenderProps(
         props.children,
-        (children, { isSelected, isIndeterminate, ...renderProps }) => (
+        (children, { isSelected, isIndeterminate, isFocusVisible, isDisabled }) => (
           <>
             <div
               className={boxStyles({
                 isSelected: isSelected || isIndeterminate,
-                ...renderProps
-              })}
+                isDisabled,
+                isFocusVisible
+              } as any)}
             >
               {isIndeterminate ? (
                 <MinusIcon aria-hidden className={iconStyles} />

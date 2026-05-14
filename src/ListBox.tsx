@@ -14,23 +14,18 @@ import {
   type ListBoxSectionProps
 } from "react-aria-components/ListBox"
 import { tv } from "tailwind-variants"
-import { composeTailwindRenderProps, focusRing } from "./utils"
+import { composeTailwindRenderProps } from "./utils"
 
-interface ListBoxProps<T> extends Omit<
-  AriaListBoxProps<T>,
-  "layout" | "orientation"
-> {}
+interface ListBoxProps<T> extends Omit<AriaListBoxProps<T>, "layout" | "orientation"> {}
 
-export function ListBox<T extends object>({
-  children,
-  ...props
-}: ListBoxProps<T>) {
+export function ListBox<T extends object>({ children, ...props }: ListBoxProps<T>) {
   return (
     <AriaListBox
       {...props}
+      data-slot="listbox"
       className={composeTailwindRenderProps(
         props.className,
-        "outline-0 p-1 w-50 bg-popover border border-border rounded-lg font-sans"
+        "outline-0 p-1 w-50 rounded-3xl bg-popover border border-border shadow-md ring-1 ring-foreground/5 dark:ring-foreground/10"
       )}
     >
       {children}
@@ -39,16 +34,15 @@ export function ListBox<T extends object>({
 }
 
 export const itemStyles = tv({
-  extend: focusRing,
-  base: "group relative flex cursor-default items-center gap-8 rounded-md px-2.5 py-1.5 text-sm will-change-transform forced-color-adjust-none select-none",
+  base: "group/listbox-option relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm will-change-transform forced-color-adjust-none select-none outline-none [-webkit-tap-highlight-color:transparent]",
   variants: {
     isSelected: {
       false:
-        "pressed:bg-[color-mix(in_oklch,var(--accent),var(--foreground)_8%)] text-popover-foreground -outline-offset-2 hover:bg-accent hover:text-accent-foreground",
-      true: "bg-primary text-primary-foreground -outline-offset-4 outline-primary-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:outline-[HighlightText] [&+[data-selected]]:rounded-t-none [&:has(+[data-selected])]:rounded-b-none"
+        "text-popover-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+      true: "bg-primary text-primary-foreground focus:bg-primary/90 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     },
     isDisabled: {
-      true: "text-muted-foreground forced-colors:text-[GrayText]"
+      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
     }
   }
 })
@@ -62,7 +56,6 @@ export function ListBoxItem(props: ListBoxItemProps) {
       {composeRenderProps(props.children, (children) => (
         <>
           {children}
-          <div className="absolute right-4 bottom-0 left-4 hidden h-px bg-primary-foreground/20 forced-colors:bg-[HighlightText] [.group[data-selected]:has(+[data-selected])_&]:block" />
         </>
       ))}
     </AriaListBoxItem>
@@ -70,17 +63,14 @@ export function ListBoxItem(props: ListBoxItemProps) {
 }
 
 export const dropdownItemStyles = tv({
-  base: "group selected:pr-1 flex cursor-default items-center gap-4 rounded-lg py-2 pr-3 pl-3 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&[href]]:cursor-pointer",
+  base: "group/menu-item relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&[href]]:cursor-pointer [&_svg:not([class*='size-'])]:size-4 [&_svg]:text-muted-foreground",
   variants: {
     isDisabled: {
       false: "text-foreground",
-      true: "text-muted-foreground forced-colors:text-[GrayText]"
-    },
-    isPressed: {
-      true: "bg-muted"
+      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
     },
     isFocused: {
-      true: "bg-accent text-accent-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
+      true: "bg-accent text-accent-foreground [&_svg]:text-accent-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     }
   },
   compoundVariants: [
@@ -104,11 +94,11 @@ export function DropdownItem(props: ListBoxItemProps) {
     >
       {composeRenderProps(props.children, (children, { isSelected }) => (
         <>
-          <span className="group-selected:font-semibold flex flex-1 items-center gap-2 truncate font-normal">
+          <span className="group-selected/menu-item:font-semibold flex flex-1 items-center gap-2 truncate font-normal">
             {children}
           </span>
           <span className="flex w-5 items-center">
-            {isSelected && <CheckIcon className="h-4 w-4" />}
+            {isSelected && <CheckIcon className="size-4" />}
           </span>
         </>
       ))}
@@ -121,12 +111,10 @@ export interface DropdownSectionProps<T> extends ListBoxSectionProps<T> {
   items?: any
 }
 
-export function DropdownSection<T extends object>(
-  props: DropdownSectionProps<T>
-) {
+export function DropdownSection<T extends object>(props: DropdownSectionProps<T>) {
   return (
-    <ListBoxSection className="first:-mt-1.25last:after:hidden after:block after:h-1.25 after:content-['']">
-      <Header className="sticky -top-1.25 z-10 -mx-1 -mt-px truncate border-y border-y-border bg-muted/60 px-4 py-1 text-sm font-semibold text-muted-foreground backdrop-blur-md supports-[-moz-appearance:none]:bg-muted [&+*]:mt-1">
+    <ListBoxSection className="first:-mt-1 last:after:hidden after:block after:h-1 after:content-['']">
+      <Header className="sticky -top-1 z-10 -mx-1 -mt-px truncate border-y border-y-border bg-muted/60 px-4 py-1 text-xs font-medium text-muted-foreground">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>

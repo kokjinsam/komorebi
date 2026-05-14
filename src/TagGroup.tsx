@@ -16,65 +16,52 @@ import {
 import { twMerge } from "tailwind-merge"
 import { tv } from "tailwind-variants"
 import { Description, Label } from "./Field"
-import { focusRing } from "./utils"
 
-const colors = {
-  neutral:
-    "bg-background text-muted-foreground border-border hover:border-[color-mix(in_oklch,var(--border),var(--foreground)_20%)]",
-  danger:
-    "bg-[color-mix(in_oklch,var(--destructive),transparent_85%)] text-destructive border-[color-mix(in_oklch,var(--destructive),transparent_75%)] hover:border-[color-mix(in_oklch,var(--destructive),transparent_60%)]",
-  chart1:
-    "bg-[color-mix(in_oklch,var(--chart-1),transparent_85%)] text-[color-mix(in_oklch,var(--chart-1),var(--foreground)_50%)] border-[color-mix(in_oklch,var(--chart-1),transparent_75%)] hover:border-[color-mix(in_oklch,var(--chart-1),transparent_60%)]",
-  chart3:
-    "bg-[color-mix(in_oklch,var(--chart-3),transparent_85%)] text-[color-mix(in_oklch,var(--chart-3),var(--foreground)_50%)] border-[color-mix(in_oklch,var(--chart-3),transparent_75%)] hover:border-[color-mix(in_oklch,var(--chart-3),transparent_60%)]",
-  chart5:
-    "bg-[color-mix(in_oklch,var(--chart-5),transparent_85%)] text-[color-mix(in_oklch,var(--chart-5),var(--foreground)_50%)] border-[color-mix(in_oklch,var(--chart-5),transparent_75%)] hover:border-[color-mix(in_oklch,var(--chart-5),transparent_60%)]"
+type Variant = "default" | "secondary" | "outline" | "destructive" | "ghost"
+const VariantContext = createContext<Variant>("default")
+
+const variantClasses: Record<Variant, string> = {
+  default: "bg-primary text-primary-foreground hover:bg-primary/80",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  outline: "border-border text-foreground hover:bg-muted",
+  destructive:
+    "bg-destructive/10 text-destructive hover:bg-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30",
+  ghost: "text-foreground hover:bg-muted dark:hover:bg-muted/50"
 }
 
-type Color = keyof typeof colors
-const ColorContext = createContext<Color>("neutral")
-
 const tagStyles = tv({
-  extend: focusRing,
-  base: "flex max-w-fit cursor-default items-center gap-1 rounded-full border px-3 py-0.5 font-sans text-xs transition [-webkit-tap-highlight-color:transparent]",
+  base: "group/tag flex max-w-fit cursor-default items-center gap-1 rounded-3xl border border-transparent bg-clip-padding px-2.5 py-0.5 text-xs font-medium transition outline-none [-webkit-tap-highlight-color:transparent] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30",
   variants: {
-    color: {
-      neutral: "",
-      danger: "",
-      chart1: "",
-      chart3: "",
-      chart5: ""
+    variant: {
+      default: "",
+      secondary: "",
+      outline: "border-border",
+      destructive: "",
+      ghost: ""
     },
     allowsRemoving: {
       true: "pr-1"
     },
     isSelected: {
-      true: "border-transparent bg-primary text-primary-foreground forced-color-adjust-none forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
+      true: "bg-primary text-primary-foreground ring-2 ring-primary-foreground/20 forced-color-adjust-none forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     },
     isDisabled: {
-      true: "bg-muted text-muted-foreground border-foreground/20 forced-colors:text-[GrayText]"
+      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
     }
-  },
-  compoundVariants: (Object.keys(colors) as Color[]).map((color) => ({
-    isSelected: false,
-    isDisabled: false,
-    color,
-    class: colors[color]
-  }))
+  }
 })
 
 export interface TagGroupProps<T>
-  extends
-    Omit<AriaTagGroupProps, "children">,
+  extends Omit<AriaTagGroupProps, "children">,
     Pick<TagListProps<T>, "items" | "children" | "renderEmptyState"> {
-  color?: Color
+  variant?: Variant
   label?: string
   description?: string
   errorMessage?: string
 }
 
 export interface TagProps extends AriaTagProps {
-  color?: Color
+  variant?: Variant
 }
 
 export function TagGroup<T extends object>({
@@ -89,10 +76,11 @@ export function TagGroup<T extends object>({
   return (
     <AriaTagGroup
       {...props}
-      className={twMerge("flex flex-col gap-2 font-sans", props.className)}
+      data-slot="tag-group"
+      className={twMerge("group/tag-group flex flex-col gap-2", props.className)}
     >
       <Label>{label}</Label>
-      <ColorContext.Provider value={props.color || "neutral"}>
+      <VariantContext.Provider value={props.variant || "default"}>
         <TagList
           items={items}
           renderEmptyState={renderEmptyState}
@@ -100,7 +88,7 @@ export function TagGroup<T extends object>({
         >
           {children}
         </TagList>
-      </ColorContext.Provider>
+      </VariantContext.Provider>
       {description && <Description>{description}</Description>}
       {errorMessage && (
         <Text slot="errorMessage" className="text-sm text-destructive">
@@ -112,19 +100,25 @@ export function TagGroup<T extends object>({
 }
 
 const removeButtonStyles = tv({
-  extend: focusRing,
-  base: "pressed:bg-foreground/20 flex cursor-default items-center justify-center rounded-full border-0 bg-transparent p-0.5 text-[inherit] transition-[background-color] hover:bg-foreground/10"
+  base: "pressed:bg-foreground/20 flex cursor-default items-center justify-center rounded-full border-0 bg-transparent p-0.5 text-[inherit] transition-colors hover:bg-foreground/10 outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
 })
 
-export function Tag({ children, color, ...props }: TagProps) {
+export function Tag({ children, variant, ...props }: TagProps) {
   let textValue = typeof children === "string" ? children : undefined
-  let groupColor = useContext(ColorContext)
+  let groupVariant = useContext(VariantContext)
+  let resolvedVariant = variant || groupVariant
+
   return (
     <AriaTag
       textValue={textValue}
       {...props}
+      data-slot="tag"
+      data-variant={resolvedVariant}
       className={composeRenderProps(props.className, (className, renderProps) =>
-        tagStyles({ ...renderProps, className, color: color || groupColor })
+        twMerge(
+          tagStyles({ ...renderProps, variant: resolvedVariant, className }),
+          !renderProps.isSelected && variantClasses[resolvedVariant]
+        )
       )}
     >
       {composeRenderProps(children, (children, { allowsRemoving }) => (
@@ -132,7 +126,7 @@ export function Tag({ children, color, ...props }: TagProps) {
           {children}
           {allowsRemoving && (
             <Button slot="remove" className={removeButtonStyles}>
-              <XIcon aria-hidden className="h-3 w-3" />
+              <XIcon aria-hidden className="size-3" />
             </Button>
           )}
         </>

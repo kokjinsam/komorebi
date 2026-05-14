@@ -42,7 +42,7 @@ export function CommandPalette<T extends object>(
 
   return (
     <Modal isDismissable isOpen={isOpen} onOpenChange={onOpenChange}>
-      <Dialog className="flex max-h-[inherit] flex-col">
+      <Dialog data-slot="command-palette" className="flex max-h-[inherit] flex-col">
         <AriaAutocomplete filter={contains} {...props}>
           <SearchField
             autoFocus
