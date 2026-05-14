@@ -20,11 +20,11 @@ const checkboxStyles = tv({
 })
 
 const boxStyles = tv({
-  base: "flex size-4 shrink-0 items-center justify-center rounded-md border transition-[color,box-shadow,background-color] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 group-invalid/checkbox:border-destructive group-invalid/checkbox:ring-3 group-invalid/checkbox:ring-destructive/20",
+  base: "focus-visible:border-ring focus-visible:ring-ring/30 group-invalid/checkbox:border-destructive group-invalid/checkbox:ring-destructive/20 flex size-4 shrink-0 items-center justify-center rounded-md border transition-[color,box-shadow,background-color] group-invalid/checkbox:ring-3 focus-visible:ring-3",
   variants: {
     isSelected: {
       false: "border-input bg-background",
-      true: "border-transparent bg-primary forced-colors:bg-[Highlight]!"
+      true: "bg-primary border-transparent forced-colors:bg-[Highlight]!"
     },
     isDisabled: {
       true: "forced-colors:border-[GrayText]!"
@@ -32,7 +32,8 @@ const boxStyles = tv({
   }
 })
 
-const iconStyles = "size-3 text-primary-foreground forced-colors:text-[HighlightText] pointer-events-none"
+const iconStyles =
+  "size-3 text-primary-foreground forced-colors:text-[HighlightText] pointer-events-none"
 
 export function Checkbox(props: CheckboxProps) {
   return (
@@ -45,7 +46,10 @@ export function Checkbox(props: CheckboxProps) {
     >
       {composeRenderProps(
         props.children,
-        (children, { isSelected, isIndeterminate, isFocusVisible, isDisabled }) => (
+        (
+          children,
+          { isSelected, isIndeterminate, isFocusVisible, isDisabled }
+        ) => (
           <>
             <div
               className={boxStyles({

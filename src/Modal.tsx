@@ -9,7 +9,7 @@ import {
 import { tv } from "tailwind-variants"
 
 const overlayStyles = tv({
-  base: "fixed inset-0 z-50 bg-foreground/30 supports-[backdrop-filter]:backdrop-blur-sm",
+  base: "bg-foreground/30 fixed inset-0 z-50 supports-[backdrop-filter]:backdrop-blur-sm",
   variants: {
     isEntering: {
       true: "animate-in fade-in duration-100 ease-out"
@@ -21,7 +21,7 @@ const overlayStyles = tv({
 })
 
 const modalStyles = tv({
-  base: "max-h-[calc(var(--visual-viewport-height)*.9)] w-full max-w-[min(90vw,450px)] rounded-4xl bg-popover text-left align-middle text-popover-foreground shadow-xl ring-1 ring-foreground/5 dark:ring-foreground/10 forced-colors:bg-[Canvas]",
+  base: "bg-popover text-popover-foreground ring-foreground/5 dark:ring-foreground/10 max-h-[calc(var(--visual-viewport-height)*.9)] w-full max-w-[min(90vw,450px)] rounded-4xl text-left align-middle shadow-xl ring-1 forced-colors:bg-[Canvas]",
   variants: {
     isEntering: {
       true: "animate-in zoom-in-95 fade-in-0 duration-100 ease-out"

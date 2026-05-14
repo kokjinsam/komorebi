@@ -1,5 +1,5 @@
-import { type Meta } from "@storybook/react"
 import { DotsThreeIcon } from "@phosphor-icons/react"
+import { type Meta } from "@storybook/react"
 import React from "react"
 import { Button } from "../src/Button"
 import {

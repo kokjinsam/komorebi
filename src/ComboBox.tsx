@@ -20,8 +20,10 @@ import {
 import { Popover } from "./Popover"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface ComboBoxProps<T extends object, M extends "single" | "multiple">
-  extends Omit<AriaComboBoxProps<T, M>, "children"> {
+export interface ComboBoxProps<
+  T extends object,
+  M extends "single" | "multiple"
+> extends Omit<AriaComboBoxProps<T, M>, "children"> {
   label?: string
   description?: string | null
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -29,7 +31,10 @@ export interface ComboBoxProps<T extends object, M extends "single" | "multiple"
   children: React.ReactNode | ((item: T) => React.ReactNode)
 }
 
-export function ComboBox<T extends object, M extends "single" | "multiple" = "single">({
+export function ComboBox<
+  T extends object,
+  M extends "single" | "multiple" = "single"
+>({
   label,
   description,
   errorMessage,
@@ -41,7 +46,10 @@ export function ComboBox<T extends object, M extends "single" | "multiple" = "si
     <AriaComboBox
       {...props}
       data-slot="field"
-      className={composeTailwindRenderProps(props.className, "group/field flex flex-col gap-1.5")}
+      className={composeTailwindRenderProps(
+        props.className,
+        "group/field flex flex-col gap-1.5"
+      )}
     >
       <Label>{label}</Label>
       <FieldGroup data-slot="combobox">
@@ -51,7 +59,10 @@ export function ComboBox<T extends object, M extends "single" | "multiple" = "si
         </FieldButton>
       </FieldGroup>
       {props.selectionMode === "multiple" && (
-        <ComboBoxValue placeholder="No items selected" className="text-xs text-muted-foreground" />
+        <ComboBoxValue
+          placeholder="No items selected"
+          className="text-muted-foreground text-xs"
+        />
       )}
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
@@ -71,6 +82,8 @@ export function ComboBoxItem(props: ListBoxItemProps) {
   return <DropdownItem {...props} />
 }
 
-export function ComboBoxSection<T extends object>(props: DropdownSectionProps<T>) {
+export function ComboBoxSection<T extends object>(
+  props: DropdownSectionProps<T>
+) {
   return <DropdownSection {...props} />
 }

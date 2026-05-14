@@ -1,5 +1,5 @@
-import { type Meta } from "@storybook/react"
 import { DownloadSimpleIcon, PrinterIcon } from "@phosphor-icons/react"
+import { type Meta } from "@storybook/react"
 import React from "react"
 import { TooltipTrigger } from "react-aria-components/Tooltip"
 import { Button } from "../src/Button"

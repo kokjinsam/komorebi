@@ -21,12 +21,15 @@ const styles = tv({
 
 export function Toolbar(props: ToolbarProps) {
   return (
-    <ToggleButtonGroupContext.Provider value={{ orientation: props.orientation }}>
+    <ToggleButtonGroupContext.Provider
+      value={{ orientation: props.orientation }}
+    >
       <RACToolbar
         {...props}
         data-slot="toolbar"
-        className={composeRenderProps(props.className, (className, renderProps) =>
-          styles({ ...renderProps, className })
+        className={composeRenderProps(
+          props.className,
+          (className, renderProps) => styles({ ...renderProps, className })
         )}
       />
     </ToggleButtonGroupContext.Provider>

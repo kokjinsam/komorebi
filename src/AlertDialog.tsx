@@ -30,7 +30,10 @@ export function AlertDialog({
     <Dialog role="alertdialog" data-slot="alert-dialog" {...props}>
       {({ close }) => (
         <>
-          <Heading slot="title" className="my-0 text-xl leading-6 font-semibold font-heading">
+          <Heading
+            slot="title"
+            className="font-heading my-0 text-xl leading-6 font-semibold"
+          >
             {title}
           </Heading>
           <div
@@ -42,7 +45,7 @@ export function AlertDialog({
               <InfoIcon aria-hidden />
             )}
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">{children}</p>
+          <p className="text-muted-foreground mt-3 text-sm">{children}</p>
           <div className="mt-6 flex justify-end gap-2">
             <Button variant="outline" onPress={close}>
               {cancelLabel || "Cancel"}

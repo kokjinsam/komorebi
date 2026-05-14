@@ -9,7 +9,10 @@ import {
 import { Description, FieldError, Label } from "./Field"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface CheckboxGroupProps extends Omit<AriaCheckboxGroupProps, "children"> {
+export interface CheckboxGroupProps extends Omit<
+  AriaCheckboxGroupProps,
+  "children"
+> {
   label?: string
   children?: ReactNode
   description?: string
@@ -21,7 +24,10 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
     <AriaCheckboxGroup
       {...props}
       data-slot="checkbox-group"
-      className={composeTailwindRenderProps(props.className, "group/checkbox-group flex flex-col gap-2")}
+      className={composeTailwindRenderProps(
+        props.className,
+        "group/checkbox-group flex flex-col gap-2"
+      )}
     >
       <Label>{props.label}</Label>
       {props.children}

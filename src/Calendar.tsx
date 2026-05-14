@@ -20,23 +20,23 @@ import { Button } from "./Button"
 import { composeTailwindRenderProps } from "./utils"
 
 const cellStyles = tv({
-  base: "flex size-(--cell-size) cursor-default items-center justify-center rounded-(--cell-radius) text-sm text-foreground transition-colors forced-color-adjust-none outline-none [-webkit-tap-highlight-color:transparent]",
+  base: "text-foreground flex size-(--cell-size) cursor-default items-center justify-center rounded-(--cell-radius) text-sm transition-colors forced-color-adjust-none outline-none [-webkit-tap-highlight-color:transparent]",
   variants: {
     isSelected: {
       false: "hover:bg-muted pressed:bg-muted/80",
       true: "bg-primary text-primary-foreground invalid:bg-destructive/10 invalid:text-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]"
     },
     isToday: {
-      true: "ring-1 ring-input"
+      true: "ring-input ring-1"
     },
     isOutsideMonth: {
       true: "text-muted-foreground/60"
     },
     isDisabled: {
-      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+      true: "pointer-events-none opacity-50 forced-colors:text-[GrayText]"
     },
     isFocusVisible: {
-      true: "ring-2 ring-ring/30"
+      true: "ring-ring/30 ring-2"
     }
   },
   compoundVariants: [
@@ -48,12 +48,17 @@ const cellStyles = tv({
   ]
 })
 
-export interface CalendarProps<T extends DateValue>
-  extends Omit<AriaCalendarProps<T>, "visibleDuration"> {
+export interface CalendarProps<T extends DateValue> extends Omit<
+  AriaCalendarProps<T>,
+  "visibleDuration"
+> {
   errorMessage?: string
 }
 
-export function Calendar<T extends DateValue>({ errorMessage, ...props }: CalendarProps<T>) {
+export function Calendar<T extends DateValue>({
+  errorMessage,
+  ...props
+}: CalendarProps<T>) {
   return (
     <AriaCalendar
       {...props}
@@ -71,7 +76,7 @@ export function Calendar<T extends DateValue>({ errorMessage, ...props }: Calend
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot="errorMessage" className="text-sm text-destructive">
+        <Text slot="errorMessage" className="text-destructive text-sm">
           {errorMessage}
         </Text>
       )}
@@ -91,7 +96,7 @@ export function CalendarHeader() {
           <CaretLeftIcon aria-hidden className="size-4" />
         )}
       </Button>
-      <Heading className="mx-2 flex-1 text-center font-heading text-base font-semibold text-foreground" />
+      <Heading className="font-heading text-foreground mx-2 flex-1 text-center text-base font-semibold" />
       <Button variant="ghost" size="icon-sm" slot="next">
         {direction === "rtl" ? (
           <CaretLeftIcon aria-hidden className="size-4" />
@@ -107,7 +112,7 @@ export function CalendarGridHeader() {
   return (
     <AriaCalendarGridHeader>
       {(day) => (
-        <CalendarHeaderCell className="text-xs font-medium text-muted-foreground">
+        <CalendarHeaderCell className="text-muted-foreground text-xs font-medium">
           {day}
         </CalendarHeaderCell>
       )}

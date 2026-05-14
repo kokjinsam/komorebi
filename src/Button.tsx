@@ -11,25 +11,27 @@ import { tv, type VariantProps } from "tailwind-variants"
 import { cn } from "./utils"
 
 const button = tv({
-  base: "group/button relative inline-flex shrink-0 cursor-default items-center justify-center gap-1.5 overflow-hidden rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 pressed:translate-y-px disabled:pointer-events-none disabled:opacity-50 forced-colors:outline-[Highlight] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  base: "group/button focus-visible:border-ring focus-visible:ring-ring/30 pressed:translate-y-px relative inline-flex shrink-0 cursor-default items-center justify-center gap-1.5 overflow-hidden rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 forced-colors:outline-[Highlight] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   variants: {
     variant: {
-      default: "bg-primary text-primary-foreground hover:bg-primary/80 pressed:bg-primary/70",
+      default:
+        "bg-primary text-primary-foreground hover:bg-primary/80 pressed:bg-primary/70",
       secondary:
         "bg-secondary text-secondary-foreground hover:bg-secondary/80 pressed:bg-secondary/70",
       outline:
         "border-input bg-background hover:bg-muted hover:text-foreground pressed:bg-muted/80 dark:bg-input/30",
-      ghost: "text-foreground hover:bg-muted pressed:bg-muted/80 dark:hover:bg-muted/50",
+      ghost:
+        "text-foreground hover:bg-muted pressed:bg-muted/80 dark:hover:bg-muted/50",
       destructive:
         "bg-destructive/10 text-destructive hover:bg-destructive/20 pressed:bg-destructive/30 dark:bg-destructive/20 dark:hover:bg-destructive/30",
-      link: "text-primary underline-offset-4 hover:underline pressed:translate-y-0"
+      link: "text-primary pressed:translate-y-0 underline-offset-4 hover:underline"
     },
     size: {
-      default: "h-9 px-3",
-      xs: "h-6 gap-1 px-2.5 text-xs [&_svg:not([class*='size-'])]:size-3",
-      sm: "h-8 gap-1 px-3",
-      lg: "h-10 px-4",
-      icon: "size-9",
+      "default": "h-9 px-3",
+      "xs": "h-6 gap-1 px-2.5 text-xs [&_svg:not([class*='size-'])]:size-3",
+      "sm": "h-8 gap-1 px-3",
+      "lg": "h-10 px-4",
+      "icon": "size-9",
       "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
       "icon-sm": "size-8",
       "icon-lg": "size-10"
@@ -40,10 +42,23 @@ const button = tv({
 })
 
 export interface ButtonProps
-  extends RACButtonProps,
-    Omit<VariantProps<typeof button>, "isPending"> {
-  variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "link"
-  size?: "default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"
+  extends RACButtonProps, Omit<VariantProps<typeof button>, "isPending"> {
+  variant?:
+    | "default"
+    | "secondary"
+    | "outline"
+    | "ghost"
+    | "destructive"
+    | "link"
+  size?:
+    | "default"
+    | "xs"
+    | "sm"
+    | "lg"
+    | "icon"
+    | "icon-xs"
+    | "icon-sm"
+    | "icon-lg"
 }
 
 export function Button(props: ButtonProps) {

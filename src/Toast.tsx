@@ -36,16 +36,22 @@ export function MyToastRegion() {
   return (
     <ToastRegion
       queue={queue}
-      className="fixed right-4 bottom-4 flex flex-col-reverse gap-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/30"
+      className="focus-visible:ring-ring/30 fixed right-4 bottom-4 flex flex-col-reverse gap-2 outline-none focus-visible:ring-3"
     >
       {({ toast }) => (
         <MyToast toast={toast}>
           <ToastContent className="flex min-w-0 flex-1 flex-col">
-            <Text slot="title" className="text-sm font-semibold text-primary-foreground">
+            <Text
+              slot="title"
+              className="text-primary-foreground text-sm font-semibold"
+            >
               {toast.content.title}
             </Text>
             {toast.content.description && (
-              <Text slot="description" className="text-xs text-primary-foreground/80">
+              <Text
+                slot="description"
+                className="text-primary-foreground/80 text-xs"
+              >
                 {toast.content.description}
               </Text>
             )}
@@ -53,7 +59,7 @@ export function MyToastRegion() {
           <Button
             slot="close"
             aria-label="Close"
-            className="pressed:bg-primary-foreground/20 flex size-7 shrink-0 cursor-default items-center justify-center rounded-2xl border-none bg-transparent p-0 text-primary-foreground outline-none transition-colors hover:bg-primary-foreground/10 focus-visible:border-primary-foreground focus-visible:ring-3 focus-visible:ring-primary-foreground/30 [-webkit-tap-highlight-color:transparent]"
+            className="pressed:bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 focus-visible:border-primary-foreground focus-visible:ring-primary-foreground/30 flex size-7 shrink-0 cursor-default items-center justify-center rounded-2xl border-none bg-transparent p-0 transition-colors outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-3"
           >
             <XIcon className="size-4" />
           </Button>

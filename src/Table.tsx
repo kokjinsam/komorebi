@@ -51,11 +51,11 @@ export function Table(props: TableProps) {
 }
 
 const columnStyles = tv({
-  base: "box-border flex h-5 flex-1 items-center gap-1 overflow-hidden px-2 outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+  base: "focus-visible:ring-ring/30 box-border flex h-5 flex-1 items-center gap-1 overflow-hidden px-2 outline-none focus-visible:ring-2"
 })
 
 const resizerStyles = tv({
-  base: "resizing:bg-primary forced-colors:resizing:bg-[Highlight] resizing:w-[2px] resizing:pl-[7px] box-content h-5 w-px translate-x-[8px] cursor-col-resize rounded-sm bg-border bg-clip-content px-[8px] py-1 -outline-offset-2 outline-none focus-visible:ring-2 focus-visible:ring-ring/30 forced-colors:bg-[ButtonBorder]"
+  base: "resizing:bg-primary forced-colors:resizing:bg-[Highlight] resizing:w-[2px] resizing:pl-[7px] bg-border focus-visible:ring-ring/30 box-content h-5 w-px translate-x-[8px] cursor-col-resize rounded-sm bg-clip-content px-[8px] py-1 -outline-offset-2 outline-none focus-visible:ring-2 forced-colors:bg-[ButtonBorder]"
 })
 
 export function Column(props: ColumnProps) {
@@ -82,7 +82,7 @@ export function Column(props: ColumnProps) {
                   {sortDirection && (
                     <ArrowUpIcon
                       aria-hidden
-                      className="size-4 text-muted-foreground forced-colors:text-[ButtonText]"
+                      className="text-muted-foreground size-4 forced-colors:text-[ButtonText]"
                     />
                   )}
                 </span>
@@ -134,14 +134,24 @@ export function TableBody<T extends object>(props: TableBodyProps<T>) {
 }
 
 const rowStyles = tv({
-  base: "group/row relative cursor-default select-none text-sm text-foreground outline-none -outline-offset-2 last:rounded-b-3xl hover:bg-muted pressed:bg-muted/80 pressed:translate-y-px selected:bg-accent selected:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none focus-visible:ring-2 focus-visible:ring-ring/30 border-b border-b-border last:border-b-0"
+  base: "group/row text-foreground hover:bg-muted pressed:bg-muted/80 pressed:translate-y-px selected:bg-accent selected:text-accent-foreground focus-visible:ring-ring/30 border-b-border relative cursor-default border-b text-sm -outline-offset-2 outline-none select-none last:rounded-b-3xl last:border-b-0 focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50"
 })
 
-export function Row<T extends object>({ id, columns, children, ...otherProps }: RowProps<T>) {
+export function Row<T extends object>({
+  id,
+  columns,
+  children,
+  ...otherProps
+}: RowProps<T>) {
   let { selectionBehavior, allowsDragging } = useTableOptions()
 
   return (
-    <AriaRow id={id} {...otherProps} data-slot="table-row" className={rowStyles}>
+    <AriaRow
+      id={id}
+      {...otherProps}
+      data-slot="table-row"
+      className={rowStyles}
+    >
       {allowsDragging && (
         <Cell>
           <Button slot="drag">≡</Button>
@@ -158,11 +168,11 @@ export function Row<T extends object>({ id, columns, children, ...otherProps }: 
 }
 
 const cellStyles = tv({
-  base: "group-selected/row:border-(--selected-border) box-border truncate border-b border-b-border p-2 -outline-offset-2 [--selected-border:theme(colors.accent/50%)] [-webkit-tap-highlight-color:transparent] group-last/row:border-b-0 outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+  base: "group-selected/row:border-(--selected-border) border-b-border [--selected-border:theme(colors.accent/50%)] focus-visible:ring-ring/30 box-border truncate border-b p-2 -outline-offset-2 outline-none [-webkit-tap-highlight-color:transparent] group-last/row:border-b-0 focus-visible:ring-2"
 })
 
 const expandButton = tv({
-  base: "shrink-0 cursor-default border-0 bg-transparent p-0 pr-1 align-middle outline-none focus-visible:ring-2 focus-visible:ring-ring/30 [-webkit-tap-highlight-color:transparent]",
+  base: "focus-visible:ring-ring/30 shrink-0 cursor-default border-0 bg-transparent p-0 pr-1 align-middle outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-2",
   variants: {
     isDisabled: {
       true: "text-muted-foreground forced-colors:text-[GrayText]"
@@ -171,7 +181,7 @@ const expandButton = tv({
 })
 
 const chevron = tv({
-  base: "size-4 text-muted-foreground transition-transform duration-200 ease-in-out",
+  base: "text-muted-foreground size-4 transition-transform duration-200 ease-in-out",
   variants: {
     isExpanded: {
       true: "rotate-90 transform"

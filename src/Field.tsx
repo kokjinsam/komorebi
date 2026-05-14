@@ -18,7 +18,10 @@ export function Label(props: LabelProps) {
     <RACLabel
       {...props}
       data-slot="field-label"
-      className={twMerge("text-sm font-medium text-foreground cursor-default w-fit", props.className)}
+      className={twMerge(
+        "text-sm font-medium text-foreground cursor-default w-fit",
+        props.className
+      )}
     />
   )
 }

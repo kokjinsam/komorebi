@@ -16,7 +16,11 @@ export interface SliderProps<T> extends AriaSliderProps<T> {
   thumbLabels?: string[]
 }
 
-export function Slider<T extends number | number[]>({ label, thumbLabels, ...props }: SliderProps<T>) {
+export function Slider<T extends number | number[]>({
+  label,
+  thumbLabels,
+  ...props
+}: SliderProps<T>) {
   return (
     <AriaSlider
       {...props}
@@ -27,7 +31,7 @@ export function Slider<T extends number | number[]>({ label, thumbLabels, ...pro
       )}
     >
       <Label>{label}</Label>
-      <SliderOutput className="orientation-vertical:hidden text-xs text-muted-foreground">
+      <SliderOutput className="orientation-vertical:hidden text-muted-foreground text-xs">
         {({ state }) =>
           state.values.map((_, i) => state.getThumbValueLabel(i)).join(" – ")
         }
@@ -41,30 +45,49 @@ export function Slider<T extends number | number[]>({ label, thumbLabels, ...pro
             <div
               className={[
                 "h-1.5 rounded-full bg-input/90",
-                renderProps.orientation === "horizontal" ? "w-full" : "h-full w-1.5 translate-x-0",
-                renderProps.isDisabled ? "opacity-50 forced-colors:bg-[ButtonBorder]" : "forced-colors:bg-[ButtonBorder]"
+                renderProps.orientation === "horizontal"
+                  ? "w-full"
+                  : "h-full w-1.5 translate-x-0",
+                renderProps.isDisabled
+                  ? "opacity-50 forced-colors:bg-[ButtonBorder]"
+                  : "forced-colors:bg-[ButtonBorder]"
               ].join(" ")}
             />
             {state.values.length === 1 ? (
               <div
                 className={[
                   "absolute rounded-full bg-primary forced-colors:bg-[Highlight]",
-                  renderProps.orientation === "horizontal" ? "h-1.5 start-(--start,0) w-(--size)" : "bottom-(--start,0) ml-[50%] w-1.5 h-(--size) -translate-x-[50%]",
-                  renderProps.isDisabled ? "bg-muted-foreground/40 forced-colors:bg-[GrayText]" : ""
+                  renderProps.orientation === "horizontal"
+                    ? "h-1.5 start-(--start,0) w-(--size)"
+                    : "bottom-(--start,0) ml-[50%] w-1.5 h-(--size) -translate-x-[50%]",
+                  renderProps.isDisabled
+                    ? "bg-muted-foreground/40 forced-colors:bg-[GrayText]"
+                    : ""
                 ].join(" ")}
-                style={{ "--size": state.getThumbPercent(0) * 100 + "%" } as any}
+                style={
+                  { "--size": state.getThumbPercent(0) * 100 + "%" } as any
+                }
               />
             ) : state.values.length === 2 ? (
               <div
                 className={[
                   "absolute rounded-full bg-primary forced-colors:bg-[Highlight]",
-                  renderProps.orientation === "horizontal" ? "h-1.5 start-(--start,0) w-(--size)" : "bottom-(--start,0) ml-[50%] w-1.5 h-(--size) -translate-x-[50%]",
-                  renderProps.isDisabled ? "bg-muted-foreground/40 forced-colors:bg-[GrayText]" : ""
+                  renderProps.orientation === "horizontal"
+                    ? "h-1.5 start-(--start,0) w-(--size)"
+                    : "bottom-(--start,0) ml-[50%] w-1.5 h-(--size) -translate-x-[50%]",
+                  renderProps.isDisabled
+                    ? "bg-muted-foreground/40 forced-colors:bg-[GrayText]"
+                    : ""
                 ].join(" ")}
-                style={{
-                  "--start": state.getThumbPercent(0) * 100 + "%",
-                  "--size": (state.getThumbPercent(1) - state.getThumbPercent(0)) * 100 + "%"
-                } as any}
+                style={
+                  {
+                    "--start": state.getThumbPercent(0) * 100 + "%",
+                    "--size":
+                      (state.getThumbPercent(1) - state.getThumbPercent(0)) *
+                        100 +
+                      "%"
+                  } as any
+                }
               />
             ) : null}
             {state.values.map((_, i) => (
@@ -73,7 +96,7 @@ export function Slider<T extends number | number[]>({ label, thumbLabels, ...pro
                 index={i}
                 aria-label={thumbLabels?.[i]}
                 data-slot="slider-thumb"
-                className="group-orientation-horizontal:mt-5 group-orientation-vertical:ml-2.5 h-4 w-6 rounded-full bg-white shadow-md ring-1 ring-black/10 transition-[color,box-shadow,background-color] outline-none not-dark:bg-clip-padding hover:ring-4 hover:ring-ring/30 focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[orientation=vertical]:h-6 data-[orientation=vertical]:w-4"
+                className="group-orientation-horizontal:mt-5 group-orientation-vertical:ml-2.5 hover:ring-ring/30 focus-visible:ring-ring/30 h-4 w-6 rounded-full bg-white shadow-md ring-1 ring-black/10 transition-[color,box-shadow,background-color] outline-none not-dark:bg-clip-padding hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[orientation=vertical]:h-6 data-[orientation=vertical]:w-4"
               />
             ))}
           </>

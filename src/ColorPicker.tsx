@@ -16,10 +16,13 @@ import { Dialog } from "./Dialog"
 import { Popover } from "./Popover"
 
 const buttonStyles = tv({
-  base: "flex cursor-default items-center gap-2 rounded-md border-0 bg-transparent text-sm text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/30 [-webkit-tap-highlight-color:transparent]"
+  base: "text-foreground focus-visible:ring-ring/30 flex cursor-default items-center gap-2 rounded-md border-0 bg-transparent text-sm outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-3"
 })
 
-export interface ColorPickerProps extends Omit<AriaColorPickerProps, "children"> {
+export interface ColorPickerProps extends Omit<
+  AriaColorPickerProps,
+  "children"
+> {
   label?: string
   children?: React.ReactNode
 }
@@ -36,7 +39,11 @@ export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
           <Dialog className="flex flex-col gap-2 p-3">
             {children || (
               <>
-                <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness" />
+                <ColorArea
+                  colorSpace="hsb"
+                  xChannel="saturation"
+                  yChannel="brightness"
+                />
                 <ColorSlider colorSpace="hsb" channel="hue" />
                 <ColorField label="Hex" />
               </>

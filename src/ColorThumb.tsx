@@ -8,7 +8,7 @@ import {
 import { tv } from "tailwind-variants"
 
 const thumbStyles = tv({
-  base: "top-[50%] left-[50%] box-border size-4 rounded-full border-2 border-background",
+  base: "border-background top-[50%] left-[50%] box-border size-4 rounded-full border-2",
   variants: {
     isFocusVisible: {
       true: "size-6"
@@ -30,7 +30,8 @@ export function ColorThumb(props: ColorThumbProps) {
       style={({ defaultStyle, isDisabled }) => ({
         ...defaultStyle,
         backgroundColor: isDisabled ? undefined : defaultStyle.backgroundColor,
-        boxShadow: "0 0 0 1px oklch(0 0 0 / 20%), inset 0 0 0 1px oklch(0 0 0 / 20%)"
+        boxShadow:
+          "0 0 0 1px oklch(0 0 0 / 20%), inset 0 0 0 1px oklch(0 0 0 / 20%)"
       })}
       className={thumbStyles}
     />

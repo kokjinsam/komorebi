@@ -15,11 +15,11 @@ import { Checkbox } from "./Checkbox"
 import { composeTailwindRenderProps } from "./utils"
 
 const itemStyles = tv({
-  base: "group/tree-item relative flex cursor-default border-b border-border bg-background px-3 py-1 text-sm text-foreground select-none first:rounded-t-3xl first:border-t-0 last:rounded-b-3xl last:border-b-0 outline-none -outline-offset-2 focus-visible:ring-2 focus-visible:ring-ring/30 hover:bg-muted pressed:bg-muted/80 pressed:translate-y-px selected:bg-accent selected:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none",
+  base: "group/tree-item border-border bg-background text-foreground focus-visible:ring-ring/30 hover:bg-muted pressed:bg-muted/80 pressed:translate-y-px selected:bg-accent selected:text-accent-foreground relative flex cursor-default border-b px-3 py-1 text-sm -outline-offset-2 outline-none select-none first:rounded-t-3xl first:border-t-0 last:rounded-b-3xl last:border-b-0 focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50",
   variants: {
     isSelected: {
       false: "",
-      true: "border-y-transparent z-20"
+      true: "z-20 border-y-transparent"
     },
     isDisabled: {
       true: "z-10"
@@ -43,7 +43,7 @@ export function Tree<T extends object>({ children, ...props }: TreeProps<T>) {
 }
 
 const expandButton = tv({
-  base: "flex size-8 shrink-0 cursor-default items-center justify-center rounded-2xl border-0 bg-transparent p-0 text-start outline-none focus-visible:ring-2 focus-visible:ring-ring/30 [-webkit-tap-highlight-color:transparent]",
+  base: "focus-visible:ring-ring/30 flex size-8 shrink-0 cursor-default items-center justify-center rounded-2xl border-0 bg-transparent p-0 text-start outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-2",
   variants: {
     isDisabled: {
       true: "text-muted-foreground forced-colors:text-[GrayText]"
@@ -52,7 +52,7 @@ const expandButton = tv({
 })
 
 const chevron = tv({
-  base: "size-4 text-muted-foreground transition-transform duration-200 ease-in-out",
+  base: "text-muted-foreground size-4 transition-transform duration-200 ease-in-out",
   variants: {
     isExpanded: {
       true: "rotate-90 transform"
@@ -66,9 +66,20 @@ export interface TreeItemProps extends Partial<AriaTreeItemProps> {
 
 export function TreeItem(props: TreeItemProps) {
   return (
-    <AriaTreeItem data-slot="tree-item" className={itemStyles} textValue={props.title} {...props}>
+    <AriaTreeItem
+      data-slot="tree-item"
+      className={itemStyles}
+      textValue={props.title}
+      {...props}
+    >
       <AriaTreeItemContent {...props}>
-        {({ selectionMode, selectionBehavior, hasChildItems, isExpanded, isDisabled }) => (
+        {({
+          selectionMode,
+          selectionBehavior,
+          hasChildItems,
+          isExpanded,
+          isDisabled
+        }) => (
           <div className="flex items-center">
             {selectionMode !== "none" && selectionBehavior === "toggle" && (
               <Checkbox slot="selection" />

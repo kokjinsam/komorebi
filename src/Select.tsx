@@ -20,8 +20,10 @@ import {
 import { Popover } from "./Popover"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface SelectProps<T extends object, M extends "single" | "multiple">
-  extends Omit<AriaSelectProps<T, M>, "children"> {
+export interface SelectProps<
+  T extends object,
+  M extends "single" | "multiple"
+> extends Omit<AriaSelectProps<T, M>, "children"> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -29,7 +31,10 @@ export interface SelectProps<T extends object, M extends "single" | "multiple">
   children: React.ReactNode | ((item: T) => React.ReactNode)
 }
 
-export function Select<T extends object, M extends "single" | "multiple" = "single">({
+export function Select<
+  T extends object,
+  M extends "single" | "multiple" = "single"
+>({
   label,
   description,
   errorMessage,
@@ -49,14 +54,16 @@ export function Select<T extends object, M extends "single" | "multiple" = "sing
       {label && <Label>{label}</Label>}
       <Button
         data-slot="select-trigger"
-        className="flex h-9 w-full min-w-[180px] cursor-default items-center gap-2 rounded-3xl border border-transparent bg-input/50 px-3 text-sm text-start transition-[color,box-shadow,background-color] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 group-invalid/field:border-destructive group-invalid/field:ring-3 group-invalid/field:ring-destructive/20 dark:group-invalid/field:ring-destructive/40 [-webkit-tap-highlight-color:transparent]"
+        className="bg-input/50 focus-visible:border-ring focus-visible:ring-ring/30 group-invalid/field:border-destructive group-invalid/field:ring-destructive/20 dark:group-invalid/field:ring-destructive/40 flex h-9 w-full min-w-[180px] cursor-default items-center gap-2 rounded-3xl border border-transparent px-3 text-start text-sm transition-[color,box-shadow,background-color] outline-none [-webkit-tap-highlight-color:transparent] group-invalid/field:ring-3 focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50"
       >
-        <SelectValue className="flex-1 text-sm text-foreground placeholder-shown:text-muted-foreground">
-          {({ selectedText, defaultChildren }) => selectedText || defaultChildren}
+        <SelectValue className="text-foreground placeholder-shown:text-muted-foreground flex-1 text-sm">
+          {({ selectedText, defaultChildren }) =>
+            selectedText || defaultChildren
+          }
         </SelectValue>
         <CaretDownIcon
           aria-hidden
-          className="size-4 shrink-0 text-muted-foreground"
+          className="text-muted-foreground size-4 shrink-0"
         />
       </Button>
       {description && <Description>{description}</Description>}
@@ -77,6 +84,8 @@ export function SelectItem(props: ListBoxItemProps) {
   return <DropdownItem {...props} />
 }
 
-export function SelectSection<T extends object>(props: DropdownSectionProps<T>) {
+export function SelectSection<T extends object>(
+  props: DropdownSectionProps<T>
+) {
   return <DropdownSection {...props} />
 }

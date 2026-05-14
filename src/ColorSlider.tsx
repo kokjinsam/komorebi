@@ -40,7 +40,7 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
       )}
     >
       <Label>{label}</Label>
-      <SliderOutput className="orientation-vertical:hidden text-sm font-medium text-muted-foreground" />
+      <SliderOutput className="orientation-vertical:hidden text-muted-foreground text-sm font-medium" />
       <SliderTrack
         className={trackStyles}
         style={({ defaultStyle, isDisabled }) => ({

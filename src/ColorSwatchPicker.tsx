@@ -39,17 +39,21 @@ export function ColorSwatchPicker({
 }
 
 const itemStyles = tv({
-  base: "relative rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/30 [-webkit-tap-highlight-color:transparent]"
+  base: "focus-visible:ring-ring/30 relative rounded-sm outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-2"
 })
 
 export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
   return (
-    <AriaColorSwatchPickerItem {...props} data-slot="color-swatch-picker-item" className={itemStyles}>
+    <AriaColorSwatchPickerItem
+      {...props}
+      data-slot="color-swatch-picker-item"
+      className={itemStyles}
+    >
       {({ isSelected }) => (
         <>
           <ColorSwatch />
           {isSelected && (
-            <div className="absolute top-0 left-0 box-border size-full rounded-sm border border-foreground outline-2 outline-background forced-color-adjust-none" />
+            <div className="border-foreground outline-background absolute top-0 left-0 box-border size-full rounded-sm border outline-2 forced-color-adjust-none" />
           )}
         </>
       )}

@@ -16,9 +16,13 @@ import { tv } from "tailwind-variants"
 import { Checkbox } from "./Checkbox"
 import { composeTailwindRenderProps } from "./utils"
 
-export function GridList<T extends object>({ children, ...props }: GridListProps<T>) {
+export function GridList<T extends object>({
+  children,
+  ...props
+}: GridListProps<T>) {
   let isHorizontal =
-    (props as { orientation?: "horizontal" | "vertical" }).orientation === "horizontal"
+    (props as { orientation?: "horizontal" | "vertical" }).orientation ===
+    "horizontal"
   return (
     <AriaGridList
       {...props}
@@ -47,7 +51,7 @@ const itemStyles = tv({
       true: "bg-accent text-accent-foreground pressed:bg-accent/80 z-20"
     },
     isDisabled: {
-      true: "z-10 opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+      true: "pointer-events-none z-10 opacity-50 forced-colors:text-[GrayText]"
     }
   }
 })
@@ -55,7 +59,12 @@ const itemStyles = tv({
 export function GridListItem({ children, ...props }: GridListItemProps) {
   let textValue = typeof children === "string" ? children : undefined
   return (
-    <AriaGridListItem data-slot="grid-list-item" textValue={textValue} {...props} className={itemStyles}>
+    <AriaGridListItem
+      data-slot="grid-list-item"
+      textValue={textValue}
+      {...props}
+      className={itemStyles}
+    >
       {composeRenderProps(
         children,
         (children, { selectionMode, selectionBehavior, allowsDragging }) => (
@@ -72,7 +81,10 @@ export function GridListItem({ children, ...props }: GridListItemProps) {
   )
 }
 
-export function GridListHeader({ children, ...props }: HTMLAttributes<HTMLElement>) {
+export function GridListHeader({
+  children,
+  ...props
+}: HTMLAttributes<HTMLElement>) {
   return (
     <AriaGridListHeader
       {...props}

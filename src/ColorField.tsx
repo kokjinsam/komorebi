@@ -1,12 +1,12 @@
 "use client"
 
 import React from "react"
-import { Input as RACInput } from "react-aria-components/Input"
 import {
   ColorField as AriaColorField,
   type ColorFieldProps as AriaColorFieldProps,
   type ValidationResult
 } from "react-aria-components/ColorField"
+import { Input as RACInput } from "react-aria-components/Input"
 import { Description, FieldError, Label } from "./Field"
 import { composeTailwindRenderProps } from "./utils"
 
@@ -19,12 +19,20 @@ export interface ColorFieldProps extends AriaColorFieldProps {
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-export function ColorField({ label, description, errorMessage, ...props }: ColorFieldProps) {
+export function ColorField({
+  label,
+  description,
+  errorMessage,
+  ...props
+}: ColorFieldProps) {
   return (
     <AriaColorField
       {...props}
       data-slot="field"
-      className={composeTailwindRenderProps(props.className, "group/field flex flex-col gap-1.5")}
+      className={composeTailwindRenderProps(
+        props.className,
+        "group/field flex flex-col gap-1.5"
+      )}
     >
       {label && <Label>{label}</Label>}
       <RACInput data-slot="input" className={inputClass} />

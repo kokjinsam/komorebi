@@ -68,10 +68,18 @@ export const Ghost = (args: any) => (
 
 export const Removable = (args: any) => (
   <TagGroup label="Categories" selectionMode="none" {...args}>
-    <Tag id="1" textValue="News">News</Tag>
-    <Tag id="2" textValue="Travel">Travel</Tag>
-    <Tag id="3" textValue="Gaming">Gaming</Tag>
-    <Tag id="4" textValue="Shopping">Shopping</Tag>
+    <Tag id="1" textValue="News">
+      News
+    </Tag>
+    <Tag id="2" textValue="Travel">
+      Travel
+    </Tag>
+    <Tag id="3" textValue="Gaming">
+      Gaming
+    </Tag>
+    <Tag id="4" textValue="Shopping">
+      Shopping
+    </Tag>
   </TagGroup>
 )
 

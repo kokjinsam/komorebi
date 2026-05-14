@@ -9,7 +9,7 @@ import {
 import { tv } from "tailwind-variants"
 
 const styles = tv({
-  base: "group/toggle-button relative inline-flex cursor-default items-center justify-center gap-1.5 rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 pressed:translate-y-px forced-color-adjust-none [-webkit-tap-highlight-color:transparent] [&_svg:not([class*='size-'])]:size-4 h-9 px-3",
+  base: "group/toggle-button focus-visible:border-ring focus-visible:ring-ring/30 pressed:translate-y-px relative inline-flex h-9 cursor-default items-center justify-center gap-1.5 rounded-4xl border border-transparent bg-clip-padding px-3 text-sm font-medium whitespace-nowrap transition-all forced-color-adjust-none outline-none select-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4",
   variants: {
     isSelected: {
       false:

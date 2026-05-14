@@ -23,7 +23,9 @@ export function Breadcrumbs<T extends object>(props: BreadcrumbsProps<T>) {
   )
 }
 
-export function Breadcrumb(props: BreadcrumbProps & Omit<LinkProps, "className">) {
+export function Breadcrumb(
+  props: BreadcrumbProps & Omit<LinkProps, "className">
+) {
   return (
     <AriaBreadcrumb
       {...props}
@@ -38,10 +40,14 @@ export function Breadcrumb(props: BreadcrumbProps & Omit<LinkProps, "className">
           <Link
             variant={isCurrent ? "secondary" : "secondary"}
             {...props}
-            className={isCurrent ? "text-foreground no-underline pointer-events-none" : undefined}
+            className={
+              isCurrent
+                ? "text-foreground pointer-events-none no-underline"
+                : undefined
+            }
           />
           {!isCurrent && (
-            <CaretRightIcon className="size-3 text-muted-foreground" />
+            <CaretRightIcon className="text-muted-foreground size-3" />
           )}
         </>
       )}

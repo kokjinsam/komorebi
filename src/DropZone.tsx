@@ -10,13 +10,13 @@ import {
 import { tv } from "tailwind-variants"
 
 const dropZone = tv({
-  base: "group/drop-zone flex min-h-24 w-[30%] items-center justify-center rounded-3xl border-2 border-dashed border-input bg-background p-6 text-center text-sm text-balance transition-colors outline-none",
+  base: "group/drop-zone border-input bg-background flex min-h-24 w-[30%] items-center justify-center rounded-3xl border-2 border-dashed p-6 text-center text-sm text-balance transition-colors outline-none",
   variants: {
     isFocusVisible: {
-      true: "border-ring ring-3 ring-ring/30 forced-colors:outline-[Highlight]"
+      true: "border-ring ring-ring/30 ring-3 forced-colors:outline-[Highlight]"
     },
     isDropTarget: {
-      true: "border-ring bg-accent ring-3 ring-ring/30 forced-colors:outline-[Highlight]"
+      true: "border-ring bg-accent ring-ring/30 ring-3 forced-colors:outline-[Highlight]"
     }
   }
 })

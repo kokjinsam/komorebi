@@ -1,5 +1,9 @@
+import {
+  TextBIcon as BoldIcon,
+  TextItalicIcon as ItalicIcon,
+  TextUnderlineIcon as UnderlineIcon
+} from "@phosphor-icons/react"
 import { type Meta } from "@storybook/react"
-import { TextBIcon as BoldIcon, TextItalicIcon as ItalicIcon, TextUnderlineIcon as UnderlineIcon } from "@phosphor-icons/react"
 import React from "react"
 import { Group } from "react-aria-components/Group"
 import { Button } from "../src/Button"

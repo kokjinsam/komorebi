@@ -87,7 +87,14 @@
   /* Font slots — defaults to inherit so consumers control typeface */
   --font-sans: var(--font-sans, inherit);
   --font-heading: var(--font-heading, var(--font-sans));
-  --font-mono: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  --font-mono: var(
+    --font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace
+  );
   --font-serif: var(--font-serif, ui-serif, Georgia, serif);
 
   /* Color → Tailwind utility bridge */

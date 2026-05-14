@@ -49,14 +49,19 @@ export function MenuItem(props: MenuItemProps) {
           <>
             {selectionMode !== "none" && (
               <span className="flex w-4 items-center">
-                {isSelected && <CheckIcon weight="fill" aria-hidden className="size-4" />}
+                {isSelected && (
+                  <CheckIcon weight="fill" aria-hidden className="size-4" />
+                )}
               </span>
             )}
             <span className="group-selected/menu-item:font-semibold flex flex-1 items-center gap-2 truncate font-normal">
               {children}
             </span>
             {hasSubmenu && (
-              <CaretRightIcon aria-hidden className="absolute right-2 size-4 text-muted-foreground" />
+              <CaretRightIcon
+                aria-hidden
+                className="text-muted-foreground absolute right-2 size-4"
+              />
             )}
           </>
         )
@@ -66,7 +71,7 @@ export function MenuItem(props: MenuItemProps) {
 }
 
 export function MenuSeparator(props: SeparatorProps) {
-  return <Separator {...props} className="mx-2 my-1 h-px bg-border" />
+  return <Separator {...props} className="bg-border mx-2 my-1 h-px" />
 }
 
 export interface MenuSectionProps<T> extends AriaMenuSectionProps<T> {
@@ -81,7 +86,7 @@ export function MenuSection<T extends object>(props: MenuSectionProps<T>) {
       className="after:block after:h-1 after:content-[''] first:-mt-1"
     >
       {props.title && (
-        <Header className="sticky -top-1 z-10 -mx-1 -mt-px truncate border-y border-y-border bg-muted/60 px-4 py-1 text-xs font-medium text-muted-foreground [&+*]:mt-1">
+        <Header className="border-y-border bg-muted/60 text-muted-foreground sticky -top-1 z-10 -mx-1 -mt-px truncate border-y px-4 py-1 text-xs font-medium [&+*]:mt-1">
           {props.title}
         </Header>
       )}

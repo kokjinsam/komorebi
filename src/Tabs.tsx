@@ -40,11 +40,11 @@ export function Tabs(props: TabsProps) {
 }
 
 const tabListStyles = tv({
-  base: "inline-flex h-9 items-center justify-center rounded-3xl bg-muted p-1 text-muted-foreground",
+  base: "bg-muted text-muted-foreground inline-flex h-9 items-center justify-center rounded-3xl p-1",
   variants: {
     orientation: {
       horizontal: "flex-row",
-      vertical: "flex-col h-auto w-auto"
+      vertical: "h-auto w-auto flex-col"
     }
   }
 })

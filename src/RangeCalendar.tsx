@@ -14,31 +14,33 @@ import { tv } from "tailwind-variants"
 import { CalendarGridHeader, CalendarHeader } from "./Calendar"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface RangeCalendarProps<T extends DateValue>
-  extends Omit<AriaRangeCalendarProps<T>, "visibleDuration"> {
+export interface RangeCalendarProps<T extends DateValue> extends Omit<
+  AriaRangeCalendarProps<T>,
+  "visibleDuration"
+> {
   errorMessage?: string
 }
 
 const cell = tv({
-  base: "flex size-full items-center justify-center text-sm text-foreground forced-color-adjust-none outline-none",
+  base: "text-foreground flex size-full items-center justify-center text-sm forced-color-adjust-none outline-none",
   variants: {
     selectionState: {
-      none: "rounded-(--cell-radius) hover:bg-muted pressed:bg-muted/80",
+      none: "hover:bg-muted pressed:bg-muted/80 rounded-(--cell-radius)",
       middle: [
         "rounded-none bg-accent text-accent-foreground",
         "hover:bg-accent/80 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
         "group-invalid:bg-destructive/10 group-invalid:text-destructive"
       ].join(" "),
-      cap: "rounded-(--cell-radius) bg-primary text-primary-foreground group-invalid:bg-destructive forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:group-invalid:bg-[Mark]"
+      cap: "bg-primary text-primary-foreground group-invalid:bg-destructive rounded-(--cell-radius) forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:group-invalid:bg-[Mark]"
     },
     isToday: {
-      true: "ring-1 ring-input"
+      true: "ring-input ring-1"
     },
     isDisabled: {
-      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+      true: "pointer-events-none opacity-50 forced-colors:text-[GrayText]"
     },
     isFocusVisible: {
-      true: "ring-2 ring-ring/30"
+      true: "ring-ring/30 ring-2"
     }
   },
   compoundVariants: [
@@ -50,7 +52,10 @@ const cell = tv({
   ]
 })
 
-export function RangeCalendar<T extends DateValue>({ errorMessage, ...props }: RangeCalendarProps<T>) {
+export function RangeCalendar<T extends DateValue>({
+  errorMessage,
+  ...props
+}: RangeCalendarProps<T>) {
   return (
     <AriaRangeCalendar
       {...props}
@@ -78,7 +83,15 @@ export function RangeCalendar<T extends DateValue>({ errorMessage, ...props }: R
                 "[td:last-child_&]:rounded-r-(--cell-radius)"
               ].join(" ")}
             >
-              {({ formattedDate, isSelected, isSelectionStart, isSelectionEnd, isFocusVisible, isDisabled, isToday }) => (
+              {({
+                formattedDate,
+                isSelected,
+                isSelectionStart,
+                isSelectionEnd,
+                isFocusVisible,
+                isDisabled,
+                isToday
+              }) => (
                 <span
                   className={cell({
                     selectionState:
@@ -100,7 +113,7 @@ export function RangeCalendar<T extends DateValue>({ errorMessage, ...props }: R
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot="errorMessage" className="text-sm text-destructive">
+        <Text slot="errorMessage" className="text-destructive text-sm">
           {errorMessage}
         </Text>
       )}

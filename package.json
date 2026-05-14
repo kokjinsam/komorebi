@@ -28,6 +28,8 @@
   "scripts": {
     "build": "vite build --mode production",
     "build-storybook": "storybook build",
+    "fmt": "oxfmt",
+    "lint": "oxlint",
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {

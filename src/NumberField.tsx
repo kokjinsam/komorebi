@@ -19,21 +19,30 @@ export interface NumberFieldProps extends AriaNumberFieldProps {
   placeholder?: string
 }
 
-export function NumberField({ label, description, errorMessage, placeholder, ...props }: NumberFieldProps) {
+export function NumberField({
+  label,
+  description,
+  errorMessage,
+  placeholder,
+  ...props
+}: NumberFieldProps) {
   return (
     <AriaNumberField
       {...props}
       data-slot="field"
-      className={composeTailwindRenderProps(props.className, "group/field flex flex-col gap-1.5")}
+      className={composeTailwindRenderProps(
+        props.className,
+        "group/field flex flex-col gap-1.5"
+      )}
     >
       <Label>{label}</Label>
       <FieldGroup data-slot="number-field">
         <Input className="w-20" placeholder={placeholder} />
-        <div className="flex h-full flex-col border-s border-input/30">
+        <div className="border-input/30 flex h-full flex-col border-s">
           <StepperButton slot="increment">
             <CaretUpIcon aria-hidden className="size-4" />
           </StepperButton>
-          <div className="border-b border-input/30" />
+          <div className="border-input/30 border-b" />
           <StepperButton slot="decrement">
             <CaretDownIcon aria-hidden className="size-4" />
           </StepperButton>
@@ -49,7 +58,7 @@ function StepperButton(props: ButtonProps) {
   return (
     <Button
       {...props}
-      className="pressed:bg-muted/80 flex flex-1 cursor-default items-center justify-center border-0 bg-transparent px-1.5 text-muted-foreground transition-colors hover:bg-muted/50 [-webkit-tap-highlight-color:transparent] disabled:text-muted-foreground/50"
+      className="pressed:bg-muted/80 text-muted-foreground hover:bg-muted/50 disabled:text-muted-foreground/50 flex flex-1 cursor-default items-center justify-center border-0 bg-transparent px-1.5 transition-colors [-webkit-tap-highlight-color:transparent]"
     />
   )
 }

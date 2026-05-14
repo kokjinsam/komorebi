@@ -5,7 +5,7 @@ import { tv } from "tailwind-variants"
 export const cn = twMerge
 
 export const focusRing = tv({
-  base: "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 forced-colors:outline-[Highlight]",
+  base: "focus-visible:border-ring focus-visible:ring-ring/30 focus-visible:ring-3 forced-colors:outline-[Highlight]",
   variants: {
     isFocusVisible: {
       false: "",

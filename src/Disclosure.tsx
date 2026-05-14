@@ -16,11 +16,11 @@ import { Button } from "./Button"
 import { composeTailwindRenderProps } from "./utils"
 
 const disclosure = tv({
-  base: "group/disclosure min-w-50 rounded-2xl text-foreground"
+  base: "group/disclosure text-foreground min-w-50 rounded-2xl"
 })
 
 const chevron = tv({
-  base: "size-4 text-muted-foreground transition-transform duration-200 ease-in-out shrink-0",
+  base: "text-muted-foreground size-4 shrink-0 transition-transform duration-200 ease-in-out",
   variants: {
     isExpanded: {
       true: "rotate-90 transform"
@@ -57,12 +57,15 @@ export function DisclosureHeader({ children }: DisclosureHeaderProps) {
       <Button
         slot="trigger"
         variant="ghost"
-        className="w-full justify-between rounded-2xl px-3 py-2 font-medium h-auto"
+        className="h-auto w-full justify-between rounded-2xl px-3 py-2 font-medium"
       >
         {({ isDisabled }) => (
           <>
             <span>{children}</span>
-            <CaretRightIcon aria-hidden className={chevron({ isExpanded, isDisabled } as any)} />
+            <CaretRightIcon
+              aria-hidden
+              className={chevron({ isExpanded, isDisabled } as any)}
+            />
           </>
         )}
       </Button>
@@ -84,7 +87,7 @@ export function DisclosurePanel({ children, ...props }: DisclosurePanelProps) {
         "h-(--disclosure-panel-height) motion-safe:transition-[height] overflow-clip"
       )}
     >
-      <div className="px-3 py-2 text-sm text-foreground">{children}</div>
+      <div className="text-foreground px-3 py-2 text-sm">{children}</div>
     </AriaDisclosurePanel>
   )
 }

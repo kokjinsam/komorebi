@@ -18,7 +18,10 @@ export function Meter({ label, ...props }: MeterProps) {
     <AriaMeter
       {...props}
       data-slot="meter"
-      className={composeTailwindRenderProps(props.className, "flex flex-col gap-2 max-w-full")}
+      className={composeTailwindRenderProps(
+        props.className,
+        "flex flex-col gap-2 max-w-full"
+      )}
     >
       {({ percentage, valueText }) => (
         <>
@@ -37,7 +40,7 @@ export function Meter({ label, ...props }: MeterProps) {
               {" " + valueText}
             </span>
           </div>
-          <div className="relative h-1.5 w-64 max-w-full overflow-hidden rounded-full bg-muted">
+          <div className="bg-muted relative h-1.5 w-64 max-w-full overflow-hidden rounded-full">
             <div
               className={`absolute top-0 left-0 h-full rounded-full forced-colors:bg-[Highlight] ${getFillClass(percentage)}`}
               style={{ width: percentage + "%" }}

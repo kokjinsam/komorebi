@@ -16,9 +16,15 @@ import {
 import { tv } from "tailwind-variants"
 import { composeTailwindRenderProps } from "./utils"
 
-interface ListBoxProps<T> extends Omit<AriaListBoxProps<T>, "layout" | "orientation"> {}
+interface ListBoxProps<T> extends Omit<
+  AriaListBoxProps<T>,
+  "layout" | "orientation"
+> {}
 
-export function ListBox<T extends object>({ children, ...props }: ListBoxProps<T>) {
+export function ListBox<T extends object>({
+  children,
+  ...props
+}: ListBoxProps<T>) {
   return (
     <AriaListBox
       {...props}
@@ -34,7 +40,7 @@ export function ListBox<T extends object>({ children, ...props }: ListBoxProps<T
 }
 
 export const itemStyles = tv({
-  base: "group/listbox-option relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm will-change-transform forced-color-adjust-none select-none outline-none [-webkit-tap-highlight-color:transparent]",
+  base: "group/listbox-option relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm will-change-transform forced-color-adjust-none outline-none select-none [-webkit-tap-highlight-color:transparent]",
   variants: {
     isSelected: {
       false:
@@ -42,7 +48,7 @@ export const itemStyles = tv({
       true: "bg-primary text-primary-foreground focus:bg-primary/90 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     },
     isDisabled: {
-      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+      true: "pointer-events-none opacity-50 forced-colors:text-[GrayText]"
     }
   }
 })
@@ -54,20 +60,18 @@ export function ListBoxItem(props: ListBoxItemProps) {
   return (
     <AriaListBoxItem {...props} textValue={textValue} className={itemStyles}>
       {composeRenderProps(props.children, (children) => (
-        <>
-          {children}
-        </>
+        <>{children}</>
       ))}
     </AriaListBoxItem>
   )
 }
 
 export const dropdownItemStyles = tv({
-  base: "group/menu-item relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&[href]]:cursor-pointer [&_svg:not([class*='size-'])]:size-4 [&_svg]:text-muted-foreground",
+  base: "group/menu-item [&_svg]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&_svg:not([class*='size-'])]:size-4 [&[href]]:cursor-pointer",
   variants: {
     isDisabled: {
       false: "text-foreground",
-      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+      true: "pointer-events-none opacity-50 forced-colors:text-[GrayText]"
     },
     isFocused: {
       true: "bg-accent text-accent-foreground [&_svg]:text-accent-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
@@ -111,10 +115,12 @@ export interface DropdownSectionProps<T> extends ListBoxSectionProps<T> {
   items?: any
 }
 
-export function DropdownSection<T extends object>(props: DropdownSectionProps<T>) {
+export function DropdownSection<T extends object>(
+  props: DropdownSectionProps<T>
+) {
   return (
-    <ListBoxSection className="first:-mt-1 last:after:hidden after:block after:h-1 after:content-['']">
-      <Header className="sticky -top-1 z-10 -mx-1 -mt-px truncate border-y border-y-border bg-muted/60 px-4 py-1 text-xs font-medium text-muted-foreground">
+    <ListBoxSection className="after:block after:h-1 after:content-[''] first:-mt-1 last:after:hidden">
+      <Header className="border-y-border bg-muted/60 text-muted-foreground sticky -top-1 z-10 -mx-1 -mt-px truncate border-y px-4 py-1 text-xs font-medium">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>

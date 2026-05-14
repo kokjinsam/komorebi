@@ -30,7 +30,7 @@ const variantClasses: Record<Variant, string> = {
 }
 
 const tagStyles = tv({
-  base: "group/tag flex max-w-fit cursor-default items-center gap-1 rounded-3xl border border-transparent bg-clip-padding px-2.5 py-0.5 text-xs font-medium transition outline-none [-webkit-tap-highlight-color:transparent] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30",
+  base: "group/tag focus-visible:border-ring focus-visible:ring-ring/30 flex max-w-fit cursor-default items-center gap-1 rounded-3xl border border-transparent bg-clip-padding px-2.5 py-0.5 text-xs font-medium transition outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-3",
   variants: {
     variant: {
       default: "",
@@ -43,16 +43,17 @@ const tagStyles = tv({
       true: "pr-1"
     },
     isSelected: {
-      true: "bg-primary text-primary-foreground ring-2 ring-primary-foreground/20 forced-color-adjust-none forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
+      true: "bg-primary text-primary-foreground ring-primary-foreground/20 ring-2 forced-color-adjust-none forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     },
     isDisabled: {
-      true: "opacity-50 pointer-events-none forced-colors:text-[GrayText]"
+      true: "pointer-events-none opacity-50 forced-colors:text-[GrayText]"
     }
   }
 })
 
 export interface TagGroupProps<T>
-  extends Omit<AriaTagGroupProps, "children">,
+  extends
+    Omit<AriaTagGroupProps, "children">,
     Pick<TagListProps<T>, "items" | "children" | "renderEmptyState"> {
   variant?: Variant
   label?: string
@@ -77,7 +78,10 @@ export function TagGroup<T extends object>({
     <AriaTagGroup
       {...props}
       data-slot="tag-group"
-      className={twMerge("group/tag-group flex flex-col gap-2", props.className)}
+      className={twMerge(
+        "group/tag-group flex flex-col gap-2",
+        props.className
+      )}
     >
       <Label>{label}</Label>
       <VariantContext.Provider value={props.variant || "default"}>
@@ -91,7 +95,7 @@ export function TagGroup<T extends object>({
       </VariantContext.Provider>
       {description && <Description>{description}</Description>}
       {errorMessage && (
-        <Text slot="errorMessage" className="text-sm text-destructive">
+        <Text slot="errorMessage" className="text-destructive text-sm">
           {errorMessage}
         </Text>
       )}
@@ -100,7 +104,7 @@ export function TagGroup<T extends object>({
 }
 
 const removeButtonStyles = tv({
-  base: "pressed:bg-foreground/20 flex cursor-default items-center justify-center rounded-full border-0 bg-transparent p-0.5 text-[inherit] transition-colors hover:bg-foreground/10 outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+  base: "pressed:bg-foreground/20 hover:bg-foreground/10 focus-visible:ring-ring/30 flex cursor-default items-center justify-center rounded-full border-0 bg-transparent p-0.5 text-[inherit] transition-colors outline-none focus-visible:ring-2"
 })
 
 export function Tag({ children, variant, ...props }: TagProps) {

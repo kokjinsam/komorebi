@@ -14,18 +14,28 @@ import { tv } from "tailwind-variants"
 import { Description, FieldError, Label } from "./Field"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface DateFieldProps<T extends DateValue> extends AriaDateFieldProps<T> {
+export interface DateFieldProps<
+  T extends DateValue
+> extends AriaDateFieldProps<T> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-export function DateField<T extends DateValue>({ label, description, errorMessage, ...props }: DateFieldProps<T>) {
+export function DateField<T extends DateValue>({
+  label,
+  description,
+  errorMessage,
+  ...props
+}: DateFieldProps<T>) {
   return (
     <AriaDateField
       {...props}
       data-slot="field"
-      className={composeTailwindRenderProps(props.className, "group/field flex flex-col gap-1.5")}
+      className={composeTailwindRenderProps(
+        props.className,
+        "group/field flex flex-col gap-1.5"
+      )}
     >
       {label && <Label>{label}</Label>}
       <DateInput />
@@ -36,11 +46,13 @@ export function DateField<T extends DateValue>({ label, description, errorMessag
 }
 
 const segmentStyles = tv({
-  base: "type-literal:p-0 inline rounded-sm p-0.5 whitespace-nowrap text-foreground caret-transparent outline-0 forced-color-adjust-none [-webkit-tap-highlight-color:transparent] forced-colors:text-[ButtonText]",
+  base: "type-literal:p-0 text-foreground inline rounded-sm p-0.5 whitespace-nowrap caret-transparent outline-0 forced-color-adjust-none [-webkit-tap-highlight-color:transparent] forced-colors:text-[ButtonText]",
   variants: {
     isPlaceholder: { true: "text-muted-foreground" },
     isDisabled: { true: "text-muted-foreground forced-colors:text-[GrayText]" },
-    isFocused: { true: "bg-primary text-primary-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]" }
+    isFocused: {
+      true: "bg-primary text-primary-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
+    }
   }
 })
 

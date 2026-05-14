@@ -13,7 +13,7 @@ interface LinkProps extends AriaLinkProps {
 }
 
 const styles = tv({
-  base: "group/link rounded-md underline-offset-4 transition outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 forced-colors:outline-[Highlight] disabled:cursor-default disabled:opacity-50",
+  base: "group/link focus-visible:border-ring focus-visible:ring-ring/30 rounded-md underline-offset-4 transition outline-none focus-visible:ring-3 disabled:cursor-default disabled:opacity-50 forced-colors:outline-[Highlight]",
   variants: {
     variant: {
       primary: "text-primary hover:underline",

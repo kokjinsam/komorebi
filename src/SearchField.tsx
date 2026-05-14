@@ -18,7 +18,13 @@ export interface SearchFieldProps extends AriaSearchFieldProps {
   placeholder?: string
 }
 
-export function SearchField({ label, description, errorMessage, placeholder, ...props }: SearchFieldProps) {
+export function SearchField({
+  label,
+  description,
+  errorMessage,
+  placeholder,
+  ...props
+}: SearchFieldProps) {
   return (
     <AriaSearchField
       {...props}
@@ -32,9 +38,12 @@ export function SearchField({ label, description, errorMessage, placeholder, ...
       <FieldGroup data-slot="search-field">
         <MagnifyingGlassIcon
           aria-hidden
-          className="ml-3 size-4 shrink-0 text-muted-foreground"
+          className="text-muted-foreground ml-3 size-4 shrink-0"
         />
-        <Input placeholder={placeholder} className="[&::-webkit-search-cancel-button]:hidden" />
+        <Input
+          placeholder={placeholder}
+          className="[&::-webkit-search-cancel-button]:hidden"
+        />
         <FieldButton className="mr-1 group-empty:invisible">
           <XIcon aria-hidden className="size-4" />
         </FieldButton>

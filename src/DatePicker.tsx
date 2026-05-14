@@ -15,18 +15,28 @@ import { FieldButton } from "./FieldButton"
 import { Popover } from "./Popover"
 import { composeTailwindRenderProps } from "./utils"
 
-export interface DatePickerProps<T extends DateValue> extends AriaDatePickerProps<T> {
+export interface DatePickerProps<
+  T extends DateValue
+> extends AriaDatePickerProps<T> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-export function DatePicker<T extends DateValue>({ label, description, errorMessage, ...props }: DatePickerProps<T>) {
+export function DatePicker<T extends DateValue>({
+  label,
+  description,
+  errorMessage,
+  ...props
+}: DatePickerProps<T>) {
   return (
     <AriaDatePicker
       {...props}
       data-slot="field"
-      className={composeTailwindRenderProps(props.className, "group/field flex flex-col gap-1.5")}
+      className={composeTailwindRenderProps(
+        props.className,
+        "group/field flex flex-col gap-1.5"
+      )}
     >
       {label && <Label>{label}</Label>}
       <FieldGroup className="w-auto min-w-52" data-slot="date-picker">
