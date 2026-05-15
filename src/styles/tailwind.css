@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "./globals.css";
+
 @plugin "tailwindcss-react-aria-components";
 @plugin "tailwindcss-animate";
+
 @variant dark (&:where(.dark, .dark *));

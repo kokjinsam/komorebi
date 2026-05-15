@@ -1,7 +1,6 @@
 import React from "react"
 import { themes } from "storybook/theming"
 import "../src/styles/tailwind.css"
-import "../src/styles/globals.css"
 import "../src/styles/default-theme.css"
 import "../src/styles/komorebi.css"
 
