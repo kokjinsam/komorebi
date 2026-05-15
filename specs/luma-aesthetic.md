@@ -45,7 +45,7 @@ What remains valid from `design-tokens.md`:
   `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`,
   `--input`, `--ring`, `--popover`, `--card`, sidebar stubs).
 - shadcn-unprefixed naming, `.dark` mode via class selector.
-- The CSS export shape (`@kokjinsam/komorebi/styles.css`).
+- The CSS export shape (`@vrmn/komorebi/styles.css`).
 - The `forced-colors:` system color references.
 - Tooltip's inverted-surface decision (`bg-foreground text-background`).
 
@@ -1128,7 +1128,7 @@ the global parameter. If a story has its own `bg-` decorator, leave it.
   CI gate.
 - **Provider injecting theme.** Could later inject `<style>` for the
   default theme so consumers don't have to import `styles.css`. Out of
-  scope; current `import "@kokjinsam/komorebi/styles.css"` flow stands.
+  scope; current `import "@vrmn/komorebi/styles.css"` flow stands.
 - **Echarts theming.** `echarts` is in `peerDependencies` but has no
   consumer in `src/` yet. The monochrome `--chart-1..5` are reserved for
   when a chart component lands; current values are placeholders, not load-

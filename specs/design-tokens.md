@@ -9,14 +9,14 @@
 > and `forced-colors:` decisions remain valid.
 
 Introduce a shadcn-aligned, CSS-variable–based design token system to
-`@kokjinsam/komorebi` and migrate every component off hardcoded Tailwind
+`@vrmn/komorebi` and migrate every component off hardcoded Tailwind
 palette classes so consumers can re-theme the library by overriding tokens.
 
 ---
 
 ## Context
 
-- Komorebi is a React Aria component library (`@kokjinsam/komorebi`), Tailwind 4
+- Komorebi is a React Aria component library (`@vrmn/komorebi`), Tailwind 4
   + `tailwind-variants`, currently at v0.0.1.
 - Every component hardcodes Tailwind palette classes (`bg-blue-600`,
   `dark:bg-neutral-800`, `border-red-700`, …) — ~17 colors × shades referenced
@@ -33,7 +33,7 @@ palette classes so consumers can re-theme the library by overriding tokens.
 2. Every component reads from semantic tokens; **no `bg-blue-600` /
    `dark:bg-neutral-700` style classes remain in `src/*.tsx`**.
 3. Library ships its own default theme (`src/index.css`, exposed via the
-   package entry) — `import "@kokjinsam/komorebi/styles.css"` gives consumers
+   package entry) — `import "@vrmn/komorebi/styles.css"` gives consumers
    a working look out of the box.
 4. Consumers can re-theme by redeclaring any variable in their own CSS after
    the import. shadcn-using consumers get implicit theme inheritance because
@@ -275,7 +275,7 @@ override sidebar surfaces independently when a Sidebar lands later.
 
 ```ts
 // app entry
-import "@kokjinsam/komorebi/styles.css";
+import "@vrmn/komorebi/styles.css";
 ```
 
 The CSS export is added to `package.json` via `"exports"`:
@@ -296,7 +296,7 @@ build emits and wires `./styles.css` to that.)
 Consumers override by redeclaring after the import:
 
 ```css
-@import "@kokjinsam/komorebi/styles.css";
+@import "@vrmn/komorebi/styles.css";
 
 :root {
   --primary: oklch(0.55 0.18 250);   /* brand blue */
@@ -899,7 +899,7 @@ they want, but the PR ships atomically):
 - [ ] `grep -rE "dark:(bg|text|border|outline)-" src/` returns only entries where the `dark:` modifier wraps a token reference whose *behavior* (not value) needs to differ per mode — should be effectively empty after the migration. Any remaining `dark:` references are justified in code review.
 - [ ] `pnpm storybook` builds; every story renders in both light and dark with no console errors.
 - [ ] The new `Theming` story renders cleanly across its three pre-baked theme variants — proves the token override surface works.
-- [ ] `import "@kokjinsam/komorebi/styles.css"` from a sibling consumer (or `pnpm pack` smoke) resolves and loads tokens.
+- [ ] `import "@vrmn/komorebi/styles.css"` from a sibling consumer (or `pnpm pack` smoke) resolves and loads tokens.
 - [ ] `forced-colors:` system color references unchanged across the diff.
 
 ## Open questions / explicit deferrals

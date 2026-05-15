@@ -8,7 +8,7 @@ Replace every `lucide-react` icon in `komorebi` with the equivalent icon from
 
 ## Context
 
-- Komorebi is a React Aria component library (`@kokjinsam/komorebi`).
+- Komorebi is a React Aria component library (`@vrmn/komorebi`).
 - `@phosphor-icons/react@^2.1.10` is already declared as a `peerDependency`.
 - 23 distinct Lucide icons are referenced across 23 files (17 in `src/`,
   5 in `stories/`).
@@ -102,7 +102,7 @@ Replace every `lucide-react` icon in `komorebi` with the equivalent icon from
   because each call site that needs a non-default weight passes
   `weight="fill"` explicitly.
 - Not exported through a barrel (none exists). It's available at
-  `@kokjinsam/komorebi/Provider` once Vite builds, mirroring the
+  `@vrmn/komorebi/Provider` once Vite builds, mirroring the
   pattern of other per-file components.
 
 ### 6. Stories: migrated in-PR
@@ -213,7 +213,7 @@ Update the import line and any JSX usage. Apply `weight="fill"` per
   ```
 
   No barrel re-export (none exists). Consumers import directly:
-  `import { Provider } from "@kokjinsam/komorebi/Provider"`.
+  `import { Provider } from "@vrmn/komorebi/Provider"`.
 
 ---
 

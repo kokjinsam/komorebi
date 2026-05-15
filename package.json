@@ -1,10 +1,10 @@
 {
-  "name": "@kokjinsam/komorebi",
+  "name": "@vrmn/komorebi",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kokjinsam/komorebi.git"
+    "url": "https://github.com/vermilionmeridian/komorebi.git"
   },
   "type": "module",
   "sideEffects": [
