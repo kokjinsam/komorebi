@@ -33,6 +33,17 @@ function copyCssPlugin(): Plugin {
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === "development"
+  const peerDependencies = Object.keys(pkg.peerDependencies ?? {})
+
+  // id.startsWith(${dependency}/) is important because scoped
+  // package names like @phosphor-icons/react must not accidentally
+  // match unrelated packages like @phosphor-icons/reactive.
+  // This predicate avoids that.
+  const isExternal = (id: string) =>
+    id === "react/jsx-runtime" ||
+    peerDependencies.some(
+      (dependency) => id === dependency || id.startsWith(`${dependency}/`)
+    )
 
   return {
     build: {
@@ -55,10 +66,7 @@ export default defineConfig(({ mode }) => {
       minify: isDev ? false : "esbuild",
       rollupOptions: {
         cache: isDev,
-        external: [
-          ...Object.keys(pkg.peerDependencies ?? {}),
-          "react/jsx-runtime"
-        ],
+        external: isExternal,
         output: {
           banner: '"use client";\n',
           chunkFileNames: (chunkInfo) => {
