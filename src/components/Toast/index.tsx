@@ -13,13 +13,16 @@ import {
 } from "react-aria-components/Toast"
 import { flushSync } from "react-dom"
 import { composeTailwindRenderProps } from "@/utils"
-import "@/styles/Toast.css"
 
 interface MyToastContent {
   description?: string
   title: string
 }
 
+/**
+ * Toast view-transition animations require importing
+ * `@vrmn/komorebi/styles/komorebi.css` in your app's CSS.
+ */
 export const queue = new ToastQueue<MyToastContent>({
   wrapUpdate(fn) {
     if ("startViewTransition" in document) {

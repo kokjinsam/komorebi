@@ -1,6 +1,6 @@
 {
   "name": "@vrmn/komorebi",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -11,17 +11,245 @@
   ],
   "type": "module",
   "sideEffects": [
-    "*.css",
     "dist/styles/*.css"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
+    },
+    "./AlertDialog": {
+      "import": "./dist/AlertDialog/index.js",
+      "types": "./dist/AlertDialog/index.d.ts"
+    },
+    "./Badge": {
+      "import": "./dist/Badge/index.js",
+      "types": "./dist/Badge/index.d.ts"
+    },
+    "./Breadcrumbs": {
+      "import": "./dist/Breadcrumbs/index.js",
+      "types": "./dist/Breadcrumbs/index.d.ts"
+    },
+    "./Button": {
+      "import": "./dist/Button/index.js",
+      "types": "./dist/Button/index.d.ts"
+    },
+    "./Calendar": {
+      "import": "./dist/Calendar/index.js",
+      "types": "./dist/Calendar/index.d.ts"
+    },
+    "./Card": {
+      "import": "./dist/Card/index.js",
+      "types": "./dist/Card/index.d.ts"
+    },
+    "./Checkbox": {
+      "import": "./dist/Checkbox/index.js",
+      "types": "./dist/Checkbox/index.d.ts"
+    },
+    "./CheckboxGroup": {
+      "import": "./dist/CheckboxGroup/index.js",
+      "types": "./dist/CheckboxGroup/index.d.ts"
+    },
+    "./ColorArea": {
+      "import": "./dist/ColorArea/index.js",
+      "types": "./dist/ColorArea/index.d.ts"
+    },
+    "./ColorField": {
+      "import": "./dist/ColorField/index.js",
+      "types": "./dist/ColorField/index.d.ts"
+    },
+    "./ColorPicker": {
+      "import": "./dist/ColorPicker/index.js",
+      "types": "./dist/ColorPicker/index.d.ts"
+    },
+    "./ColorSlider": {
+      "import": "./dist/ColorSlider/index.js",
+      "types": "./dist/ColorSlider/index.d.ts"
+    },
+    "./ColorSwatch": {
+      "import": "./dist/ColorSwatch/index.js",
+      "types": "./dist/ColorSwatch/index.d.ts"
+    },
+    "./ColorSwatchPicker": {
+      "import": "./dist/ColorSwatchPicker/index.js",
+      "types": "./dist/ColorSwatchPicker/index.d.ts"
+    },
+    "./ColorThumb": {
+      "import": "./dist/ColorThumb/index.js",
+      "types": "./dist/ColorThumb/index.d.ts"
+    },
+    "./ColorWheel": {
+      "import": "./dist/ColorWheel/index.js",
+      "types": "./dist/ColorWheel/index.d.ts"
+    },
+    "./ComboBox": {
+      "import": "./dist/ComboBox/index.js",
+      "types": "./dist/ComboBox/index.d.ts"
+    },
+    "./CommandPalette": {
+      "import": "./dist/CommandPalette/index.js",
+      "types": "./dist/CommandPalette/index.d.ts"
+    },
+    "./DateField": {
+      "import": "./dist/DateField/index.js",
+      "types": "./dist/DateField/index.d.ts"
+    },
+    "./DatePicker": {
+      "import": "./dist/DatePicker/index.js",
+      "types": "./dist/DatePicker/index.d.ts"
+    },
+    "./DateRangePicker": {
+      "import": "./dist/DateRangePicker/index.js",
+      "types": "./dist/DateRangePicker/index.d.ts"
+    },
+    "./Dialog": {
+      "import": "./dist/Dialog/index.js",
+      "types": "./dist/Dialog/index.d.ts"
+    },
+    "./Disclosure": {
+      "import": "./dist/Disclosure/index.js",
+      "types": "./dist/Disclosure/index.d.ts"
+    },
+    "./DisclosureGroup": {
+      "import": "./dist/DisclosureGroup/index.js",
+      "types": "./dist/DisclosureGroup/index.d.ts"
+    },
+    "./DropZone": {
+      "import": "./dist/DropZone/index.js",
+      "types": "./dist/DropZone/index.d.ts"
+    },
+    "./Field": {
+      "import": "./dist/Field/index.js",
+      "types": "./dist/Field/index.d.ts"
+    },
+    "./FieldButton": {
+      "import": "./dist/FieldButton/index.js",
+      "types": "./dist/FieldButton/index.d.ts"
+    },
+    "./Form": {
+      "import": "./dist/Form/index.js",
+      "types": "./dist/Form/index.d.ts"
+    },
+    "./GridList": {
+      "import": "./dist/GridList/index.js",
+      "types": "./dist/GridList/index.d.ts"
+    },
+    "./Link": {
+      "import": "./dist/Link/index.js",
+      "types": "./dist/Link/index.d.ts"
+    },
+    "./ListBox": {
+      "import": "./dist/ListBox/index.js",
+      "types": "./dist/ListBox/index.d.ts"
+    },
+    "./Menu": {
+      "import": "./dist/Menu/index.js",
+      "types": "./dist/Menu/index.d.ts"
+    },
+    "./Meter": {
+      "import": "./dist/Meter/index.js",
+      "types": "./dist/Meter/index.d.ts"
+    },
+    "./Modal": {
+      "import": "./dist/Modal/index.js",
+      "types": "./dist/Modal/index.d.ts"
+    },
+    "./NumberField": {
+      "import": "./dist/NumberField/index.js",
+      "types": "./dist/NumberField/index.d.ts"
+    },
+    "./Popover": {
+      "import": "./dist/Popover/index.js",
+      "types": "./dist/Popover/index.d.ts"
+    },
+    "./ProgressBar": {
+      "import": "./dist/ProgressBar/index.js",
+      "types": "./dist/ProgressBar/index.d.ts"
+    },
+    "./RadioGroup": {
+      "import": "./dist/RadioGroup/index.js",
+      "types": "./dist/RadioGroup/index.d.ts"
+    },
+    "./RangeCalendar": {
+      "import": "./dist/RangeCalendar/index.js",
+      "types": "./dist/RangeCalendar/index.d.ts"
+    },
+    "./SearchField": {
+      "import": "./dist/SearchField/index.js",
+      "types": "./dist/SearchField/index.d.ts"
+    },
+    "./Select": {
+      "import": "./dist/Select/index.js",
+      "types": "./dist/Select/index.d.ts"
+    },
+    "./Separator": {
+      "import": "./dist/Separator/index.js",
+      "types": "./dist/Separator/index.d.ts"
+    },
+    "./Slider": {
+      "import": "./dist/Slider/index.js",
+      "types": "./dist/Slider/index.d.ts"
+    },
+    "./Switch": {
+      "import": "./dist/Switch/index.js",
+      "types": "./dist/Switch/index.d.ts"
+    },
+    "./Table": {
+      "import": "./dist/Table/index.js",
+      "types": "./dist/Table/index.d.ts"
+    },
+    "./Tabs": {
+      "import": "./dist/Tabs/index.js",
+      "types": "./dist/Tabs/index.d.ts"
+    },
+    "./TagGroup": {
+      "import": "./dist/TagGroup/index.js",
+      "types": "./dist/TagGroup/index.d.ts"
+    },
+    "./TextField": {
+      "import": "./dist/TextField/index.js",
+      "types": "./dist/TextField/index.d.ts"
+    },
+    "./TimeField": {
+      "import": "./dist/TimeField/index.js",
+      "types": "./dist/TimeField/index.d.ts"
+    },
+    "./Toast": {
+      "import": "./dist/Toast/index.js",
+      "types": "./dist/Toast/index.d.ts"
+    },
+    "./ToggleButton": {
+      "import": "./dist/ToggleButton/index.js",
+      "types": "./dist/ToggleButton/index.d.ts"
+    },
+    "./ToggleButtonGroup": {
+      "import": "./dist/ToggleButtonGroup/index.js",
+      "types": "./dist/ToggleButtonGroup/index.d.ts"
+    },
+    "./Toolbar": {
+      "import": "./dist/Toolbar/index.js",
+      "types": "./dist/Toolbar/index.d.ts"
+    },
+    "./Tooltip": {
+      "import": "./dist/Tooltip/index.js",
+      "types": "./dist/Tooltip/index.d.ts"
+    },
+    "./Tree": {
+      "import": "./dist/Tree/index.js",
+      "types": "./dist/Tree/index.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./styles/default-theme.css": "./dist/styles/default-theme.css",
+    "./styles/globals.css": "./dist/styles/globals.css",
+    "./styles/komorebi.css": "./dist/styles/komorebi.css",
+    "./styles/tailwind.css": "./dist/styles/tailwind.css"
   },
   "publishConfig": {
     "access": "public",
@@ -30,9 +258,12 @@
   "scripts": {
     "build": "vite build --mode production",
     "build-storybook": "storybook build",
+    "check-exports": "tsx scripts/sync-exports.ts --check",
     "fmt": "oxfmt",
     "lint": "oxlint",
-    "storybook": "storybook dev -p 6006"
+    "prepublishOnly": "pnpm sync-exports --check && pnpm lint && pnpm build",
+    "storybook": "storybook dev -p 6006",
+    "sync-exports": "tsx scripts/sync-exports.ts"
   },
   "dependencies": {
     "postcss": "^8.5.14",
@@ -60,9 +291,7 @@
     "oxlint": "1.64.0",
     "react-docgen-typescript": "2.4.0",
     "storybook": "10.3.6",
-    "tailwindcss": "4.3.0",
-    "tailwindcss-animate": "1.0.7",
-    "tailwindcss-react-aria-components": "2.1.0",
+    "tsx": "4.22.0",
     "typescript": "6.0.3",
     "vite": "8.0.12",
     "vite-plugin-dts": "5.0.0"
@@ -73,6 +302,9 @@
     "react": "^18.0.0 || ^19.0.0",
     "react-aria": "^3.48.0",
     "react-aria-components": "^1.17.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-react-aria-components": "^2.0.0"
   }
 }

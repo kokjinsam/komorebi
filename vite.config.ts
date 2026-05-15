@@ -1,71 +1,90 @@
-import { resolve, dirname } from "node:path"
+import { copyFileSync, mkdirSync, readdirSync, statSync } from "node:fs"
+import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import { defineConfig } from "vite"
+import { defineConfig, type Plugin } from "vite"
 import dts from "vite-plugin-dts"
 import pkg from "./package.json"
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const componentsDir = resolve(__dirname, "src/components")
+const componentEntries = Object.fromEntries(
+  readdirSync(componentsDir)
+    .filter((name) => statSync(resolve(componentsDir, name)).isDirectory())
+    .map((name) => [name, resolve(componentsDir, name, "index.tsx")])
+)
+
+function copyCssPlugin(): Plugin {
+  const stylesSrc = resolve(__dirname, "src/styles")
+  const stylesOut = resolve(__dirname, "dist/styles")
+  return {
+    apply: "build",
+    closeBundle() {
+      mkdirSync(stylesOut, { recursive: true })
+      for (const f of readdirSync(stylesSrc)) {
+        if (f.endsWith(".css")) {
+          copyFileSync(resolve(stylesSrc, f), resolve(stylesOut, f))
+        }
+      }
+    },
+    name: "komorebi-copy-css"
+  }
+}
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === "development"
 
   return {
     build: {
+      cssCodeSplit: false,
+      emptyOutDir: !isDev,
       lib: {
         entry: {
-          // Main entry point
-          index: resolve(__dirname, "src/index.ts")
+          "index": resolve(__dirname, "src/index.ts"),
+          "utils/index": resolve(__dirname, "src/utils/index.ts"),
+          ...componentEntries
         },
-        fileName: (_format, entryName) => `${entryName}.js`,
+        fileName: (_format, entryName) =>
+          entryName === "index"
+            ? "index.js"
+            : entryName.includes("/")
+              ? `${entryName}.js`
+              : `${entryName}/index.js`,
         formats: ["es"]
       },
+      minify: isDev ? false : "esbuild",
       rollupOptions: {
-        // Externalize dependencies that shouldn't be bundled
+        cache: isDev,
         external: [
-          // Only externalize peer dependencies - bundle everything else
           ...Object.keys(pkg.peerDependencies ?? {}),
           "react/jsx-runtime"
         ],
         output: {
-          // Don't preserve modules - bundle dependencies into flat output
-          // This avoids nested node_modules/.pnpm/ paths in dist that break Jest
-          preserveModules: false,
-          // Chunk filenames without double-dashes (fixes Jest resolution issues)
-          // Use a function to sanitize chunk names
+          banner: '"use client";\n',
           chunkFileNames: (chunkInfo) => {
-            // Strip trailing dashes/underscores from chunk name
             const name = chunkInfo.name.replace(/[-_]+$/, "") || "chunk"
-            // Use hashCharacters to avoid dashes in hash (Rollup 4.8+)
             return `chunks/${name}-[hash:16].js`
           },
-          // Use only alphanumeric characters in hashes to avoid filename issues
-          hashCharacters: "base36",
-          // Hoist "use client" directives to the top of chunks
-          hoistTransitiveImports: false,
-          // Add "use client" directive to all output chunks
-          // This is necessary because rollup-plugin-preserve-directives only works with preserveModules: true
-          banner: '"use client";\n',
-          // Global variables for UMD build (if needed)
+          entryFileNames: (chunkInfo) => {
+            if (chunkInfo.name === "index") {
+              return "index.js"
+            }
+            if (chunkInfo.name === "utils/index") {
+              return "utils/index.js"
+            }
+            return `${chunkInfo.name}/index.js`
+          },
           globals: {
             "react": "React",
             "react-dom": "ReactDOM",
             "react/jsx-runtime": "jsxRuntime"
-          }
-        },
-        // Note: preserveDirectives plugin removed - it only works with preserveModules: true
-        // We use output.banner instead to add "use client" to all chunks
-        plugins: [],
-        // Enable Rollup caching for faster rebuilds
-        cache: isDev
+          },
+          hashCharacters: "base36",
+          hoistTransitiveImports: false,
+          preserveModules: false
+        }
       },
-      // Faster sourcemaps in dev
       sourcemap: isDev ? "inline" : true,
-      // Skip minification in dev for faster rebuilds
-      minify: isDev ? false : "esbuild",
-      // Don't clear dist/ on every rebuild in dev
-      emptyOutDir: !isDev,
-      // Selective file watching in dev
       watch: isDev
         ? {
             exclude: ["**/*.test.*", "**/*.stories.*", "**/__tests__/**"],
@@ -75,13 +94,22 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       dts({
+        beforeWriteFile(filePath, content) {
+          // Flatten dist/components/<Name>/… → dist/<Name>/…
+          return {
+            content,
+            filePath: filePath.replace("/dist/components/", "/dist/")
+          }
+        },
         compilerOptions: {
           incremental: isDev,
           tsBuildInfoFile: isDev ? "./.tsbuildinfo" : undefined
         },
+        entryRoot: "src",
         exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"],
         include: ["src/**/*"]
-      })
+      }),
+      copyCssPlugin()
     ],
     resolve: {
       alias: {

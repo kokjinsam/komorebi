@@ -1,3 +1,7 @@
+/** Komorebi Component CSS */
+
+/** Toast */
+
 ::view-transition-new(.toast):only-child {
   animation: slide-in 400ms;
 }
