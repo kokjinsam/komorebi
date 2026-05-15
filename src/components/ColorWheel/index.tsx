@@ -6,20 +6,20 @@ import {
   type ColorWheelProps as AriaColorWheelProps,
   ColorWheelTrack
 } from "react-aria-components/ColorWheel"
-import { ColorThumb } from "./ColorThumb"
+import { ColorThumb } from "../ColorThumb"
 
-export interface ColorWheelProps extends Omit<
+export type ColorWheelProps = Omit<
   AriaColorWheelProps,
   "outerRadius" | "innerRadius"
-> {}
+>
 
 export function ColorWheel(props: ColorWheelProps) {
   return (
     <AriaColorWheel
       {...props}
       data-slot="color-wheel"
-      outerRadius={100}
       innerRadius={74}
+      outerRadius={100}
     >
       <ColorWheelTrack
         className="disabled:opacity-50 forced-colors:disabled:bg-[GrayText]"

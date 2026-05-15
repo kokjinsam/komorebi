@@ -1,9 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import {
-  ColorSwatchPicker,
-  ColorSwatchPickerItem
-} from "../src/ColorSwatchPicker"
+import { ColorSwatchPicker, ColorSwatchPickerItem } from "../src"
 
 const meta: Meta<typeof ColorSwatchPicker> = {
   component: ColorSwatchPicker,
@@ -15,7 +12,7 @@ const meta: Meta<typeof ColorSwatchPicker> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof ColorSwatchPicker> = (args) => (
   <ColorSwatchPicker {...args}>
     <ColorSwatchPickerItem color="#A00" />
     <ColorSwatchPickerItem color="#f80" />

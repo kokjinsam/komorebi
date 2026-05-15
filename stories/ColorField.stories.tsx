@@ -1,19 +1,21 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { ColorField } from "../src/ColorField"
+import { ColorField } from "../src"
 
 const meta: Meta<typeof ColorField> = {
+  args: {
+    defaultValue: "#ff0",
+    label: "Color"
+  },
   component: ColorField,
   parameters: {
     layout: "centered"
   },
-  tags: ["autodocs"],
-  args: {
-    label: "Color",
-    defaultValue: "#ff0"
-  }
+  tags: ["autodocs"]
 }
 
 export default meta
 
-export const Example = (args: any) => <ColorField {...args} />
+export const Example: StoryFn<typeof ColorField> = (args) => (
+  <ColorField {...args} />
+)

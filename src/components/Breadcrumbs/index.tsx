@@ -10,15 +10,15 @@ import {
   type LinkProps
 } from "react-aria-components/Breadcrumbs"
 import { twMerge } from "tailwind-merge"
-import { Link } from "./Link"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Link } from "../Link"
 
 export function Breadcrumbs<T extends object>(props: BreadcrumbsProps<T>) {
   return (
     <AriaBreadcrumbs
       {...props}
-      data-slot="breadcrumbs"
       className={twMerge("flex flex-wrap items-center gap-1", props.className)}
+      data-slot="breadcrumbs"
     />
   )
 }
@@ -29,11 +29,11 @@ export function Breadcrumb(
   return (
     <AriaBreadcrumb
       {...props}
-      data-slot="breadcrumb"
       className={composeTailwindRenderProps(
         props.className,
         "flex items-center gap-1"
       )}
+      data-slot="breadcrumb"
     >
       {({ isCurrent }) => (
         <>

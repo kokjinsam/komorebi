@@ -8,12 +8,12 @@ import {
 } from "react-aria-components/Autocomplete"
 import { Dialog } from "react-aria-components/Dialog"
 import { type MenuProps as AriaMenuProps } from "react-aria-components/Menu"
-import { Menu } from "./Menu"
-import { Modal } from "./Modal"
-import { SearchField } from "./SearchField"
+import { Menu } from "../Menu"
+import { Modal } from "../Modal"
+import { SearchField } from "../SearchField"
 
 export interface CommandPaletteProps<T extends object>
-  extends Omit<AriaAutocompleteProps, "children">, AriaMenuProps<T> {
+  extends AriaMenuProps<T>, Omit<AriaAutocompleteProps, "children"> {
   isOpen: boolean
   onOpenChange: (isOpen?: boolean) => void
 }
@@ -21,11 +21,11 @@ export interface CommandPaletteProps<T extends object>
 export function CommandPalette<T extends object>(
   props: CommandPaletteProps<T>
 ) {
-  let { isOpen, onOpenChange } = props
-  let { contains } = useFilter({ sensitivity: "base" })
+  const { isOpen, onOpenChange } = props
+  const { contains } = useFilter({ sensitivity: "base" })
 
   useEffect(() => {
-    let isMacUA = /mac(os|intosh)/i.test(navigator.userAgent)
+    const isMacUA = /mac(os|intosh)/i.test(navigator.userAgent)
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "j" && (isMacUA ? e.metaKey : e.ctrlKey)) {
         e.preventDefault()
@@ -48,14 +48,14 @@ export function CommandPalette<T extends object>(
       position="top"
     >
       <Dialog
-        data-slot="command-palette"
         className="flex max-h-[inherit] flex-col p-1"
+        data-slot="command-palette"
       >
         <AriaAutocomplete filter={contains} {...props}>
           <div className="px-1 pt-1">
             <SearchField
-              autoFocus
               aria-label="Search commands"
+              autoFocus
               placeholder="Search commands"
             />
           </div>

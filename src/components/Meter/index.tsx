@@ -6,8 +6,8 @@ import {
   Meter as AriaMeter,
   type MeterProps as AriaMeterProps
 } from "react-aria-components/Meter"
-import { Label } from "./Field"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Label } from "../Field"
 
 export interface MeterProps extends AriaMeterProps {
   label?: string
@@ -17,11 +17,11 @@ export function Meter({ label, ...props }: MeterProps) {
   return (
     <AriaMeter
       {...props}
-      data-slot="meter"
       className={composeTailwindRenderProps(
         props.className,
         "flex flex-col gap-2 max-w-full"
       )}
+      data-slot="meter"
     >
       {({ percentage, valueText }) => (
         <>
@@ -32,9 +32,9 @@ export function Meter({ label, ...props }: MeterProps) {
             >
               {percentage >= 80 && (
                 <WarningIcon
-                  weight="fill"
                   aria-label="Alert"
                   className="inline-block size-4 align-text-bottom"
+                  weight="fill"
                 />
               )}
               {" " + valueText}
@@ -53,7 +53,11 @@ export function Meter({ label, ...props }: MeterProps) {
 }
 
 function getFillClass(percentage: number) {
-  if (percentage < 40) return "bg-muted-foreground/40"
-  if (percentage < 80) return "bg-muted-foreground/70"
+  if (percentage < 40) {
+    return "bg-muted-foreground/40"
+  }
+  if (percentage < 80) {
+    return "bg-muted-foreground/70"
+  }
   return "bg-destructive"
 }

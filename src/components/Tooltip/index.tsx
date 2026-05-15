@@ -29,18 +29,18 @@ export function Tooltip({ children, ...props }: TooltipProps) {
   return (
     <AriaTooltip
       {...props}
-      data-slot="tooltip"
-      offset={10}
       className={composeRenderProps(props.className, (className, renderProps) =>
         styles({ ...renderProps, className })
       )}
+      data-slot="tooltip"
+      offset={10}
     >
       <OverlayArrow>
         <svg
-          width={8}
+          className="group/tooltip-placement-bottom:rotate-180 group/tooltip-placement-left:-rotate-90 group/tooltip-placement-right:rotate-90 fill-foreground block forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
           height={8}
           viewBox="0 0 8 8"
-          className="group/tooltip-placement-bottom:rotate-180 group/tooltip-placement-left:-rotate-90 group/tooltip-placement-right:rotate-90 fill-foreground block forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
+          width={8}
         >
           <path d="M0 0 L4 4 L8 0" />
         </svg>

@@ -11,31 +11,31 @@ import {
   type ValidationResult
 } from "react-aria-components/DateField"
 import { tv } from "tailwind-variants"
-import { Description, FieldError, Label } from "./Field"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Description, FieldError, Label } from "../Field"
 
 export interface DateFieldProps<
   T extends DateValue
 > extends AriaDateFieldProps<T> {
-  label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
+  label?: string
 }
 
 export function DateField<T extends DateValue>({
-  label,
   description,
   errorMessage,
+  label,
   ...props
 }: DateFieldProps<T>) {
   return (
     <AriaDateField
       {...props}
-      data-slot="field"
       className={composeTailwindRenderProps(
         props.className,
         "group/field flex flex-col gap-1.5"
       )}
+      data-slot="field"
     >
       {label && <Label>{label}</Label>}
       <DateInput />
@@ -48,11 +48,11 @@ export function DateField<T extends DateValue>({
 const segmentStyles = tv({
   base: "type-literal:p-0 text-foreground inline rounded-sm p-0.5 whitespace-nowrap caret-transparent outline-0 forced-color-adjust-none [-webkit-tap-highlight-color:transparent] forced-colors:text-[ButtonText]",
   variants: {
-    isPlaceholder: { true: "text-muted-foreground" },
     isDisabled: { true: "text-muted-foreground forced-colors:text-[GrayText]" },
     isFocused: {
       true: "bg-primary text-primary-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
-    }
+    },
+    isPlaceholder: { true: "text-muted-foreground" }
   }
 })
 
@@ -75,7 +75,7 @@ export function DateInput({
         inline ? dateInputInlineClass : dateInputContainerClass
       )}
     >
-      {(segment) => <DateSegment segment={segment} className={segmentStyles} />}
+      {(segment) => <DateSegment className={segmentStyles} segment={segment} />}
     </AriaDateInput>
   )
 }

@@ -11,17 +11,17 @@ import { type InputProps, Input as RACInput } from "react-aria-components/Input"
 import { type LabelProps, Label as RACLabel } from "react-aria-components/Label"
 import { Text, type TextProps } from "react-aria-components/Text"
 import { twMerge } from "tailwind-merge"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
 
 export function Label(props: LabelProps) {
   return (
     <RACLabel
       {...props}
-      data-slot="field-label"
       className={twMerge(
         "text-sm font-medium text-foreground cursor-default w-fit",
         props.className
       )}
+      data-slot="field-label"
     />
   )
 }
@@ -30,9 +30,9 @@ export function Description(props: TextProps) {
   return (
     <Text
       {...props}
-      slot="description"
-      data-slot="field-description"
       className={twMerge("text-sm text-muted-foreground", props.className)}
+      data-slot="field-description"
+      slot="description"
     />
   )
 }
@@ -41,11 +41,11 @@ export function FieldError(props: FieldErrorProps) {
   return (
     <RACFieldError
       {...props}
-      data-slot="field-error"
       className={composeTailwindRenderProps(
         props.className,
         "text-sm text-destructive forced-colors:text-[Mark]"
       )}
+      data-slot="field-error"
     />
   )
 }
@@ -57,10 +57,10 @@ export function FieldGroup(props: GroupProps) {
   return (
     <Group
       {...props}
-      data-slot="field-group"
       className={composeRenderProps(props.className, (className) =>
         twMerge(fieldGroupBase, className)
       )}
+      data-slot="field-group"
     />
   )
 }
@@ -69,11 +69,11 @@ export function Input(props: InputProps) {
   return (
     <RACInput
       {...props}
-      data-slot="input"
       className={composeTailwindRenderProps(
         props.className,
         "flex-1 min-w-0 bg-transparent px-3 py-1 text-sm text-foreground placeholder:text-muted-foreground outline-none border-0 [-webkit-tap-highlight-color:transparent] disabled:text-muted-foreground"
       )}
+      data-slot="input"
     />
   )
 }

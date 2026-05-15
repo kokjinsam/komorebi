@@ -8,35 +8,35 @@ import {
   type DateValue,
   type ValidationResult
 } from "react-aria-components/DatePicker"
-import { Calendar } from "./Calendar"
-import { DateInput } from "./DateField"
-import { Description, FieldError, FieldGroup, Label } from "./Field"
-import { FieldButton } from "./FieldButton"
-import { Popover } from "./Popover"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Calendar } from "../Calendar"
+import { DateInput } from "../DateField"
+import { Description, FieldError, FieldGroup, Label } from "../Field"
+import { FieldButton } from "../FieldButton"
+import { Popover } from "../Popover"
 
 export interface DatePickerProps<
   T extends DateValue
 > extends AriaDatePickerProps<T> {
-  label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
+  label?: string
 }
 
 export function DatePicker<T extends DateValue>({
-  label,
   description,
   errorMessage,
+  label,
   ...props
 }: DatePickerProps<T>) {
   return (
     <AriaDatePicker
       {...props}
-      data-slot="field"
       className={composeTailwindRenderProps(
         props.className,
         "group/field flex flex-col gap-1.5"
       )}
+      data-slot="field"
     >
       {label && <Label>{label}</Label>}
       <FieldGroup className="w-auto min-w-52" data-slot="date-picker">

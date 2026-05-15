@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { ColorWheel } from "../src/ColorWheel"
+import { ColorWheel } from "../src"
 
 const meta: Meta<typeof ColorWheel> = {
   component: ColorWheel,
@@ -12,4 +12,6 @@ const meta: Meta<typeof ColorWheel> = {
 
 export default meta
 
-export const Example = (args: any) => <ColorWheel {...args} />
+export const Example: StoryFn<typeof ColorWheel> = (args) => (
+  <ColorWheel {...args} />
+)

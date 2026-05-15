@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { Switch } from "../src/Switch"
+import { Switch } from "../src"
 
 const meta: Meta<typeof Switch> = {
   component: Switch,
@@ -12,4 +12,6 @@ const meta: Meta<typeof Switch> = {
 
 export default meta
 
-export const Example = (args: any) => <Switch {...args}>Wi-Fi</Switch>
+export const Example: StoryFn<typeof Switch> = (args) => (
+  <Switch {...args}>Wi-Fi</Switch>
+)

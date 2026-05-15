@@ -31,10 +31,10 @@ export function Tabs(props: TabsProps) {
   return (
     <RACTabs
       {...props}
-      data-slot="tabs"
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabsStyles({ ...renderProps, className })
       )}
+      data-slot="tabs"
     />
   )
 }
@@ -53,10 +53,10 @@ export function TabList<T extends object>(props: TabListProps<T>) {
   return (
     <RACTabList
       {...props}
-      data-slot="tabs-list"
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabListStyles({ ...renderProps, className })
       )}
+      data-slot="tabs-list"
     />
   )
 }
@@ -65,7 +65,6 @@ export function Tab(props: TabProps) {
   return (
     <RACTab
       {...props}
-      data-slot="tabs-tab"
       className={composeRenderProps(props.className, (className) =>
         twMerge(
           "inline-flex h-7 cursor-default items-center justify-center gap-1.5 rounded-2xl px-3 text-sm font-medium whitespace-nowrap transition-all outline-none select-none [-webkit-tap-highlight-color:transparent]",
@@ -75,6 +74,7 @@ export function Tab(props: TabProps) {
           className
         )
       )}
+      data-slot="tabs-tab"
     />
   )
 }
@@ -95,13 +95,13 @@ export function TabPanel(props: TabPanelProps) {
   return (
     <RACTabPanel
       {...props}
-      data-slot="tabs-panel"
       className={composeRenderProps(props.className, (className) =>
         twMerge(
           "mt-2 text-foreground outline-none entering:opacity-0 exiting:opacity-0 exiting:absolute exiting:top-0 exiting:left-0 exiting:w-full transition",
           className
         )
       )}
+      data-slot="tabs-panel"
     />
   )
 }

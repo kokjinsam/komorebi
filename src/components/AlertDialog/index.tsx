@@ -5,34 +5,34 @@ import React, { type ReactNode } from "react"
 import { type DialogProps } from "react-aria-components/Dialog"
 import { Heading } from "react-aria-components/Heading"
 import { chain } from "react-aria/chain"
-import { Button } from "./Button"
-import { Dialog } from "./Dialog"
+import { Button } from "../Button"
+import { Dialog } from "../Dialog"
 
 interface AlertDialogProps extends Omit<DialogProps, "children"> {
-  title: string
-  children: ReactNode
-  variant?: "info" | "destructive"
   actionLabel: string
   cancelLabel?: string
+  children: ReactNode
   onAction?: () => void
+  title: string
+  variant?: "info" | "destructive"
 }
 
 export function AlertDialog({
+  actionLabel,
+  cancelLabel,
+  children,
+  onAction,
   title,
   variant,
-  cancelLabel,
-  actionLabel,
-  onAction,
-  children,
   ...props
 }: AlertDialogProps) {
   return (
-    <Dialog role="alertdialog" data-slot="alert-dialog" {...props}>
+    <Dialog data-slot="alert-dialog" role="alertdialog" {...props}>
       {({ close }) => (
         <>
           <Heading
-            slot="title"
             className="font-heading my-0 text-xl leading-6 font-semibold"
+            slot="title"
           >
             {title}
           </Heading>
@@ -40,20 +40,20 @@ export function AlertDialog({
             className={`absolute top-6 right-6 size-6 ${variant === "destructive" ? "text-destructive" : "text-primary"}`}
           >
             {variant === "destructive" ? (
-              <WarningCircleIcon weight="fill" aria-hidden />
+              <WarningCircleIcon aria-hidden weight="fill" />
             ) : (
               <InfoIcon aria-hidden />
             )}
           </div>
           <p className="text-muted-foreground mt-3 text-sm">{children}</p>
           <div className="mt-6 flex justify-end gap-2">
-            <Button variant="outline" onPress={close}>
+            <Button onPress={close} variant="outline">
               {cancelLabel || "Cancel"}
             </Button>
             <Button
-              variant={variant === "destructive" ? "destructive" : "default"}
               autoFocus
               onPress={chain(onAction, close)}
+              variant={variant === "destructive" ? "destructive" : "default"}
             >
               {actionLabel}
             </Button>

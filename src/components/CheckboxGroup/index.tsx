@@ -6,28 +6,28 @@ import {
   type CheckboxGroupProps as AriaCheckboxGroupProps,
   type ValidationResult
 } from "react-aria-components/CheckboxGroup"
-import { Description, FieldError, Label } from "./Field"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Description, FieldError, Label } from "../Field"
 
 export interface CheckboxGroupProps extends Omit<
   AriaCheckboxGroupProps,
   "children"
 > {
-  label?: string
   children?: ReactNode
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
+  label?: string
 }
 
 export function CheckboxGroup(props: CheckboxGroupProps) {
   return (
     <AriaCheckboxGroup
       {...props}
-      data-slot="checkbox-group"
       className={composeTailwindRenderProps(
         props.className,
         "group/checkbox-group flex flex-col gap-2"
       )}
+      data-slot="checkbox-group"
     >
       <Label>{props.label}</Label>
       {props.children}

@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { ColorSlider } from "../src/ColorSlider"
+import { ColorSlider } from "../src"
 
 const meta: Meta<typeof ColorSlider> = {
   component: ColorSlider,
@@ -12,11 +12,13 @@ const meta: Meta<typeof ColorSlider> = {
 
 export default meta
 
-export const Example = (args: any) => <ColorSlider {...args} />
+export const Example: StoryFn<typeof ColorSlider> = (args) => (
+  <ColorSlider {...args} />
+)
 
 Example.args = {
-  label: "Fill Color",
   channel: "hue",
   colorSpace: "hsl",
-  defaultValue: "#f00"
+  defaultValue: "#f00",
+  label: "Fill Color"
 }

@@ -12,8 +12,8 @@ import {
   type DisclosureProps as AriaDisclosureProps
 } from "react-aria-components/Disclosure"
 import { tv } from "tailwind-variants"
-import { Button } from "./Button"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Button } from "../Button"
 
 const disclosure = tv({
   base: "group/disclosure text-foreground min-w-50 rounded-2xl"
@@ -36,10 +36,10 @@ export function Disclosure({ children, ...props }: DisclosureProps) {
   return (
     <AriaDisclosure
       {...props}
-      data-slot="disclosure"
       className={composeRenderProps(props.className, (className, renderProps) =>
         disclosure({ ...renderProps, className })
       )}
+      data-slot="disclosure"
     >
       {children}
     </AriaDisclosure>
@@ -51,21 +51,18 @@ export interface DisclosureHeaderProps {
 }
 
 export function DisclosureHeader({ children }: DisclosureHeaderProps) {
-  let { isExpanded } = useContext(DisclosureStateContext)!
+  const { isExpanded } = useContext(DisclosureStateContext)!
   return (
     <Heading className="m-0 text-base">
       <Button
+        className="h-auto w-full justify-between rounded-2xl px-3 py-2 font-medium"
         slot="trigger"
         variant="ghost"
-        className="h-auto w-full justify-between rounded-2xl px-3 py-2 font-medium"
       >
         {({ isDisabled }) => (
           <>
             <span>{children}</span>
-            <CaretRightIcon
-              aria-hidden
-              className={chevron({ isExpanded, isDisabled } as any)}
-            />
+            <CaretRightIcon aria-hidden className={chevron({ isExpanded })} />
           </>
         )}
       </Button>
@@ -81,11 +78,11 @@ export function DisclosurePanel({ children, ...props }: DisclosurePanelProps) {
   return (
     <AriaDisclosurePanel
       {...props}
-      data-slot="disclosure-panel"
       className={composeTailwindRenderProps(
         props.className,
         "h-(--disclosure-panel-height) motion-safe:transition-[height] overflow-clip"
       )}
+      data-slot="disclosure-panel"
     >
       <div className="text-foreground px-3 py-2 text-sm">{children}</div>
     </AriaDisclosurePanel>

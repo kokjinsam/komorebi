@@ -8,8 +8,8 @@ export function Form(props: FormProps) {
   return (
     <RACForm
       {...props}
-      data-slot="form"
       className={twMerge("group/form flex flex-col gap-6", props.className)}
+      data-slot="form"
     />
   )
 }

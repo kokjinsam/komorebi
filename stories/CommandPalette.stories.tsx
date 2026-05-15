@@ -1,9 +1,9 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
 import { DialogTrigger } from "react-aria-components/Dialog"
-import { Button } from "../src/Button"
-import { CommandPalette } from "../src/CommandPalette"
-import { MenuItem, MenuSection } from "../src/Menu"
+import { Button } from "../src"
+import { CommandPalette } from "../src"
+import { MenuItem, MenuSection } from "../src"
 
 const meta: Meta<typeof CommandPalette> = {
   component: CommandPalette,
@@ -15,7 +15,7 @@ const meta: Meta<typeof CommandPalette> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof CommandPalette> = (args) => (
   <DialogTrigger>
     <Button>
       Open Command Palette{" "}
@@ -33,12 +33,14 @@ export const Example = (args: any) => (
   </DialogTrigger>
 )
 
-export const DisabledItems = (args: any) => <Example {...args} />
+export const DisabledItems: StoryFn<typeof CommandPalette> = (args) => (
+  <Example {...args} />
+)
 DisabledItems.args = {
   disabledKeys: ["mint"]
 }
 
-export const Sections = (args: any) => (
+export const Sections: StoryFn<typeof CommandPalette> = (args) => (
   <DialogTrigger>
     <Button>
       Open Command Palette{" "}

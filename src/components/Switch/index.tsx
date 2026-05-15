@@ -5,7 +5,7 @@ import {
   Switch as AriaSwitch,
   type SwitchProps as AriaSwitchProps
 } from "react-aria-components/Switch"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
 
 export interface SwitchProps extends Omit<AriaSwitchProps, "children"> {
   children: React.ReactNode
@@ -15,11 +15,11 @@ export function Switch({ children, ...props }: SwitchProps) {
   return (
     <AriaSwitch
       {...props}
-      data-slot="switch"
       className={composeTailwindRenderProps(
         props.className,
         "group/switch relative flex gap-2 items-center text-foreground text-sm transition disabled:pointer-events-none disabled:opacity-50 forced-colors:disabled:text-[GrayText] [-webkit-tap-highlight-color:transparent]"
       )}
+      data-slot="switch"
     >
       {(renderProps) => (
         <>

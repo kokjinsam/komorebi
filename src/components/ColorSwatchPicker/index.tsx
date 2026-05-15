@@ -9,14 +9,14 @@ import {
 } from "react-aria-components/ColorSwatchPicker"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { tv } from "tailwind-variants"
-import { ColorSwatch } from "./ColorSwatch"
+import { ColorSwatch } from "../ColorSwatch"
 
 const pickerStyles = tv({
   base: "flex gap-1",
   variants: {
     layout: {
-      stack: "flex-col",
-      grid: "flex-wrap"
+      grid: "flex-wrap",
+      stack: "flex-col"
     }
   }
 })
@@ -28,10 +28,10 @@ export function ColorSwatchPicker({
   return (
     <AriaColorSwatchPicker
       {...props}
-      data-slot="color-swatch-picker"
       className={composeRenderProps(props.className, (className, renderProps) =>
         pickerStyles({ ...renderProps, className })
       )}
+      data-slot="color-swatch-picker"
     >
       {children}
     </AriaColorSwatchPicker>
@@ -46,8 +46,8 @@ export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
   return (
     <AriaColorSwatchPickerItem
       {...props}
-      data-slot="color-swatch-picker-item"
       className={itemStyles}
+      data-slot="color-swatch-picker-item"
     >
       {({ isSelected }) => (
         <>

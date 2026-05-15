@@ -22,6 +22,9 @@ const overlayStyles = tv({
 
 const modalStyles = tv({
   base: "bg-popover text-popover-foreground ring-foreground/5 dark:ring-foreground/10 max-h-[calc(var(--visual-viewport-height)*.9)] w-full max-w-[min(90vw,450px)] rounded-4xl text-left align-middle shadow-xl ring-1 forced-colors:bg-[Canvas]",
+  defaultVariants: {
+    position: "center" as const
+  },
   variants: {
     isEntering: {
       true: "animate-in zoom-in-95 fade-in-0 duration-100 ease-out"
@@ -33,9 +36,6 @@ const modalStyles = tv({
       center: "p-6",
       top: ""
     }
-  },
-  defaultVariants: {
-    position: "center" as const
   }
 })
 
@@ -56,8 +56,8 @@ export function Modal({ position = "center", ...props }: ModalProps) {
       >
         <RACModal
           {...props}
-          data-slot="modal"
           className={(renderProps) => modalStyles({ ...renderProps, position })}
+          data-slot="modal"
         />
       </div>
     </ModalOverlay>

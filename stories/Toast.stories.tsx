@@ -1,25 +1,25 @@
 import { type Meta, type StoryObj } from "@storybook/react"
 import React from "react"
-import { Button } from "../src/Button"
-import { MyToastRegion, queue } from "../src/Toast"
+import { Button } from "../src"
+import { MyToastRegion, queue } from "../src"
 
 interface ToastStoryArgs {
-  title: string
+  buttonLabel: string
   description?: string
   timeout?: number
-  buttonLabel: string
+  title: string
 }
 
 const meta: Meta<ToastStoryArgs> = {
-  title: "Toast",
-  parameters: {
-    layout: "centered"
+  args: {
+    buttonLabel: "Show toast",
+    description: "3 files uploaded successfully.",
+    title: "Files uploaded"
   },
-  tags: ["autodocs"],
   argTypes: {
-    title: {
+    buttonLabel: {
       control: "text",
-      description: "The title of the toast."
+      description: "Label for the trigger button."
     },
     description: {
       control: "text",
@@ -29,37 +29,22 @@ const meta: Meta<ToastStoryArgs> = {
       control: "number",
       description: "Auto-dismiss timeout in milliseconds."
     },
-    buttonLabel: {
+    title: {
       control: "text",
-      description: "Label for the trigger button."
+      description: "The title of the toast."
     }
   },
-  args: {
-    title: "Files uploaded",
-    description: "3 files uploaded successfully.",
-    buttonLabel: "Show toast"
-  }
+  parameters: {
+    layout: "centered"
+  },
+  tags: ["autodocs"],
+  title: "Toast"
 }
 
 export default meta
 type Story = StoryObj<ToastStoryArgs>
 
 export const Example: Story = {
-  render: (args) => (
-    <>
-      <MyToastRegion />
-      <Button
-        onPress={() =>
-          queue.add(
-            { title: args.title, description: args.description },
-            args.timeout ? { timeout: args.timeout } : undefined
-          )
-        }
-      >
-        {args.buttonLabel}
-      </Button>
-    </>
-  ),
   parameters: {
     docs: {
       source: {
@@ -116,5 +101,20 @@ function MyToast(props: ToastProps<MyToastContent>) {
         }
       }
     }
-  }
+  },
+  render: (args) => (
+    <>
+      <MyToastRegion />
+      <Button
+        onPress={() =>
+          queue.add(
+            { description: args.description, title: args.title },
+            args.timeout ? { timeout: args.timeout } : undefined
+          )
+        }
+      >
+        {args.buttonLabel}
+      </Button>
+    </>
+  )
 }

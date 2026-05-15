@@ -11,18 +11,18 @@ import {
   type TreeProps
 } from "react-aria-components/Tree"
 import { tv } from "tailwind-variants"
-import { Checkbox } from "./Checkbox"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Checkbox } from "../Checkbox"
 
 const itemStyles = tv({
   base: "group/tree-item border-border bg-background text-foreground focus-visible:ring-ring/30 hover:bg-muted pressed:bg-muted/80 pressed:translate-y-px selected:bg-accent selected:text-accent-foreground relative flex cursor-default border-b px-3 py-1 text-sm -outline-offset-2 outline-none select-none first:rounded-t-3xl first:border-t-0 last:rounded-b-3xl last:border-b-0 focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50",
   variants: {
+    isDisabled: {
+      true: "z-10"
+    },
     isSelected: {
       false: "",
       true: "z-20 border-y-transparent"
-    },
-    isDisabled: {
-      true: "z-10"
     }
   }
 })
@@ -31,11 +31,11 @@ export function Tree<T extends object>({ children, ...props }: TreeProps<T>) {
   return (
     <AriaTree
       {...props}
-      data-slot="tree"
       className={composeTailwindRenderProps(
         props.className,
         "w-48 max-w-full overflow-auto relative rounded-3xl border border-border bg-background shadow-sm"
       )}
+      data-slot="tree"
     >
       {children}
     </AriaTree>
@@ -67,18 +67,18 @@ export interface TreeItemProps extends Partial<AriaTreeItemProps> {
 export function TreeItem(props: TreeItemProps) {
   return (
     <AriaTreeItem
-      data-slot="tree-item"
       className={itemStyles}
+      data-slot="tree-item"
       textValue={props.title}
       {...props}
     >
       <AriaTreeItemContent {...props}>
         {({
-          selectionMode,
-          selectionBehavior,
           hasChildItems,
+          isDisabled,
           isExpanded,
-          isDisabled
+          selectionBehavior,
+          selectionMode
         }) => (
           <div className="flex items-center">
             {selectionMode !== "none" && selectionBehavior === "toggle" && (
@@ -86,7 +86,7 @@ export function TreeItem(props: TreeItemProps) {
             )}
             <div className="w-[calc(calc(var(--tree-item-level)-1)*(--spacing(3)))] shrink-0" />
             {hasChildItems ? (
-              <Button slot="chevron" className={expandButton({ isDisabled })}>
+              <Button className={expandButton({ isDisabled })} slot="chevron">
                 <CaretRightIcon
                   aria-hidden
                   className={chevron({ isExpanded })}

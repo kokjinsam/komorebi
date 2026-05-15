@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { ToggleButton } from "../src/ToggleButton"
+import { ToggleButton } from "../src"
 
 const meta: Meta<typeof ToggleButton> = {
   component: ToggleButton,
@@ -12,4 +12,6 @@ const meta: Meta<typeof ToggleButton> = {
 
 export default meta
 
-export const Example = (args: any) => <ToggleButton {...args}>Pin</ToggleButton>
+export const Example: StoryFn<typeof ToggleButton> = (args) => (
+  <ToggleButton {...args}>Pin</ToggleButton>
+)

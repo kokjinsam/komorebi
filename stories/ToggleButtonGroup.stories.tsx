@@ -3,10 +3,10 @@ import {
   TextItalicIcon as ItalicIcon,
   TextUnderlineIcon as UnderlineIcon
 } from "@phosphor-icons/react"
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { ToggleButton } from "../src/ToggleButton"
-import { ToggleButtonGroup } from "../src/ToggleButtonGroup"
+import { ToggleButton } from "../src"
+import { ToggleButtonGroup } from "../src"
 
 const meta: Meta<typeof ToggleButtonGroup> = {
   component: ToggleButtonGroup,
@@ -18,15 +18,15 @@ const meta: Meta<typeof ToggleButtonGroup> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof ToggleButtonGroup> = (args) => (
   <ToggleButtonGroup {...args}>
-    <ToggleButton id="bold" aria-label="Bold">
+    <ToggleButton aria-label="Bold" id="bold">
       <BoldIcon className="h-4 w-4" />
     </ToggleButton>
-    <ToggleButton id="italic" aria-label="Italic">
+    <ToggleButton aria-label="Italic" id="italic">
       <ItalicIcon className="h-4 w-4" />
     </ToggleButton>
-    <ToggleButton id="underline" aria-label="Underline">
+    <ToggleButton aria-label="Underline" id="underline">
       <UnderlineIcon className="h-4 w-4" />
     </ToggleButton>
   </ToggleButtonGroup>

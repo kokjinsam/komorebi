@@ -10,8 +10,8 @@ import {
 import { tv } from "tailwind-variants"
 
 export interface PopoverProps extends Omit<AriaPopoverProps, "children"> {
-  showArrow?: boolean
   children: React.ReactNode
+  showArrow?: boolean
 }
 
 const styles = tv({
@@ -28,27 +28,27 @@ const styles = tv({
 
 export function Popover({
   children,
-  showArrow,
   className,
+  showArrow,
   ...props
 }: PopoverProps) {
-  let offset = showArrow ? 12 : 8
+  const offset = showArrow ? 12 : 8
   return (
     <AriaPopover
       offset={offset}
       {...props}
-      data-slot="popover"
       className={composeRenderProps(className, (className, renderProps) =>
         styles({ ...renderProps, className })
       )}
+      data-slot="popover"
     >
       {showArrow && (
         <OverlayArrow className="group">
           <svg
-            width={12}
+            className="group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90 fill-popover stroke-foreground/5 block stroke-1 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
             height={12}
             viewBox="0 0 12 12"
-            className="group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90 fill-popover stroke-foreground/5 block stroke-1 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
+            width={12}
           >
             <path d="M0 0 L6 6 L12 0" />
           </svg>

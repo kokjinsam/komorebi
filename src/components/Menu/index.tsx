@@ -19,38 +19,38 @@ import {
   type SubmenuTriggerProps,
   type MenuTriggerProps as AriaMenuTriggerProps
 } from "react-aria-components/Menu"
-import { dropdownItemStyles } from "./ListBox"
-import { Popover, type PopoverProps } from "./Popover"
+import { dropdownItemStyles } from "../ListBox"
+import { Popover, type PopoverProps } from "../Popover"
 
 export function Menu<T extends object>(props: MenuProps<T>) {
   return (
     <AriaMenu
       {...props}
-      data-slot="menu"
       className="max-h-[inherit] overflow-auto p-1 outline-none"
+      data-slot="menu"
     />
   )
 }
 
 export function MenuItem(props: MenuItemProps) {
-  let textValue =
+  const textValue =
     props.textValue ||
     (typeof props.children === "string" ? props.children : undefined)
   return (
     <AriaMenuItem
       textValue={textValue}
       {...props}
-      data-slot="menu-item"
       className={dropdownItemStyles}
+      data-slot="menu-item"
     >
       {composeRenderProps(
         props.children,
-        (children, { selectionMode, isSelected, hasSubmenu }) => (
+        (children, { hasSubmenu, isSelected, selectionMode }) => (
           <>
             {selectionMode !== "none" && (
               <span className="flex w-4 items-center">
                 {isSelected && (
-                  <CheckIcon weight="fill" aria-hidden className="size-4" />
+                  <CheckIcon aria-hidden className="size-4" weight="fill" />
                 )}
               </span>
             )}
@@ -75,8 +75,8 @@ export function MenuSeparator(props: SeparatorProps) {
 }
 
 export interface MenuSectionProps<T> extends AriaMenuSectionProps<T> {
+  items?: Iterable<T>
   title?: string
-  items?: any
 }
 
 export function MenuSection<T extends object>(props: MenuSectionProps<T>) {
@@ -100,14 +100,14 @@ interface MenuTriggerProps extends AriaMenuTriggerProps {
 }
 
 export function MenuTrigger(props: MenuTriggerProps) {
-  let [trigger, menu] = React.Children.toArray(props.children) as [
+  const [trigger, menu] = React.Children.toArray(props.children) as [
     React.ReactElement,
     React.ReactElement
   ]
   return (
     <AriaMenuTrigger {...props}>
       {trigger}
-      <Popover placement={props.placement} className="min-w-37.5 p-1">
+      <Popover className="min-w-37.5 p-1" placement={props.placement}>
         {menu}
       </Popover>
     </AriaMenuTrigger>
@@ -115,14 +115,14 @@ export function MenuTrigger(props: MenuTriggerProps) {
 }
 
 export function SubmenuTrigger(props: SubmenuTriggerProps) {
-  let [trigger, menu] = React.Children.toArray(props.children) as [
+  const [trigger, menu] = React.Children.toArray(props.children) as [
     React.ReactElement,
     React.ReactElement
   ]
   return (
     <AriaSubmenuTrigger {...props}>
       {trigger}
-      <Popover offset={-2} crossOffset={-4} className="min-w-37.5 p-1">
+      <Popover className="min-w-37.5 p-1" crossOffset={-4} offset={-2}>
         {menu}
       </Popover>
     </AriaSubmenuTrigger>

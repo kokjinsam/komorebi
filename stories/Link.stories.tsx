@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { Link } from "../src/Link"
+import { Link } from "../src"
 
 const meta: Meta<typeof Link> = {
   component: Link,
@@ -12,7 +12,9 @@ const meta: Meta<typeof Link> = {
 
 export default meta
 
-export const Example = (args: any) => <Link {...args}>The missing link</Link>
+export const Example: StoryFn<typeof Link> = (args) => (
+  <Link {...args}>The missing link</Link>
+)
 
 Example.args = {
   href: "https://www.imdb.com/title/tt6348138/",

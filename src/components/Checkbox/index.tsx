@@ -22,12 +22,12 @@ const checkboxStyles = tv({
 const boxStyles = tv({
   base: "focus-visible:border-ring focus-visible:ring-ring/30 group-invalid/checkbox:border-destructive group-invalid/checkbox:ring-destructive/20 flex size-4 shrink-0 items-center justify-center rounded-md border transition-[color,box-shadow,background-color] group-invalid/checkbox:ring-3 focus-visible:ring-3",
   variants: {
+    isDisabled: {
+      true: "forced-colors:border-[GrayText]!"
+    },
     isSelected: {
       false: "border-input bg-background",
       true: "bg-primary border-transparent forced-colors:bg-[Highlight]!"
-    },
-    isDisabled: {
-      true: "forced-colors:border-[GrayText]!"
     }
   }
 })
@@ -39,24 +39,23 @@ export function Checkbox(props: CheckboxProps) {
   return (
     <AriaCheckbox
       {...props}
-      data-slot="checkbox"
       className={composeRenderProps(props.className, (className, renderProps) =>
         checkboxStyles({ ...renderProps, className })
       )}
+      data-slot="checkbox"
     >
       {composeRenderProps(
         props.children,
         (
           children,
-          { isSelected, isIndeterminate, isFocusVisible, isDisabled }
+          { isDisabled, isFocusVisible, isIndeterminate, isSelected }
         ) => (
           <>
             <div
               className={boxStyles({
-                isSelected: isSelected || isIndeterminate,
                 isDisabled,
-                isFocusVisible
-              } as any)}
+                isSelected: isSelected || isIndeterminate
+              })}
             >
               {isIndeterminate ? (
                 <MinusIcon aria-hidden className={iconStyles} />

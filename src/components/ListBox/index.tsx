@@ -14,12 +14,9 @@ import {
   type ListBoxSectionProps
 } from "react-aria-components/ListBox"
 import { tv } from "tailwind-variants"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
 
-interface ListBoxProps<T> extends Omit<
-  AriaListBoxProps<T>,
-  "layout" | "orientation"
-> {}
+type ListBoxProps<T> = Omit<AriaListBoxProps<T>, "layout" | "orientation">
 
 export function ListBox<T extends object>({
   children,
@@ -28,11 +25,11 @@ export function ListBox<T extends object>({
   return (
     <AriaListBox
       {...props}
-      data-slot="listbox"
       className={composeTailwindRenderProps(
         props.className,
         "outline-0 p-1 w-50 rounded-3xl bg-popover border border-border shadow-md ring-1 ring-foreground/5 dark:ring-foreground/10"
       )}
+      data-slot="listbox"
     >
       {children}
     </AriaListBox>
@@ -42,23 +39,23 @@ export function ListBox<T extends object>({
 export const itemStyles = tv({
   base: "group/listbox-option relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm will-change-transform forced-color-adjust-none outline-none select-none [-webkit-tap-highlight-color:transparent]",
   variants: {
+    isDisabled: {
+      true: "pointer-events-none opacity-50 forced-colors:text-[GrayText]"
+    },
     isSelected: {
       false:
         "text-popover-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
       true: "bg-primary text-primary-foreground focus:bg-primary/90 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
-    },
-    isDisabled: {
-      true: "pointer-events-none opacity-50 forced-colors:text-[GrayText]"
     }
   }
 })
 
 export function ListBoxItem(props: ListBoxItemProps) {
-  let textValue =
+  const textValue =
     props.textValue ||
     (typeof props.children === "string" ? props.children : undefined)
   return (
-    <AriaListBoxItem {...props} textValue={textValue} className={itemStyles}>
+    <AriaListBoxItem {...props} className={itemStyles} textValue={textValue}>
       {composeRenderProps(props.children, (children) => (
         <>{children}</>
       ))}
@@ -68,6 +65,13 @@ export function ListBoxItem(props: ListBoxItemProps) {
 
 export const dropdownItemStyles = tv({
   base: "group/menu-item [&_svg]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-2xl px-2.5 py-1.5 text-sm no-underline outline-0 forced-color-adjust-none select-none [-webkit-tap-highlight-color:transparent] [&_svg:not([class*='size-'])]:size-4 [&[href]]:cursor-pointer",
+  compoundVariants: [
+    {
+      className: "bg-muted/60",
+      isFocused: false,
+      isOpen: true
+    }
+  ],
   variants: {
     isDisabled: {
       false: "text-foreground",
@@ -76,25 +80,18 @@ export const dropdownItemStyles = tv({
     isFocused: {
       true: "bg-accent text-accent-foreground [&_svg]:text-accent-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]"
     }
-  },
-  compoundVariants: [
-    {
-      isFocused: false,
-      isOpen: true,
-      className: "bg-muted/60"
-    }
-  ]
+  }
 })
 
 export function DropdownItem(props: ListBoxItemProps) {
-  let textValue =
+  const textValue =
     props.textValue ||
     (typeof props.children === "string" ? props.children : undefined)
   return (
     <AriaListBoxItem
       {...props}
-      textValue={textValue}
       className={dropdownItemStyles}
+      textValue={textValue}
     >
       {composeRenderProps(props.children, (children, { isSelected }) => (
         <>
@@ -111,8 +108,8 @@ export function DropdownItem(props: ListBoxItemProps) {
 }
 
 export interface DropdownSectionProps<T> extends ListBoxSectionProps<T> {
+  items?: Iterable<T>
   title?: string
-  items?: any
 }
 
 export function DropdownSection<T extends object>(

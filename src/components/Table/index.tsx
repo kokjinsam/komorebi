@@ -25,8 +25,8 @@ import {
 } from "react-aria-components/Table"
 import { twMerge } from "tailwind-merge"
 import { tv } from "tailwind-variants"
-import { Checkbox } from "./Checkbox"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Checkbox } from "../Checkbox"
 
 interface TableProps extends Omit<AriaTableProps, "className"> {
   className?: string
@@ -35,16 +35,16 @@ interface TableProps extends Omit<AriaTableProps, "className"> {
 export function Table(props: TableProps) {
   return (
     <ResizableTableContainer
-      onScroll={props.onScroll}
       className={twMerge(
         "w-full max-h-[320px] overflow-auto scroll-pt-[2.281rem] relative rounded-3xl border border-border bg-background shadow-sm",
         props.className
       )}
+      onScroll={props.onScroll}
     >
       <AriaTable
         {...props}
-        data-slot="table"
         className="box-border border-separate border-spacing-0 overflow-hidden has-[>[data-empty]]:h-full"
+        data-slot="table"
       />
     </ResizableTableContainer>
   )
@@ -71,7 +71,7 @@ export function Column(props: ColumnProps) {
         props.children,
         (children, { allowsSorting, sortDirection }) => (
           <div className="flex items-center">
-            <Group role="presentation" tabIndex={-1} className={columnStyles}>
+            <Group className={columnStyles} role="presentation" tabIndex={-1}>
               <span className="truncate">{children}</span>
               {allowsSorting && (
                 <span
@@ -97,23 +97,23 @@ export function Column(props: ColumnProps) {
 }
 
 export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
-  let { selectionBehavior, selectionMode, allowsDragging } = useTableOptions()
+  const { allowsDragging, selectionBehavior, selectionMode } = useTableOptions()
 
   return (
     <AriaTableHeader
       {...props}
-      data-slot="table-header"
       className={composeTailwindRenderProps(
         props.className,
         "sticky top-0 z-10 bg-muted/60 border-b border-b-border rounded-t-3xl forced-colors:bg-[Canvas]"
       )}
+      data-slot="table-header"
     >
       {allowsDragging && <Column />}
       {selectionBehavior === "toggle" && (
         <AriaColumn
-          width={36}
-          minWidth={36}
           className="box-border cursor-default p-2 text-start text-sm font-semibold outline-none"
+          minWidth={36}
+          width={36}
         >
           {selectionMode === "multiple" && <Checkbox slot="selection" />}
         </AriaColumn>
@@ -127,8 +127,8 @@ export function TableBody<T extends object>(props: TableBodyProps<T>) {
   return (
     <AriaTableBody
       {...props}
-      data-slot="table-body"
       className="empty:text-center empty:text-sm empty:italic"
+      data-slot="table-body"
     />
   )
 }
@@ -138,19 +138,19 @@ const rowStyles = tv({
 })
 
 export function Row<T extends object>({
-  id,
-  columns,
   children,
+  columns,
+  id,
   ...otherProps
 }: RowProps<T>) {
-  let { selectionBehavior, allowsDragging } = useTableOptions()
+  const { allowsDragging, selectionBehavior } = useTableOptions()
 
   return (
     <AriaRow
       id={id}
       {...otherProps}
-      data-slot="table-row"
       className={rowStyles}
+      data-slot="table-row"
     >
       {allowsDragging && (
         <Cell>
@@ -193,8 +193,8 @@ export function Cell(props: CellProps) {
   return (
     <AriaCell
       {...props}
-      data-slot="table-cell"
       className={cellStyles}
+      data-slot="table-cell"
       style={({ hasChildItems, isTreeColumn, level }) => ({
         paddingInlineStart: isTreeColumn
           ? 4 + (hasChildItems ? 0 : 20) + (level - 1) * 16
@@ -203,10 +203,10 @@ export function Cell(props: CellProps) {
     >
       {composeRenderProps(
         props.children,
-        (children, { hasChildItems, isTreeColumn, isExpanded, isDisabled }) => (
+        (children, { hasChildItems, isDisabled, isExpanded, isTreeColumn }) => (
           <>
             {hasChildItems && isTreeColumn && (
-              <Button slot="chevron" className={expandButton({ isDisabled })}>
+              <Button className={expandButton({ isDisabled })} slot="chevron">
                 <CaretRightIcon
                   aria-hidden
                   className={chevron({ isExpanded })}

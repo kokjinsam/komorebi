@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { ColorArea } from "../src/ColorArea"
+import { ColorArea } from "../src"
 
 const meta: Meta<typeof ColorArea> = {
   component: ColorArea,
@@ -12,4 +12,6 @@ const meta: Meta<typeof ColorArea> = {
 
 export default meta
 
-export const Example = (args: any) => <ColorArea {...args} className="w-50" />
+export const Example: StoryFn<typeof ColorArea> = (args) => (
+  <ColorArea {...args} className="w-50" />
+)

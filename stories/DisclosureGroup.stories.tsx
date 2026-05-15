@@ -1,11 +1,7 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import {
-  Disclosure,
-  DisclosureHeader,
-  DisclosurePanel
-} from "../src/Disclosure"
-import { DisclosureGroup } from "../src/DisclosureGroup"
+import { Disclosure, DisclosureHeader, DisclosurePanel } from "../src"
+import { DisclosureGroup } from "../src"
 
 const meta: Meta<typeof DisclosureGroup> = {
   component: DisclosureGroup,
@@ -17,7 +13,7 @@ const meta: Meta<typeof DisclosureGroup> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof DisclosureGroup> = (args) => (
   <DisclosureGroup {...args}>
     <Disclosure>
       <DisclosureHeader>Files</DisclosureHeader>

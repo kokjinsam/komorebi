@@ -1,18 +1,18 @@
 import React from "react"
-import { Badge } from "../src/Badge"
+import { Badge } from "../src"
 
 export default {
-  title: "Badge",
-  component: Badge,
-  parameters: { layout: "centered" },
-  tags: ["autodocs"],
+  args: { children: "Badge" },
   argTypes: {
     variant: {
       control: "select",
       options: ["default", "secondary", "outline", "destructive", "ghost"]
     }
   },
-  args: { children: "Badge" }
+  component: Badge,
+  parameters: { layout: "centered" },
+  tags: ["autodocs"],
+  title: "Badge"
 }
 
 export const Default = { args: { variant: "default" } }

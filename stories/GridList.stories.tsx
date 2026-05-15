@@ -1,13 +1,9 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
 import { GridListSection } from "react-aria-components/GridList"
-import { GridList, GridListHeader, GridListItem } from "../src/GridList"
+import { GridList, GridListHeader, GridListItem } from "../src"
 
 const meta: Meta<typeof GridList> = {
-  component: GridList,
-  parameters: {
-    layout: "centered"
-  },
   argTypes: {
     keyboardNavigationBehavior: {
       control: {
@@ -16,12 +12,16 @@ const meta: Meta<typeof GridList> = {
       options: ["arrow", "tab"]
     }
   },
+  component: GridList,
+  parameters: {
+    layout: "centered"
+  },
   tags: ["autodocs"]
 }
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof GridList> = (args) => (
   <GridList aria-label="Ice cream flavors" {...args}>
     <GridListItem id="chocolate">Chocolate</GridListItem>
     <GridListItem id="mint">Mint</GridListItem>
@@ -31,12 +31,12 @@ export const Example = (args: any) => (
 )
 
 Example.args = {
+  keyboardNavigationBehavior: "arrow",
   onAction: null,
-  selectionMode: "multiple",
-  keyboardNavigationBehavior: "arrow"
+  selectionMode: "multiple"
 }
 
-export const Horizontal = (args: any) => (
+export const Horizontal: StoryFn<typeof GridList> = (args) => (
   <GridList aria-label="Ice cream flavors" orientation="horizontal" {...args}>
     <GridListItem id="chocolate">Chocolate</GridListItem>
     <GridListItem id="mint">Mint</GridListItem>
@@ -49,13 +49,15 @@ Horizontal.args = {
   ...Example.args
 }
 
-export const DisabledItems = (args: any) => <Example {...args} />
+export const DisabledItems: StoryFn<typeof GridList> = (args) => (
+  <Example {...args} />
+)
 DisabledItems.args = {
   ...Example.args,
   disabledKeys: ["mint"]
 }
 
-export const Sections = (args: any) => (
+export const Sections: StoryFn<typeof GridList> = (args) => (
   <GridList aria-label="Food" {...args}>
     <GridListSection>
       <GridListHeader>Fruits</GridListHeader>

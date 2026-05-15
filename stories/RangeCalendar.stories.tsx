@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { RangeCalendar } from "../src/RangeCalendar"
+import { RangeCalendar } from "../src"
 
 const meta: Meta<typeof RangeCalendar> = {
   component: RangeCalendar,
@@ -12,6 +12,6 @@ const meta: Meta<typeof RangeCalendar> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof RangeCalendar> = (args) => (
   <RangeCalendar aria-label="Trip dates" {...args} />
 )

@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src/Tabs"
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src"
 
 const meta: Meta<typeof Tabs> = {
   component: Tabs,
@@ -12,7 +12,7 @@ const meta: Meta<typeof Tabs> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof Tabs> = (args) => (
   <Tabs {...args}>
     <TabList aria-label="History of Ancient Rome">
       <Tab id="FoR">Founding of Rome</Tab>

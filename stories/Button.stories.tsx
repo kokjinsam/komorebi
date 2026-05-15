@@ -1,24 +1,11 @@
-import { Button } from "../src/Button"
+import { Button } from "../src"
 
 export default {
-  title: "Button",
-  component: Button,
-  parameters: {
-    layout: "centered"
+  args: {
+    children: "Button",
+    isDisabled: false
   },
-  tags: ["autodocs"],
   argTypes: {
-    variant: {
-      control: "select",
-      options: [
-        "default",
-        "secondary",
-        "outline",
-        "ghost",
-        "destructive",
-        "link"
-      ]
-    },
     size: {
       control: "select",
       options: [
@@ -31,12 +18,25 @@ export default {
         "icon-sm",
         "icon-lg"
       ]
+    },
+    variant: {
+      control: "select",
+      options: [
+        "default",
+        "secondary",
+        "outline",
+        "ghost",
+        "destructive",
+        "link"
+      ]
     }
   },
-  args: {
-    isDisabled: false,
-    children: "Button"
-  }
+  component: Button,
+  parameters: {
+    layout: "centered"
+  },
+  tags: ["autodocs"],
+  title: "Button"
 }
 
 export const Default = {
@@ -60,9 +60,9 @@ export const Destructive = {
 }
 
 export const Pending = {
-  args: { variant: "default", isPending: true, children: "Saving…" }
+  args: { children: "Saving…", isPending: true, variant: "default" }
 }
 
 export const Disabled = {
-  args: { variant: "default", isDisabled: true }
+  args: { isDisabled: true, variant: "default" }
 }

@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { Tag, TagGroup } from "../src/TagGroup"
+import { Tag, TagGroup } from "../src"
 
 const meta: Meta<typeof TagGroup> = {
   component: TagGroup,
@@ -12,7 +12,7 @@ const meta: Meta<typeof TagGroup> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof TagGroup> = (args) => (
   <TagGroup {...args}>
     <Tag>Chocolate</Tag>
     <Tag isDisabled>Mint</Tag>
@@ -26,7 +26,7 @@ Example.args = {
   selectionMode: "single"
 }
 
-export const Default = (args: any) => (
+export const Default: StoryFn<typeof TagGroup> = (args) => (
   <TagGroup label="Status" variant="default" {...args}>
     <Tag>Draft</Tag>
     <Tag>Review</Tag>
@@ -34,7 +34,7 @@ export const Default = (args: any) => (
   </TagGroup>
 )
 
-export const Secondary = (args: any) => (
+export const Secondary: StoryFn<typeof TagGroup> = (args) => (
   <TagGroup label="Category" variant="secondary" {...args}>
     <Tag>Design</Tag>
     <Tag>Engineering</Tag>
@@ -42,7 +42,7 @@ export const Secondary = (args: any) => (
   </TagGroup>
 )
 
-export const Outline = (args: any) => (
+export const Outline: StoryFn<typeof TagGroup> = (args) => (
   <TagGroup label="Health" variant="outline" {...args}>
     <Tag>Passing</Tag>
     <Tag>Healthy</Tag>
@@ -50,7 +50,7 @@ export const Outline = (args: any) => (
   </TagGroup>
 )
 
-export const Destructive = (args: any) => (
+export const Destructive: StoryFn<typeof TagGroup> = (args) => (
   <TagGroup label="Issues" variant="destructive" {...args}>
     <Tag>Error</Tag>
     <Tag>Critical</Tag>
@@ -58,7 +58,7 @@ export const Destructive = (args: any) => (
   </TagGroup>
 )
 
-export const Ghost = (args: any) => (
+export const Ghost: StoryFn<typeof TagGroup> = (args) => (
   <TagGroup label="Info" variant="ghost" {...args}>
     <Tag>Queued</Tag>
     <Tag>Pending</Tag>
@@ -66,7 +66,7 @@ export const Ghost = (args: any) => (
   </TagGroup>
 )
 
-export const Removable = (args: any) => (
+export const Removable: StoryFn<typeof TagGroup> = (args) => (
   <TagGroup label="Categories" selectionMode="none" {...args}>
     <Tag id="1" textValue="News">
       News

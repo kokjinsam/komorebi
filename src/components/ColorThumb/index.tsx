@@ -10,14 +10,14 @@ import { tv } from "tailwind-variants"
 const thumbStyles = tv({
   base: "border-background top-[50%] left-[50%] box-border size-4 rounded-full border-2",
   variants: {
-    isFocusVisible: {
-      true: "size-6"
+    isDisabled: {
+      true: "border-muted bg-muted opacity-50 forced-colors:border-[GrayText] forced-colors:bg-[GrayText]"
     },
     isDragging: {
       true: "bg-foreground forced-colors:bg-[ButtonBorder]"
     },
-    isDisabled: {
-      true: "border-muted bg-muted opacity-50 forced-colors:border-[GrayText] forced-colors:bg-[GrayText]"
+    isFocusVisible: {
+      true: "size-6"
     }
   }
 })
@@ -26,6 +26,7 @@ export function ColorThumb(props: ColorThumbProps) {
   return (
     <AriaColorThumb
       {...props}
+      className={thumbStyles}
       data-slot="color-thumb"
       style={({ defaultStyle, isDisabled }) => ({
         ...defaultStyle,
@@ -33,7 +34,6 @@ export function ColorThumb(props: ColorThumbProps) {
         boxShadow:
           "0 0 0 1px oklch(0 0 0 / 20%), inset 0 0 0 1px oklch(0 0 0 / 20%)"
       })}
-      className={thumbStyles}
     />
   )
 }

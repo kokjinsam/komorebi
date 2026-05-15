@@ -26,11 +26,11 @@ export function Toolbar(props: ToolbarProps) {
     >
       <RACToolbar
         {...props}
-        data-slot="toolbar"
         className={composeRenderProps(
           props.className,
           (className, renderProps) => styles({ ...renderProps, className })
         )}
+        data-slot="toolbar"
       />
     </ToggleButtonGroupContext.Provider>
   )

@@ -8,12 +8,12 @@ import {
 } from "react-aria-components/ColorPicker"
 import { DialogTrigger } from "react-aria-components/Dialog"
 import { tv } from "tailwind-variants"
-import { ColorArea } from "./ColorArea"
-import { ColorField } from "./ColorField"
-import { ColorSlider } from "./ColorSlider"
-import { ColorSwatch } from "./ColorSwatch"
-import { Dialog } from "./Dialog"
-import { Popover } from "./Popover"
+import { ColorArea } from "../ColorArea"
+import { ColorField } from "../ColorField"
+import { ColorSlider } from "../ColorSlider"
+import { ColorSwatch } from "../ColorSwatch"
+import { Dialog } from "../Dialog"
+import { Popover } from "../Popover"
 
 const buttonStyles = tv({
   base: "text-foreground focus-visible:ring-ring/30 flex cursor-default items-center gap-2 rounded-md border-0 bg-transparent text-sm outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-3"
@@ -23,11 +23,11 @@ export interface ColorPickerProps extends Omit<
   AriaColorPickerProps,
   "children"
 > {
-  label?: string
   children?: React.ReactNode
+  label?: string
 }
 
-export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
+export function ColorPicker({ children, label, ...props }: ColorPickerProps) {
   return (
     <AriaColorPicker {...props} data-slot="color-picker">
       <DialogTrigger>
@@ -44,7 +44,7 @@ export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
                   xChannel="saturation"
                   yChannel="brightness"
                 />
-                <ColorSlider colorSpace="hsb" channel="hue" />
+                <ColorSlider channel="hue" colorSpace="hsb" />
                 <ColorField label="Hex" />
               </>
             )}

@@ -22,10 +22,10 @@ export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
   return (
     <RACToggleButtonGroup
       {...props}
-      data-slot="toggle-button-group"
       className={composeRenderProps(props.className, (className, renderProps) =>
         styles({ ...renderProps, className })
       )}
+      data-slot="toggle-button-group"
     />
   )
 }

@@ -1,6 +1,6 @@
 import React from "react"
-import { Badge } from "../src/Badge"
-import { Button } from "../src/Button"
+import { Badge } from "../src"
+import { Button } from "../src"
 import {
   Card,
   CardAction,
@@ -9,11 +9,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "../src/Card"
+} from "../src"
 
 export default {
-  title: "Card",
-  parameters: { layout: "centered" }
+  parameters: { layout: "centered" },
+  title: "Card"
 }
 
 export const Default = () => (
@@ -78,7 +78,7 @@ export const WithBadge = () => (
 )
 
 export const Small = () => (
-  <Card size="sm" className="w-72">
+  <Card className="w-72" size="sm">
     <CardHeader>
       <CardTitle>Quick Note</CardTitle>
       <CardDescription>Compact card variant.</CardDescription>

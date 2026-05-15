@@ -1,9 +1,9 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
 import { DialogTrigger } from "react-aria-components/Dialog"
-import { AlertDialog } from "../src/AlertDialog"
-import { Button } from "../src/Button"
-import { Modal } from "../src/Modal"
+import { AlertDialog } from "../src"
+import { Button } from "../src"
+import { Modal } from "../src"
 
 const meta: Meta<typeof AlertDialog> = {
   component: AlertDialog,
@@ -15,7 +15,7 @@ const meta: Meta<typeof AlertDialog> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof AlertDialog> = (args) => (
   <DialogTrigger>
     <Button variant="secondary">Delete…</Button>
     <Modal>
@@ -25,9 +25,9 @@ export const Example = (args: any) => (
 )
 
 Example.args = {
-  title: "Delete folder",
+  actionLabel: "Delete",
   children:
     'Are you sure you want to delete "Documents"? All contents will be permanently destroyed.',
-  variant: "destructive",
-  actionLabel: "Delete"
+  title: "Delete folder",
+  variant: "destructive"
 }

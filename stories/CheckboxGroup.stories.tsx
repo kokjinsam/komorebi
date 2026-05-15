@@ -1,22 +1,12 @@
+import { type StoryFn } from "@storybook/react"
 import React from "react"
 import { Form } from "react-aria-components/Form"
-import { Button } from "../src/Button"
-import { Checkbox } from "../src/Checkbox"
-import { CheckboxGroup } from "../src/CheckboxGroup"
+import { Button } from "../src"
+import { Checkbox } from "../src"
+import { CheckboxGroup } from "../src"
 
 export default {
-  title: "CheckboxGroup",
-  component: CheckboxGroup,
-  parameters: {
-    layout: "centered"
-  },
-  tags: ["autodocs"],
-  argTypes: {},
   args: {
-    label: "Cities",
-    isDisabled: false,
-    isRequired: false,
-    description: "",
     children: (
       <>
         <Checkbox value="sf">San Francisco</Checkbox>
@@ -25,15 +15,26 @@ export default {
         <Checkbox value="london">London</Checkbox>
         <Checkbox value="tokyo">Tokyo</Checkbox>
       </>
-    )
-  }
+    ),
+    description: "",
+    isDisabled: false,
+    isRequired: false,
+    label: "Cities"
+  },
+  argTypes: {},
+  component: CheckboxGroup,
+  parameters: {
+    layout: "centered"
+  },
+  tags: ["autodocs"],
+  title: "CheckboxGroup"
 }
 
 export const Default = {
   args: {}
 }
 
-export const Validation = (args: any) => (
+export const Validation: StoryFn<typeof CheckboxGroup> = (args) => (
   <Form className="flex flex-col items-start gap-2">
     <CheckboxGroup {...args} />
     <Button type="submit" variant="secondary">

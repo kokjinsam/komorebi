@@ -9,31 +9,31 @@ import {
   type ButtonProps,
   type ValidationResult
 } from "react-aria-components/NumberField"
-import { Description, FieldError, FieldGroup, Input, Label } from "./Field"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Description, FieldError, FieldGroup, Input, Label } from "../Field"
 
 export interface NumberFieldProps extends AriaNumberFieldProps {
-  label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
+  label?: string
   placeholder?: string
 }
 
 export function NumberField({
-  label,
   description,
   errorMessage,
+  label,
   placeholder,
   ...props
 }: NumberFieldProps) {
   return (
     <AriaNumberField
       {...props}
-      data-slot="field"
       className={composeTailwindRenderProps(
         props.className,
         "group/field flex flex-col gap-1.5"
       )}
+      data-slot="field"
     >
       <Label>{label}</Label>
       <FieldGroup data-slot="number-field">

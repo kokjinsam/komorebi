@@ -1,9 +1,9 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { Button } from "../src/Button"
-import { DateField } from "../src/DateField"
-import { Form } from "../src/Form"
-import { TextField } from "../src/TextField"
+import { Button } from "../src"
+import { DateField } from "../src"
+import { Form } from "../src"
+import { TextField } from "../src"
 
 const meta: Meta<typeof Form> = {
   component: Form,
@@ -15,16 +15,16 @@ const meta: Meta<typeof Form> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof Form> = (args) => (
   <Form {...args}>
     <TextField
-      label="Email"
-      placeholder="Enter your email"
-      name="email"
-      type="email"
       isRequired
+      label="Email"
+      name="email"
+      placeholder="Enter your email"
+      type="email"
     />
-    <DateField label="Birth date" isRequired />
+    <DateField isRequired label="Birth date" />
     <div className="flex gap-2">
       <Button type="submit">Submit</Button>
       <Button type="reset" variant="secondary">

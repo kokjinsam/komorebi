@@ -1,6 +1,6 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { Tree, TreeItem } from "../src/Tree"
+import { Tree, TreeItem } from "../src"
 
 const meta: Meta<typeof Tree> = {
   component: Tree,
@@ -12,7 +12,7 @@ const meta: Meta<typeof Tree> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof Tree> = (args) => (
   <Tree
     aria-label="Files"
     style={{ height: "400px", width: "300px" }}
@@ -31,13 +31,15 @@ export const Example = (args: any) => (
 )
 
 Example.args = {
-  onAction: null,
   defaultExpandedKeys: ["documents", "photos", "project"],
-  selectionMode: "multiple",
-  defaultSelectedKeys: ["project"]
+  defaultSelectedKeys: ["project"],
+  onAction: null,
+  selectionMode: "multiple"
 }
 
-export const DisabledItems = (args: any) => <Example {...args} />
+export const DisabledItems: StoryFn<typeof Tree> = (args) => (
+  <Example {...args} />
+)
 DisabledItems.args = {
   ...Example.args,
   disabledKeys: ["photos"]

@@ -8,15 +8,15 @@ import {
   SliderThumb,
   SliderTrack
 } from "react-aria-components/Slider"
-import { Label } from "./Field"
-import { composeTailwindRenderProps } from "./utils"
+import { composeTailwindRenderProps } from "@/utils"
+import { Label } from "../Field"
 
 export interface SliderProps<T> extends AriaSliderProps<T> {
   label?: string
-  thumbLabels?: string[]
+  thumbLabels?: Array<string>
 }
 
-export function Slider<T extends number | number[]>({
+export function Slider<T extends number | Array<number>>({
   label,
   thumbLabels,
   ...props
@@ -24,11 +24,11 @@ export function Slider<T extends number | number[]>({
   return (
     <AriaSlider
       {...props}
-      data-slot="slider"
       className={composeTailwindRenderProps(
         props.className,
         "group/slider relative flex w-full touch-none select-none items-center orientation-horizontal:grid orientation-vertical:flex grid-cols-[1fr_auto] flex-col gap-2 orientation-horizontal:w-64 orientation-horizontal:max-w-[calc(100%-10px)]"
       )}
+      data-slot="slider"
     >
       <Label>{label}</Label>
       <SliderOutput className="orientation-vertical:hidden text-muted-foreground text-xs">
@@ -37,8 +37,8 @@ export function Slider<T extends number | number[]>({
         }
       </SliderOutput>
       <SliderTrack
-        data-slot="slider-track"
         className="group orientation-horizontal:h-5 orientation-vertical:w-5 orientation-vertical:h-38 col-span-2 flex items-center"
+        data-slot="slider-track"
       >
         {({ state, ...renderProps }) => (
           <>
@@ -65,7 +65,9 @@ export function Slider<T extends number | number[]>({
                     : ""
                 ].join(" ")}
                 style={
-                  { "--size": state.getThumbPercent(0) * 100 + "%" } as any
+                  {
+                    "--size": state.getThumbPercent(0) * 100 + "%"
+                  } as React.CSSProperties
                 }
               />
             ) : state.values.length === 2 ? (
@@ -81,22 +83,22 @@ export function Slider<T extends number | number[]>({
                 ].join(" ")}
                 style={
                   {
-                    "--start": state.getThumbPercent(0) * 100 + "%",
                     "--size":
                       (state.getThumbPercent(1) - state.getThumbPercent(0)) *
                         100 +
-                      "%"
-                  } as any
+                      "%",
+                    "--start": state.getThumbPercent(0) * 100 + "%"
+                  } as React.CSSProperties
                 }
               />
             ) : null}
             {state.values.map((_, i) => (
               <SliderThumb
-                key={i}
-                index={i}
                 aria-label={thumbLabels?.[i]}
-                data-slot="slider-thumb"
                 className="group-orientation-horizontal:mt-5 group-orientation-vertical:ml-2.5 hover:ring-ring/30 focus-visible:ring-ring/30 h-4 w-6 rounded-full bg-white shadow-md ring-1 ring-black/10 transition-[color,box-shadow,background-color] outline-none not-dark:bg-clip-padding hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[orientation=vertical]:h-6 data-[orientation=vertical]:w-4"
+                data-slot="slider-thumb"
+                index={i}
+                key={i}
               />
             ))}
           </>

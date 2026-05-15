@@ -2,17 +2,17 @@ import React from "react"
 import { DialogTrigger } from "react-aria-components/Dialog"
 import { TableBody } from "react-aria-components/Table"
 import { TooltipTrigger } from "react-aria-components/Tooltip"
-import { AlertDialog } from "../src/AlertDialog"
-import { Button } from "../src/Button"
-import { Meter } from "../src/Meter"
-import { Modal } from "../src/Modal"
-import { Select, SelectItem } from "../src/Select"
-import { Cell, Column, Row, Table, TableHeader } from "../src/Table"
-import { Tag, TagGroup } from "../src/TagGroup"
-import { TextField } from "../src/TextField"
-import { Tooltip } from "../src/Tooltip"
+import { AlertDialog } from "../src"
+import { Button } from "../src"
+import { Meter } from "../src"
+import { Modal } from "../src"
+import { Select, SelectItem } from "../src"
+import { Cell, Column, Row, Table, TableHeader } from "../src"
+import { Tag, TagGroup } from "../src"
+import { TextField } from "../src"
+import { Tooltip } from "../src"
 
-function ThemeGrid({ title, style }: { title: string; style?: string }) {
+function ThemeGrid({ style, title }: { style?: string; title: string }) {
   return (
     <>
       {style && <style>{style}</style>}
@@ -29,10 +29,10 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
             <Button variant="outline">Outline</Button>
             <Button variant="ghost">Ghost</Button>
             <Button variant="destructive">Destructive</Button>
-            <Button variant="default" isDisabled>
+            <Button isDisabled variant="default">
               Disabled
             </Button>
-            <Button variant="default" isPending>
+            <Button isPending variant="default">
               Pending
             </Button>
           </div>
@@ -45,8 +45,8 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
           <div className="flex flex-wrap gap-4">
             <TextField
               label="Email"
-              type="email"
               placeholder="you@example.com"
+              type="email"
             />
             <Select label="Role">
               <SelectItem>Admin</SelectItem>
@@ -61,9 +61,9 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
             Meter
           </h3>
           <div className="flex w-56 flex-col gap-2">
-            <Meter label="Storage (30%)" value={30} maxValue={100} />
-            <Meter label="Storage (60%)" value={60} maxValue={100} />
-            <Meter label="Storage (90%)" value={90} maxValue={100} />
+            <Meter label="Storage (30%)" maxValue={100} value={30} />
+            <Meter label="Storage (60%)" maxValue={100} value={60} />
+            <Meter label="Storage (90%)" maxValue={100} value={90} />
           </div>
         </section>
 
@@ -112,7 +112,7 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
           <DialogTrigger>
             <Button variant="secondary">Open modal</Button>
             <Modal>
-              <AlertDialog title="Confirm action" actionLabel="Confirm">
+              <AlertDialog actionLabel="Confirm" title="Confirm action">
                 Are you sure you want to proceed?
               </AlertDialog>
             </Modal>
@@ -125,9 +125,9 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
           </h3>
           <Table
             aria-label="Files"
-            selectionMode="multiple"
-            defaultSelectedKeys={new Set(["2"])}
             className="w-80"
+            defaultSelectedKeys={new Set(["2"])}
+            selectionMode="multiple"
           >
             <TableHeader>
               <Column id="name" isRowHeader>
@@ -157,8 +157,8 @@ function ThemeGrid({ title, style }: { title: string; style?: string }) {
 }
 
 export default {
-  title: "Theming",
-  parameters: { layout: "fullscreen" }
+  parameters: { layout: "fullscreen" },
+  title: "Theming"
 }
 
 export const DefaultShadcn = () => (
@@ -167,14 +167,14 @@ export const DefaultShadcn = () => (
 
 export const BlueAccent = () => (
   <ThemeGrid
-    title="Blue accent"
     style=":root { --primary: oklch(0.546 0.245 262.881); --primary-foreground: oklch(0.98 0.013 248); --ring: oklch(0.546 0.245 262.881); }"
+    title="Blue accent"
   />
 )
 
 export const VioletAccent = () => (
   <ThemeGrid
-    title="Violet accent"
     style=":root { --primary: oklch(0.591 0.239 292.717); --primary-foreground: oklch(0.985 0.002 247.858); --ring: oklch(0.591 0.239 292.717); }"
+    title="Violet accent"
   />
 )

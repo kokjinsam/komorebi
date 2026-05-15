@@ -3,14 +3,14 @@ import {
   TextItalicIcon as ItalicIcon,
   TextUnderlineIcon as UnderlineIcon
 } from "@phosphor-icons/react"
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
 import { Group } from "react-aria-components/Group"
-import { Button } from "../src/Button"
-import { Checkbox } from "../src/Checkbox"
-import { Separator } from "../src/Separator"
-import { ToggleButton } from "../src/ToggleButton"
-import { Toolbar } from "../src/Toolbar"
+import { Button } from "../src"
+import { Checkbox } from "../src"
+import { Separator } from "../src"
+import { ToggleButton } from "../src"
+import { Toolbar } from "../src"
 
 const meta: Meta<typeof Toolbar> = {
   component: Toolbar,
@@ -22,7 +22,7 @@ const meta: Meta<typeof Toolbar> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof Toolbar> = (args) => (
   <Toolbar aria-label="Text formatting" {...args}>
     <Group aria-label="Style" className="contents">
       <ToggleButton aria-label="Bold" className="p-2.5">

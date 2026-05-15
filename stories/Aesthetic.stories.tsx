@@ -2,10 +2,10 @@ import React from "react"
 import { DialogTrigger } from "react-aria-components/Dialog"
 import { TableBody } from "react-aria-components/Table"
 import { TooltipTrigger } from "react-aria-components/Tooltip"
-import { AlertDialog } from "../src/AlertDialog"
-import { Badge } from "../src/Badge"
-import { Button } from "../src/Button"
-import { Calendar } from "../src/Calendar"
+import { AlertDialog } from "../src"
+import { Badge } from "../src"
+import { Button } from "../src"
+import { Calendar } from "../src"
 import {
   Card,
   CardAction,
@@ -14,31 +14,30 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "../src/Card"
-import { Checkbox } from "../src/Checkbox"
-import { Meter } from "../src/Meter"
-import { Modal } from "../src/Modal"
-import { NumberField } from "../src/NumberField"
-import { Popover } from "../src/Popover"
-import { ProgressBar } from "../src/ProgressBar"
-import { RadioGroup, Radio } from "../src/RadioGroup"
-import { SearchField } from "../src/SearchField"
-import { Select, SelectItem } from "../src/Select"
-import { Slider } from "../src/Slider"
-import { Switch } from "../src/Switch"
-import { Cell, Column, Row, Table, TableHeader } from "../src/Table"
-import { Tabs, Tab, TabList, TabPanel } from "../src/Tabs"
-import { Tag, TagGroup } from "../src/TagGroup"
-import { TextField } from "../src/TextField"
-import { ToggleButton } from "../src/ToggleButton"
-import { Tooltip } from "../src/Tooltip"
+} from "../src"
+import { Checkbox } from "../src"
+import { Meter } from "../src"
+import { Modal } from "../src"
+import { NumberField } from "../src"
+import { ProgressBar } from "../src"
+import { RadioGroup, Radio } from "../src"
+import { SearchField } from "../src"
+import { Select, SelectItem } from "../src"
+import { Slider } from "../src"
+import { Switch } from "../src"
+import { Cell, Column, Row, Table, TableHeader } from "../src"
+import { Tabs, Tab, TabList, TabPanel } from "../src"
+import { Tag, TagGroup } from "../src"
+import { TextField } from "../src"
+import { ToggleButton } from "../src"
+import { Tooltip } from "../src"
 
 function Section({
-  title,
-  children
+  children,
+  title
 }: {
-  title: string
   children: React.ReactNode
+  title: string
 }) {
   return (
     <section className="flex flex-col gap-3">
@@ -80,10 +79,10 @@ function AestheticShowcase({ style }: { style?: string }) {
                   <Button variant="ghost">Ghost</Button>
                   <Button variant="destructive">Destructive</Button>
                   <Button variant="link">Link</Button>
-                  <Button variant="default" isDisabled>
+                  <Button isDisabled variant="default">
                     Disabled
                   </Button>
-                  <Button variant="default" isPending>
+                  <Button isPending variant="default">
                     Saving…
                   </Button>
                 </div>
@@ -165,24 +164,24 @@ function AestheticShowcase({ style }: { style?: string }) {
             <Card>
               <CardContent className="flex flex-wrap gap-4 pt-6">
                 <TextField
-                  label="Email"
-                  type="email"
-                  placeholder="you@example.com"
                   className="w-56"
+                  label="Email"
+                  placeholder="you@example.com"
+                  type="email"
                 />
                 <TextField
-                  label="Password"
-                  type="password"
-                  placeholder="••••••••"
                   className="w-56"
+                  label="Password"
+                  placeholder="••••••••"
+                  type="password"
                 />
-                <NumberField label="Quantity" defaultValue={1} minValue={0} />
+                <NumberField defaultValue={1} label="Quantity" minValue={0} />
                 <SearchField
+                  className="w-56"
                   label="Search"
                   placeholder="Search…"
-                  className="w-56"
                 />
-                <Select label="Role" className="w-44">
+                <Select className="w-44" label="Role">
                   <SelectItem>Admin</SelectItem>
                   <SelectItem>Member</SelectItem>
                   <SelectItem>Viewer</SelectItem>
@@ -191,7 +190,7 @@ function AestheticShowcase({ style }: { style?: string }) {
             </Card>
             <Card>
               <CardContent className="flex flex-wrap gap-6 pt-6">
-                <RadioGroup label="Notifications" defaultValue="all">
+                <RadioGroup defaultValue="all" label="Notifications">
                   <Radio value="all">All</Radio>
                   <Radio value="mentions">Mentions only</Radio>
                   <Radio value="none">None</Radio>
@@ -209,13 +208,13 @@ function AestheticShowcase({ style }: { style?: string }) {
           <Section title="Sliders & Meters">
             <Card>
               <CardContent className="flex flex-col gap-6 pt-6">
-                <Slider label="Volume" defaultValue={60} className="w-64" />
+                <Slider className="w-64" defaultValue={60} label="Volume" />
                 <div className="flex w-64 flex-col gap-2">
-                  <Meter label="Storage (30%)" value={30} maxValue={100} />
-                  <Meter label="Storage (60%)" value={60} maxValue={100} />
-                  <Meter label="Storage (90%)" value={90} maxValue={100} />
+                  <Meter label="Storage (30%)" maxValue={100} value={30} />
+                  <Meter label="Storage (60%)" maxValue={100} value={60} />
+                  <Meter label="Storage (90%)" maxValue={100} value={90} />
                 </div>
-                <ProgressBar label="Uploading…" value={45} className="w-64" />
+                <ProgressBar className="w-64" label="Uploading…" value={45} />
               </CardContent>
             </Card>
           </Section>
@@ -261,8 +260,8 @@ function AestheticShowcase({ style }: { style?: string }) {
               <CardContent className="flex flex-wrap gap-4 pt-6">
                 <TagGroup
                   label="Default"
-                  variant="default"
                   selectionMode="multiple"
+                  variant="default"
                 >
                   <Tag>Alpha</Tag>
                   <Tag>Beta</Tag>
@@ -270,24 +269,24 @@ function AestheticShowcase({ style }: { style?: string }) {
                 </TagGroup>
                 <TagGroup
                   label="Secondary"
-                  variant="secondary"
                   selectionMode="multiple"
+                  variant="secondary"
                 >
                   <Tag>Design</Tag>
                   <Tag>Engineering</Tag>
                 </TagGroup>
                 <TagGroup
                   label="Destructive"
-                  variant="destructive"
                   selectionMode="multiple"
+                  variant="destructive"
                 >
                   <Tag>Error</Tag>
                   <Tag>Critical</Tag>
                 </TagGroup>
                 <TagGroup
                   label="Outline"
-                  variant="outline"
                   selectionMode="multiple"
+                  variant="outline"
                 >
                   <Tag>In progress</Tag>
                   <Tag>Review</Tag>
@@ -311,8 +310,8 @@ function AestheticShowcase({ style }: { style?: string }) {
               <CardContent className="pt-6">
                 <Table
                   aria-label="Files"
-                  selectionMode="multiple"
                   defaultSelectedKeys={new Set(["2"])}
+                  selectionMode="multiple"
                 >
                   <TableHeader>
                     <Column id="name" isRowHeader>
@@ -359,7 +358,7 @@ function AestheticShowcase({ style }: { style?: string }) {
                 <DialogTrigger>
                   <Button variant="outline">Open modal</Button>
                   <Modal>
-                    <AlertDialog title="Confirm action" actionLabel="Confirm">
+                    <AlertDialog actionLabel="Confirm" title="Confirm action">
                       Are you sure you want to proceed? This action cannot be
                       undone.
                     </AlertDialog>
@@ -375,8 +374,8 @@ function AestheticShowcase({ style }: { style?: string }) {
 }
 
 export default {
-  title: "Aesthetic",
-  parameters: { layout: "fullscreen" }
+  parameters: { layout: "fullscreen" },
+  title: "Aesthetic"
 }
 
 export const Default = () => <AestheticShowcase />

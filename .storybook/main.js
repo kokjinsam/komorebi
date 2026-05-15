@@ -1,26 +1,26 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
-  stories: [
-    "../stories/**/*.mdx",
-    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"
-  ],
   addons: ["@storybook/addon-docs", "@vueless/storybook-dark-mode"],
+  docs: {
+    autodocs: "tag"
+  },
   framework: {
     name: "@storybook/react-vite",
     options: {}
   },
-  docs: {
-    autodocs: "tag"
-  },
+  stories: [
+    "../stories/**/*.mdx",
+    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  ],
   typescript: {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
       compilerOptions: {
         allowSyntheticDefaultImports: false,
         esModuleInterop: false
       },
-      propFilter: (prop) => !/^aria-|on[A-Z]/.test(prop.name)
+      propFilter: (prop) => !/^aria-|on[A-Z]/.test(prop.name),
+      shouldExtractLiteralValuesFromEnum: true
     }
   }
 }

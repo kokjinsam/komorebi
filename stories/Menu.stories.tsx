@@ -1,7 +1,7 @@
 import { DotsThreeIcon } from "@phosphor-icons/react"
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React from "react"
-import { Button } from "../src/Button"
+import { Button } from "../src"
 import {
   MenuTrigger,
   SubmenuTrigger,
@@ -9,7 +9,7 @@ import {
   MenuItem,
   MenuSection,
   MenuSeparator
-} from "../src/Menu"
+} from "../src"
 
 const meta: Meta<typeof Menu> = {
   component: Menu,
@@ -21,9 +21,9 @@ const meta: Meta<typeof Menu> = {
 
 export default meta
 
-export const Example = (args: any) => (
+export const Example: StoryFn<typeof Menu> = (args) => (
   <MenuTrigger>
-    <Button variant="secondary" className="px-2">
+    <Button className="px-2" variant="secondary">
       <DotsThreeIcon className="h-5 w-5" />
     </Button>
     <Menu {...args}>
@@ -38,14 +38,16 @@ export const Example = (args: any) => (
   </MenuTrigger>
 )
 
-export const DisabledItems = (args: any) => <Example {...args} />
+export const DisabledItems: StoryFn<typeof Menu> = (args) => (
+  <Example {...args} />
+)
 DisabledItems.args = {
   disabledKeys: ["save"]
 }
 
-export const Sections = (args: any) => (
+export const Sections: StoryFn<typeof Menu> = (args) => (
   <MenuTrigger>
-    <Button variant="secondary" className="px-2">
+    <Button className="px-2" variant="secondary">
       <DotsThreeIcon className="h-5 w-5" />
     </Button>
     <Menu {...args}>
@@ -65,9 +67,9 @@ export const Sections = (args: any) => (
   </MenuTrigger>
 )
 
-export const Submenu = (args: any) => (
+export const Submenu: StoryFn<typeof Menu> = (args) => (
   <MenuTrigger>
-    <Button variant="secondary" className="px-2">
+    <Button className="px-2" variant="secondary">
       <DotsThreeIcon className="h-5 w-5" />
     </Button>
     <Menu {...args}>

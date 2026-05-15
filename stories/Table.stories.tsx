@@ -1,7 +1,7 @@
-import { type Meta } from "@storybook/react"
+import { type Meta, type StoryFn } from "@storybook/react"
 import React, { useMemo, useState } from "react"
 import { TableBody } from "react-aria-components/Table"
-import { Cell, Column, Row, Table, TableHeader } from "../src/Table"
+import { Cell, Column, Row, Table, TableHeader } from "../src"
 
 const meta: Meta<typeof Table> = {
   component: Table,
@@ -13,27 +13,27 @@ const meta: Meta<typeof Table> = {
 
 export default meta
 
-let rows = [
-  { id: 1, name: "Games", date: "6/7/2020", type: "File folder" },
-  { id: 2, name: "Program Files", date: "4/7/2021", type: "File folder" },
-  { id: 3, name: "bootmgr", date: "11/20/2010", type: "System file" },
-  { id: 4, name: "log.txt", date: "1/18/2016", type: "Text Document" },
-  { id: 5, name: "Proposal.ppt", date: "6/18/2022", type: "PowerPoint file" },
-  { id: 6, name: "Taxes.pdf", date: "12/6/2023", type: "PDF Document" },
-  { id: 7, name: "Photos", date: "8/2/2021", type: "File folder" },
-  { id: 8, name: "Documents", date: "3/18/2023", type: "File folder" },
-  { id: 9, name: "Budget.xls", date: "1/6/2024", type: "Excel file" }
+const rows = [
+  { date: "6/7/2020", id: 1, name: "Games", type: "File folder" },
+  { date: "4/7/2021", id: 2, name: "Program Files", type: "File folder" },
+  { date: "11/20/2010", id: 3, name: "bootmgr", type: "System file" },
+  { date: "1/18/2016", id: 4, name: "log.txt", type: "Text Document" },
+  { date: "6/18/2022", id: 5, name: "Proposal.ppt", type: "PowerPoint file" },
+  { date: "12/6/2023", id: 6, name: "Taxes.pdf", type: "PDF Document" },
+  { date: "8/2/2021", id: 7, name: "Photos", type: "File folder" },
+  { date: "3/18/2023", id: 8, name: "Documents", type: "File folder" },
+  { date: "1/6/2024", id: 9, name: "Budget.xls", type: "Excel file" }
 ]
 
-export const Example = (args: any) => {
-  let [sortDescriptor, setSortDescriptor] = useState({
+export const Example: StoryFn<typeof Table> = (args) => {
+  const [sortDescriptor, setSortDescriptor] = useState({
     column: "name",
     direction: "ascending"
   })
 
-  let items = useMemo(() => {
+  const items = useMemo(() => {
     // @ts-ignore
-    let items = rows
+    const items = rows
       .slice()
       .sort((a, b) =>
         a[sortDescriptor.column].localeCompare(b[sortDescriptor.column])
@@ -48,18 +48,18 @@ export const Example = (args: any) => {
     <Table
       aria-label="Files"
       {...args}
-      sortDescriptor={sortDescriptor}
-      onSortChange={setSortDescriptor}
       className="w-100 max-w-full"
+      onSortChange={setSortDescriptor}
+      sortDescriptor={sortDescriptor}
     >
       <TableHeader>
-        <Column id="name" isRowHeader allowsSorting>
+        <Column allowsSorting id="name" isRowHeader>
           Name
         </Column>
-        <Column id="type" allowsSorting>
+        <Column allowsSorting id="type">
           Type
         </Column>
-        <Column id="date" allowsSorting>
+        <Column allowsSorting id="date">
           Date Modified
         </Column>
       </TableHeader>
@@ -77,7 +77,7 @@ export const Example = (args: any) => {
 }
 
 Example.args = {
-  onRowAction: null,
   onCellAction: null,
+  onRowAction: null,
   selectionMode: "multiple"
 }
