@@ -14,7 +14,6 @@ const button = tv({
   base: "group/button focus-visible:border-ring focus-visible:ring-ring/30 pressed:translate-y-px relative inline-flex shrink-0 cursor-default items-center justify-center gap-1.5 overflow-hidden rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 forced-colors:outline-[Highlight] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   defaultVariants: { size: "default", variant: "default" },
   variants: {
-    isPending: { true: "text-transparent" },
     size: {
       "default": "h-9 px-3",
       "icon": "size-9",
@@ -79,7 +78,14 @@ export function Button(props: ButtonProps) {
     >
       {composeRenderProps(props.children, (children, { isPending }) => (
         <>
-          {children}
+          <span
+            className={cn(
+              "inline-flex items-center justify-center gap-1.5",
+              isPending && "opacity-0"
+            )}
+          >
+            {children}
+          </span>
           {isPending && (
             <span
               aria-hidden
