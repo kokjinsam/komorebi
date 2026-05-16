@@ -1,8 +1,20 @@
+import { DocsContainer } from "@storybook/addon-docs/blocks"
+import { useDarkMode } from "@vueless/storybook-dark-mode"
 import React from "react"
 import { themes } from "storybook/theming"
 import "../src/styles/tailwind.css"
 import "../src/styles/default-theme.css"
 import "../src/styles/komorebi.css"
+
+function ThemedDocsContainer(props) {
+  const isDark = useDarkMode()
+
+  return React.createElement(
+    DocsContainer,
+    { ...props, theme: isDark ? themes.dark : themes.light },
+    props.children
+  )
+}
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
@@ -25,10 +37,14 @@ const preview = {
     controls: {
       matchers: {}
     },
+    darkMode: {
+      classTarget: "body",
+      darkClass: "dark",
+      lightClass: "light",
+      stylePreview: true
+    },
     docs: {
-      theme: globalThis.matchMedia("(prefers-color-scheme: dark)").matches
-        ? themes.dark
-        : themes.light
+      container: ThemedDocsContainer
     }
   }
 }
