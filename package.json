@@ -181,6 +181,10 @@
       "import": "./dist/RangeCalendar/index.js",
       "types": "./dist/RangeCalendar/index.d.ts"
     },
+    "./Resizable": {
+      "import": "./dist/Resizable/index.js",
+      "types": "./dist/Resizable/index.d.ts"
+    },
     "./SearchField": {
       "import": "./dist/SearchField/index.js",
       "types": "./dist/SearchField/index.d.ts"
@@ -267,6 +271,7 @@
   },
   "dependencies": {
     "postcss": "^8.5.14",
+    "react-resizable-panels": "^4.11.1",
     "tailwind-merge": "^3.6.0",
     "tailwind-variants": "^3.2.2"
   },
